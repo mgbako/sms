@@ -1,11 +1,11 @@
-<?php namespace Scholrs\Http\Controllers\Admin;
+<?php namespace Scholr\Http\Controllers\Admin;
 
-use Scholrs\Http\Requests;
-use Scholrs\Http\Requests\StudentRequest;
-use Scholrs\Http\Controllers\Controller;
-use Scholrs\Student;
-use Scholrs\Classe;
-use Scholrs\Subject;
+use Scholr\Http\Requests;
+use Scholr\Http\Requests\StudentRequest;
+use Scholr\Http\Controllers\Controller;
+use Scholr\Student;
+use Scholr\Classe;
+use Scholr\Subject;
 
 use Illuminate\Http\Request;
 

@@ -1,6 +1,6 @@
-<?php namespace Scholrs\Http\Requests;
+<?php namespace Scholr\Http\Requests;
 
-use Scholrs\Http\Requests\Request;
+use Scholr\Http\Requests\Request;
 
 class TeacherRequest extends Request {
 
@@ -22,16 +22,17 @@ class TeacherRequest extends Request {
 	public function rules()
 	{
 		return [
-			'firstname'=>'required',
-			'lastname'=>'required',
-			'teacherId'=>'required|unique:teachers',
-			'phone'=>'required',
-			'dob'=>'required',
-			'gender'=>'required',
-			'address'=>'required',
-			'state'=>'required',
-			'nationality'=>'required',
-			'type'=>'required'
+			'firstname' => 'required|min:4|max:25',
+			'lastname' => 'required|min:4|max:25',
+			'employee_id' => 'required|min:4',
+			'nationality' => 'required',
+			'email' => 'required|email',
+			'dob' => 'required|date',
+			'end_date' => 'required',
+			'address' => 'required',
+			'phone' => 'required',
+			'state' => 'required',
+			'type' => 'required'
 		];
 	}
 

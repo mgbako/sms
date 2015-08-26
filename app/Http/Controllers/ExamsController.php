@@ -1,11 +1,11 @@
-<?php namespace Scholrs\Http\Controllers;
+<?php namespace Scholr\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Scholrs\Http\Requests;
-use Scholrs\Http\Controllers\Controller;
-use Scholrs\Question;
-use Scholrs\Student;
+use Scholr\Http\Requests;
+use Scholr\Http\Controllers\Controller;
+use Scholr\Question;
+use Scholr\Student;
 use Auth;
 
 class ExamsController extends Controller

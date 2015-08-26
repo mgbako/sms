@@ -1,16 +1,16 @@
-<?php namespace Scholrs\Http\Controllers\Admin;
+<?php namespace Scholr\Http\Controllers\Admin;
 
-use Scholrs\Http\Requests;
-use Scholrs\Http\Controllers\Controller;
+use Scholr\Http\Requests;
+use Scholr\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-use Scholrs\Subject;
-use Scholrs\Classe;
-use Scholrs\Question;
-use Scholrs\Http\Requests\QuestionRequest;
+use Scholr\Subject;
+use Scholr\Classe;
+use Scholr\Question;
+use Scholr\Http\Requests\QuestionRequest;
 use Illuminate\Support\Facades\Auth;
-use Scholrs\Teacher;
+use Scholr\Teacher;
 
 class QuestionsController extends Controller {
 

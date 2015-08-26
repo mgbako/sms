@@ -1,11 +1,11 @@
-<?php namespace Scholrs\Http\Controllers\Admin;
+<?php namespace Scholr\Http\Controllers\Admin;
 
-use Scholrs\Http\Requests;
-use Scholrs\Http\Controllers\Controller;
+use Scholr\Http\Requests;
+use Scholr\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use Scholrs\Http\Requests\ClassesRequest;
-use Scholrs\Classe;
+use Scholr\Http\Requests\ClassesRequest;
+use Scholr\Classe;
 
 class ClassesController extends Controller {
 

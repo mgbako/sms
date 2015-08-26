@@ -1,6 +1,6 @@
 <?php
 
-namespace Scholrs\Providers;
+namespace Scholr\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Scholrs\Http\Controllers';
+    protected $namespace = 'Scholr\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot($router);
 
-        $router->model('subjects', 'Scholrs\Subject');
+        $router->model('subjects', 'Scholr\Subject');
     }
 
     /**

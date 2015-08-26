@@ -1,10 +1,10 @@
-<?php namespace Scholrs\Http\Controllers\Admin;
+<?php namespace Scholr\Http\Controllers\Admin;
 use Illuminate\Http\Request;
-use Scholrs\Http\Requests;
-use Scholrs\Http\Controllers\Controller;
+use Scholr\Http\Requests;
+use Scholr\Http\Controllers\Controller;
 
-use Scholrs\Http\Requests\SubjectRequest;
-use Scholrs\Subject;
+use Scholr\Http\Requests\SubjectRequest;
+use Scholr\Subject;
 
 
 class SubjectsController extends Controller {

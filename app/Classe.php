@@ -1,4 +1,4 @@
-<?php namespace Scholrs;
+<?php namespace Scholr;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,17 +9,17 @@ class Classe extends Model {
 
 	public function teachers()
 	{
-		return $this->belongsToMany('Scholrs\Teacher');
+		return $this->belongsToMany('Scholr\Teacher');
 	}
 
 	public function students()
 	{
-		return $this->belongsToMany('Scholrs\Student');
+		return $this->belongsToMany('Scholr\Student');
 	}
 
 	public function subjects()
 	{
-		return $this->belongsToMany('Scholrs\Subject');
+		return $this->belongsToMany('Scholr\Subject');
 	}
 
 }

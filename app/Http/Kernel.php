@@ -1,6 +1,6 @@
 <?php
 
-namespace Scholrs\Http;
+namespace Scholr\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -13,11 +13,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Scholrs\Http\Middleware\EncryptCookies::class,
+        \Scholr\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Scholrs\Http\Middleware\VerifyCsrfToken::class,
+        \Scholr\Http\Middleware\VerifyCsrfToken::class,
     ];
 
     /**
@@ -26,8 +26,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Scholrs\Http\Middleware\Authenticate::class,
+        'auth' => \Scholr\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \Scholrs\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \Scholr\Http\Middleware\RedirectIfAuthenticated::class,
+        'staff' => \Scholr\Http\Middleware\RedirectIfNotAStaff::class,
     ];
 }

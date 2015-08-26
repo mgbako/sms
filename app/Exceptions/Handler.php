@@ -1,6 +1,6 @@
 <?php
 
-namespace Scholrs\Exceptions;
+namespace Scholr\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

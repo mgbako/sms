@@ -1,4 +1,4 @@
-<?php namespace Scholrs;
+<?php namespace Scholr;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,21 +10,21 @@ class Question extends Model {
 
 
 	public function subject() {
-	  return $this->belongsTo('Scholrs\Subject');
+	  return $this->belongsTo('Scholr\Subject');
 	}
 
 	public function teacher() {
-	  return $this->belongsTo('Scholrs\Teacher');
+	  return $this->belongsTo('Scholr\Teacher');
 	}
 
 	public function student()
 	{
-	  return $this->belongsTo('Scholrs\Student');
+	  return $this->belongsTo('Scholr\Student');
 	}
 
 	public function answer()
 	{
-	  return $this->hasOne('Scholrs\Answer');
+	  return $this->hasOne('Scholr\Answer');
 	}
 
 }

@@ -1,4 +1,4 @@
-<?php namespace Scholrs;
+<?php namespace Scholr;
 
 use Illuminate\Database\Eloquent\Model;
 

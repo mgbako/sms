@@ -140,12 +140,13 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
 
+
         /*
          * Application Service Providers...
          */
-        Scholrs\Providers\AppServiceProvider::class,
-        Scholrs\Providers\EventServiceProvider::class,
-        Scholrs\Providers\RouteServiceProvider::class,
+        Scholr\Providers\AppServiceProvider::class,
+        Scholr\Providers\EventServiceProvider::class,
+        Scholr\Providers\RouteServiceProvider::class,
 
     ],
 

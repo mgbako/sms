@@ -1,4 +1,4 @@
-<?php namespace Scholrs\Http\Controllers;
+<?php namespace Scholr\Http\Controllers;
 
 class WelcomeController extends Controller {
 

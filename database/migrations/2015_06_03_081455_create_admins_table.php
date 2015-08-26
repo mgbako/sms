@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfileTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,25 +12,23 @@ class CreateProfileTable extends Migration
      */
     public function up()
     {
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('staffId')->unique();
+            $table->string('email')->uniqid();
             $table->integer('phone');
             $table->date('dob');
             $table->char('gender');
             $table->string('address');
             $table->string('state');
             $table->string('nationality');
-            $table->text('bio')->nullable();
+            $table->string('type');
+            $table->string('image');
             $table->string('slug');
             $table->timestamps();
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->timestamp('end_date');
         });
     }
 
@@ -41,6 +39,6 @@ class CreateProfileTable extends Migration
      */
     public function down()
     {
-        Schema::drop('profiles');
+        Schema::drop('admins');
     }
 }

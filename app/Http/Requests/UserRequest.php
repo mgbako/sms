@@ -1,6 +1,6 @@
-<?php namespace Scholrs\Http\Requests;
+<?php namespace Scholr\Http\Requests;
 
-use Scholrs\Http\Requests\Request;
+use Scholr\Http\Requests\Request;
 
 class UserRequest extends Request {
 

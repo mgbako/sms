@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => Scholrs\User::class,
+        'model'  => Scholr\User::class,
         'key' => '',
         'secret' => '',
     ],

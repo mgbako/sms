@@ -1,16 +1,19 @@
-<?php namespace Scholrs\Http\Controllers\Admin;
+<?php namespace Scholr\Http\Controllers\Admin;
 
-use Scholrs\Http\Requests;
-use Scholrs\Http\Requests\TeacherRequest;
-use Scholrs\Http\Controllers\Controller;
-use Scholrs\Teacher;
-use Scholrs\Classe;
-use Scholrs\Subject;
+use Scholr\Http\Requests;
+use Scholr\Http\Requests\TeacherRequest;
+use Scholr\Http\Controllers\Controller;
+use Scholr\Teacher;
+use Scholr\Classe;
+use Scholr\Subject;
 
 use Illuminate\Http\Request;
 
 class TeachersController extends Controller {
-
+		public function __construct()
+	{
+		$this->middleware('staff');
+	}
 	/**
 	 * Display a listing of the resource.
 	 *

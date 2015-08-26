@@ -1,8 +1,17 @@
-<?php namespace Scholrs;
+<?php namespace Scholr;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class Student extends Model {
+class Student extends Model implements SluggableInterface{
+
+  use SluggableTrait;
+
+    protected $sluggable = array(
+        'build_from' => 'firstname',
+        'save_to'    => 'slug',
+    );
 
 	protected $fillable = ['firstname', 'lastname', 'studentId', 
     'phone', 'dob', 'gender', 'address', 'state',
@@ -10,22 +19,22 @@ class Student extends Model {
 
 
     public function account() {
-      return $this->hasOne('Scholrs\User');
+      return $this->hasOne('Scholr\User');
     }
 
     public function questions()
     {
-      return $this->hasMany('Scholrs\Question');
+      return $this->hasMany('Scholr\Question');
     }
 
     public function classes()
     {
-      return $this->belongsToMany('Scholrs\Classe')->withTimestamps();
+      return $this->belongsToMany('Scholr\Classe')->withTimestamps();
     }
 
     public function subjects()
     {
-      return $this->belongsToMany('Scholrs\Subject')->withTimestamps();
+      return $this->belongsToMany('Scholr\Subject')->withTimestamps();
     }
 
     public function getSubjectListAttribute()
@@ -35,14 +44,12 @@ class Student extends Model {
 
     public function answer()
     {
-      return $this->hasOne('Scholrs\Answer');
+      return $this->hasOne('Scholr\Answer');
     }
 
     public function grades()
     {
-      return $this->hasMany('Scholrs\Grade');
+      return $this->hasMany('Scholr\Grade');
     }
-
-  }
 
 }

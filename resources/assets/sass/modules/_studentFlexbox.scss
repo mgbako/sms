@@ -1,0 +1,48 @@
+main {
+  margin: 0;
+}
+.containers {
+  position: relative;
+  top: -20px;
+  background-color: #ddd; 
+  display: flex;
+  margin: 0 auto;
+  width:100%;
+  padding: 0;
+
+  .items {
+    background-color: white;
+    color: #333;
+    margin: 10px;
+    padding: 10px;
+  }//items
+ 
+}//container
+
+aside {
+    flex-shrink: 0;
+    width: 200px;
+    border: 2px solid #607D8B;
+  }//aside
+
+.main-content {
+    flex-grow: 2;
+    border: 2px solid #607D8B;
+    .head {
+      margin: 0 auto;
+      
+    }//head
+    .maincontent {
+      border: 2px solid #ddd;
+    }//maincontent
+  }//content
+
+  .infoboard{
+        display: flex;
+        margin: 0 auto;
+      }//infoboard
+
+      .examtaken, .grades {
+        margin: 10px;
+        color: red;
+      }

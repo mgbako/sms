@@ -10,7 +10,7 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Student ID</th>
+					<th>Staff ID</th>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Phone</th>
@@ -24,7 +24,7 @@
 			@foreach($teachers as $teacher)
 				<tbody>
 					<td>{!! $count++ !!}</td>
-					<td>{!! $teacher->teacherId !!}</td>
+					<td>{!! $teacher->staffId !!}</td>
 					<td>{!! $teacher->firstname !!}</td>
 					<td>{!! $teacher->lastname !!}</td>
 					<td>{!! $teacher->phone !!}</td>

@@ -1,12 +1,12 @@
-<?php namespace Scholrs\Http\Controllers;
+<?php namespace Scholr\Http\Controllers;
 
-use Scholrs\Http\Requests;
-use Scholrs\Http\Controllers\Controller;
+use Scholr\Http\Requests;
+use Scholr\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
-use Scholrs\User;
-use Scholrs\Http\Requests\UserRequest;
+use Scholr\User;
+use Scholr\Http\Requests\UserRequest;
 
 class UsersController extends Controller {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Scholrs\Console\Commands;
+namespace Scholr\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

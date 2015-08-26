@@ -1,9 +1,15 @@
-<?php namespace Scholrs\Http\Controllers\Auth;
+<?php namespace Scholr\Http\Controllers\Auth;
 
-use Scholrs\User;
 use Validator;
-use Scholrs\Http\Controllers\Controller;
+use Scholr\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Contracts\Auth\Guard;
+use Scholr\http\Requests\NewAccountRequest;
+use Scholr\User;
+use Scholr\Student;
+use Scholr\Teacher;
+
 
 class AuthController extends Controller
 {
@@ -17,65 +23,169 @@ class AuthController extends Controller
     | a simple trait to add these behaviors. Why don't you explore it?
     |
     */
-    protected $redirectTo = '/teachers';
-    protected $redirectAfterLogout = '/auth/login';
+    
 
     use AuthenticatesAndRegistersUsers;
 
+    protected $redirectTo;
+    protected $redirectAfterLogout = '/';
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Guard $auth)
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', ['except' => ['getLogout', 'getStudent', 'getTeacher']]);
+        $this->auth = $auth;
+    }
+
+        /**
+     * shows student login form
+     * @return string
+     */
+    public function getStudentlogin() {
+        return view('account.studentLogin');
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * show form for teacher login
+     * @return String 
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'firstname' => 'required|max:255',
-            'lastname' => 'required|max:255',
-            'phone' => 'required',
-            'dob' => 'required|date',
-            'address' => 'required',
-            'state' => 'required',
-            'nationality' => 'required',
-            'userId' => 'required|unique:users',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+    public function getTeacherlogin() {
+        return view('account.teacherLogin');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
+
+    public function getNewstudent() {
+        return view('account.newStudent');
+    }
+
+        /**
+     * show teacher regisyration form
+     * @return string 
      */
-    protected function create(array $data)
-    {
-        return User::create([
-            'firstname' => $data['firstname'],
-            'lastname' => $data['lastname'],
-            'phone' => $data['phone'],
-            'dob' => $data['dob'],
-            'address' => $data['address'],
-            'state' => $data['state'],
-            'nationality' => $data['nationality'],
-            'type' => $data['type'],
-            'userId' => $data['userId'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'image' => $data['image'],
+    public function getNewteacher() {
+        return view('account.newTeacher');
+    }
+
+    public function getStudent($slug) {
+        if ($this->auth->check()) {
+            $student = \DB::table('users')->where('slug', $slug)->first();
+            return view('account.studentHome', compact('student'));
+         }
+         return redirect('/');
+    }
+
+    public function getTeacher($slug){
+        if ($this->auth->check()) {
+            $teacher = \DB::table('teachers')->where('slug', $slug)->first();
+             return view('account.teacherHome', compact('teacher'));
+        }
+        return redirect('/');
+    }
+    /**
+     * handels a registration request for student account
+     * @param  \Illuminate\Http\Request  $request 
+     * @return \Illuminate\Http'Response
+     */
+    public function postNewstudent(NewAccountRequest $request) {
+        $requests = $request->all();
+        $requests['password'] = bcrypt($request['password']);
+        $requests['type'] = 'student';
+        $student = Student::whereStudentid($requests['loginId'])->first();
+        $user = new User($requests);
+        $user->slug = $user->loginId;
+        $this->auth->login($student->account()->save($user));
+
+        $slug = $this->auth->user()->slug;
+        $this->redirectTo = 'account/student/'.$slug;
+
+        $user = $this->auth->user();
+        flash('Welcome '.$user->firstname .' '.$user->lastname 
+                        .' Your account was created succeessfully');
+        return redirect($this->redirectPath());
+    }
+    /**
+     * handle creating teacher account
+     * @param  \Illuminate\Http\Request $request 
+     * @return \Illuminnate\Http\Response  
+     */
+    public function postNewteacher(NewAccountRequest $request) {
+
+        $requests = $request->all();
+        
+        $requests['password'] = bcrypt($requests['password']);
+        $requests['type'] = 'teacher';
+        $teacher = Teacher::whereStaffid($requests['loginId'])->firstOrFail();
+        $user = new User($requests);
+        $user->slug = $user->loginId;
+        $this->auth->login($teacher->account()->save($user));
+        $slug = $this->auth->user()->slug;
+        $this->redirectTo = 'account/teacher/'.$slug;
+        $user = $this->auth->user();
+        flash('Welcome '.$user->firstname.' '.$user->lastname 
+                        .' Your account was created succeessfully');
+        return redirect($this->redirectPath());
+    
+    }
+
+
+    /**
+     * handle student login
+     * @param  \Illuminate\Http\Request $request 
+     * @return \Illuminate\Http\Response
+     */
+    public function postStudentlogin(Request $request){
+
+        $credentials = $request->only('email', 'password');
+
+        
+
+        if ($this->auth->attempt($credentials, $request->has('remember'))){
+            $slug = $this->auth->user()->slug;
+            $this->redirectTo = 'account/student/'.$slug;
+
+                $user = $this->auth->user();
+        flash('Welcome Back '.$user->firstname. ' '.$user->lastname 
+                        .' You have logged in succeessfully');
+
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect('/account/studentlogin')
+                    ->withInput($request->only('email', 'remember'))
+                    ->withErrors([
+                        'email' => $this->getFailedLoginMessage(),
+                    ]);
+    }
+    /**
+     * Handle teacher logining teachers
+     * @param  \Illuminate\Http\Request $request 
+     * @return \Illuminate\Http\Response
+     */
+    public function postTeacherlogin(Request $request){
+
+        $credentials = $request->only('email', 'password');
+
+        if ($this->auth->attempt($credentials, $request->has('remember')))
+        {
+            $slug = $this->auth->user()->slug;
+            $this->redirectTo = 'account/teacher/'.$slug;
+
+                $user = $this->auth->user();
+        flash('Welcome '.$user->firstname.' '.$user->lastname.
+                        ' You have logged in succeessfully');
+
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect('/account/teacherlogin')
+                    ->withInput($request->only('email', 'remember'))
+                    ->withErrors([
+                        'email' => $this->getFailedLoginMessage(),
         ]);
+        
     }
 }

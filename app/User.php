@@ -1,16 +1,25 @@
 <?php
 
-namespace Scholrs;
+namespace Scholr;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
     use Authenticatable, CanResetPassword;
+    
+    use SluggableTrait;
+
+    protected $sluggable = array(
+        'build_from' => 'email',
+        'save_to'    => 'slug',
+    );
 
     /**
      * The database table used by the model.
@@ -24,9 +33,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable =  ['email', 'password', 'firstname', 
-        'lastname', 'userId', 'phone', 'dob', 'address', 'state',
-        'nationality', 'type', 'image', 'slug'
+    protected $fillable =  ['email', 'password', 'loginId', 'username', 
+                'type','slug'
         ];
 
     /**
@@ -37,18 +45,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = ['password', 'remember_token'];
 
     public function student() {
-        return $this->belongsTo('Scholrs\Student');
+        return $this->belongsTo('Scholr\Student');
     }
 
     public function teacher() {
-        return $this->belongsTo('Scholrs\Teacher');
+        return $this->belongsTo('Scholr\Teacher');
     }
 
     public function admin() {
-        return $this->belongsTo('Scholrs\Admin');
+        return $this->belongsTo('Scholr\Admin');
     }
 
     public function photos() {
-        return $this->morphMany('Scholrs\Photo', 'imageable');
+        return $this->morphMany('Scholr\Photo', 'imageable');
     }
 }

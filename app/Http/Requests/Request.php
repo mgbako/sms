@@ -1,6 +1,5 @@
-<?php
+<?php namespace Scholr\Http\Requests;
 
-namespace Scholrs\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

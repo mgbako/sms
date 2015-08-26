@@ -1,6 +1,6 @@
 <?php
 
-namespace Scholrs\Events;
+namespace Scholr\Events;
 
 abstract class Event
 {
