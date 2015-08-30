@@ -1,3 +1,9 @@
+<div class="form-group">
+  {!! Form::label('staffId', 'Staff ID', ['class'=>'col-md-4 control-label']) !!}
+  <div class="col-md-6">
+    {!! Form::text('staffId', null, ['class'=>'form-control', 'placeholder'=>'Enter  Staff Id']) !!}
+  </div>
+</div>
 
 <div class="form-group">
 {!!  Form::label('firstname', 'First Name', ['class'=>'col-md-4 control-label']) !!}
@@ -10,13 +16,6 @@
 {!!  Form::label('lastname', 'Last Name', ['class'=>'col-md-4 control-label']) !!}
   <div class="col-md-6">
       {!! Form::text('lastname', null, ['class'=>'form-control', 'placeholder'=>'Enter Last Name']) !!}
-  </div>
-</div>
-
-<div class="form-group">
-  {!! Form::label('employee_id', 'Employee ID', ['class'=>'col-md-4 control-label']) !!}
-  <div class="col-md-6">
-    {!! Form::text('employee_id', null, ['class'=>'form-control', 'placeholder'=>'Enter  Employee Id']) !!}
   </div>
 </div>
 
@@ -70,16 +69,16 @@
 </div>
 
 <div class="form-group">
-  {!! Form::label('type', 'Type', ['class'=>'col-md-4 control-label']) !!}
+  {!! Form::label('class', 'Select Classes Assigned', ['class'=>'col-md-4 control-label']) !!}
   <div class="col-md-6">
-    {!! Form::text('type', null, ['class'=>'form-control']) !!}
+    {!! Form::select('class[]', $class, null, ['class'=>'form-control ', 'multiple']) !!}
   </div>
 </div>
 
 <div class="form-group">
-  {!! Form::label('end_date', 'Tarmination Date', ['class'=>'col-md-4 control-label']) !!}
+  {!! Form::label('subjects', 'Select Subjects Assigned', ['class'=>'col-md-4 control-label']) !!}
   <div class="col-md-6">
-    {!! Form::input('date', 'end_date', date('Y-m-d'), ['class'=>'form-control']) !!}
+    {!! Form::select('subjects[]', $subjects, null, ['class'=>'form-control ', 'multiple']) !!}
   </div>
 </div>
 

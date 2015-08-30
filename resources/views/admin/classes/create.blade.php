@@ -1,16 +1,13 @@
-@extends('layouts.master')
+@extends('layouts.teacher')
 
 @section('content')
-	<div class="row">
-		<div class="col-lg-8">
-			<div class="panel panel-default">
-			  <div class="panel-heading text-center"><h1>Add New Class</h1></div>
-			  <div class="panel-body">
-				{!! Form::open(['route'=>'classes.store'])!!}
-				@include('classes.form', ['submitButton'=>'Add New Class'])
-				{!!Form::close()!!}
-			  </div>
-			</div>
+@include('errors.formError')
+	<div class="">
+		<div class="col-lg-12">
+		<h1 class="alignCenter">Add New Class</h1>
+			{!! Form::open(['route'=>'classes.store'])!!}
+			@include('partials.classForm', ['submitButton'=>'Add New Class'])
+			{!!Form::close()!!}
 		</div>
 
 		<div class="col-lg-4">

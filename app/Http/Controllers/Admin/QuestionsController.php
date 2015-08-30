@@ -4,15 +4,19 @@ use Scholr\Http\Requests;
 use Scholr\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-
-use Scholr\Subject;
-use Scholr\Classe;
-use Scholr\Question;
 use Scholr\Http\Requests\QuestionRequest;
 use Illuminate\Support\Facades\Auth;
 use Scholr\Teacher;
+use Scholr\Subject;
+use Scholr\Classe;
+use Scholr\Question;
+use Scholr\Answer;
 
 class QuestionsController extends Controller {
+
+
+	protected $class;
+	protected $subject;
 
 	/**
 	 * Display a listing of the resource.
@@ -21,10 +25,23 @@ class QuestionsController extends Controller {
 	 */
 	public function index()
 	{
+		$term = 'First Term';
+
+		if($_GET['class'])
+		{
+			$this->class = $_GET['class'];
+			$this->subject = $_GET['subject'];
+
+			\Session::put('class', $_GET['class']);
+			\Session::put('subject', $_GET['subject']);
+		}
+
+		$classe_id = Classe::where('name', $this->class)->first()->id;
+		$subject_id = Subject::where('name', $this->subject)->first()->id;
+
 		$count = 1;
 		$questions = Question::all();
-
-		return view('admin.questions.index', compact('questions', 'count'));
+		return view('admin.questions.index', compact('questions', 'count', 'subject_id', 'classe_id', 'term'));
 	}
 
 	/**
@@ -47,19 +64,21 @@ class QuestionsController extends Controller {
 	 * @return Response
 	 */
 	public function store(QuestionRequest $request)
-	{
-		dd(Auth::user()->teacher_id);
+	{	
+		$class = Classe::findOrfail($request['class_id']);
+		$subject = Subject::findOrfail($request['subject_id']);
+		$teacher = teacher::findOrfail(Auth::user()->teacher->id);
+		$question = new Question($request->all());
+		$teacher->questions()->save($question);
 
-		$question = new Question($request->all() );
-		Auth::user()->teacher->questions->save($question);
-
-		/*$input = $request->all();
-
-		Question::create($input);*/
-
-		return redirect()
-			->back()
-			->with('message', '<span class="alert alert-success">Question Created</span>');
+		$myanswer = $request['answer'];
+		$myanswer = $request[$myanswer];
+		$answer = new Answer();
+		$answer->answer = $myanswer;
+		$question->answer()->save($answer);
+		flash('New Question was Successfully Added to '.$subject->name.' exam for '.
+				$class->name);
+		return redirect()->back();
 	}
 
 	/**

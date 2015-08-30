@@ -1,19 +1,16 @@
-@extends('layouts.master')
+@extends('layouts.teacher')
 
 @section('content')
-	<div class="row">
-		<div class="col-lg-9">
-			<div class="panel panel-default">
-				<div class="panel-heading text-center"><h1 >Add New Subject</h1></div>
-				<div class="panel-body">
-					{!! Form::open(['route'=>'subjects.store'])!!}
-						@include('subjects.form', ['submitButton'=>'Add New Subject'])
-					{!!Form::close()!!}
-				</div>
-			</div>
+@include('flash::message ')
+	<div class="">
+		<div class="col-lg-12">
+		<h1 class="alignCenter">Add New Subject</h1>
+			{!! Form::open(['route'=>'subjects.store'])!!}
+			@include('partials.subjectForm', ['submitButton'=>'Add New Subject'])
+			{!!Form::close()!!}
 		</div>
 
-		<div class="col-lg-3">
+		<div class="col-lg-4">
 			@include('errors.list')
 		</div>
 	</div>

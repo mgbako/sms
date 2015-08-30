@@ -1,10 +1,14 @@
+ @inject('teachers', 'Scholr\Teacher')
+
+
  <section class="containers">
   <aside class="items">
     <ul class="nav nav-pills nav-stacked">
       <li class="active">
-        <a href="account/teacher/{{ Auth::user()->slug }}">
+        <a href="/account/teacher/{{ Auth::user()->slug }}">
           <i class="fa fa-dashboard fa-fw"></i>
           Dashboard
+           
         </a>
       </li>
       <li>
@@ -16,22 +20,32 @@
        <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
           <i class="fa fa-book fa-fw"></i>
-          Questions
+          Create Exams
           <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li>
-            <a href="{{ url('/questions') }}">
-              <i class="fa fa-book fa-fw"></i>
-                Questions Created
-            </a>
-          </li>
-          <li>
-            <a href="{{ url('/questions/create') }}">
-              <i class="fa fa-book fa-fw"></i>
-              New Questions
-            </a>
-          </li>
+          @foreach($teachers::all() as $teacher)
+            @foreach($teacher->classes as $class)
+              <li class="dropdown-submenu">
+                 <a href="#" >
+                  <i class="fa fa-book fa-fw"></i>
+                    {{ $class->name }}
+                    <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    @foreach($teacher->subjects as $subject)
+                      <li>
+                        <a href="/questions?class={{$class->name}}&subject={{$subject->name}}">
+                          <i class="fa fa-book fa-fw"></i>
+                          {{ $subject->name }}
+                        </a>
+                      </li>
+                    @endforeach
+                  </ul>
+              </li>
+            @endforeach
+           @endforeach
+          
         </ul>
       </li>
        <li class="dropdown">

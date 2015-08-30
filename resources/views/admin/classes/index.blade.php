@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+@include('flash::message ')
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 		   <div class="panel-heading text-center"><h1>All Classes</h1></div>

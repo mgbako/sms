@@ -33,16 +33,10 @@ class TeachersController extends Controller {
 	 */
 	public function create()
 	{
-		$types = [
-			'Administrator'=>'Administrator',
-			'Teacher'=>'Teacher',
-			'Users'=>'Users',
-		];
-
-		$classes = Classe::lists('name', 'id');
+	
+		$class = Classe::lists('name', 'id');
 		$subjects = Subject::lists('name', 'id');
-
-		return view('admin.teachers.create', compact('types', 'subjects', 'classes'));
+		return view('admin.teachers.create', compact('subjects', 'class'));
 	}
 
 	/**
@@ -51,17 +45,13 @@ class TeachersController extends Controller {
 	 * @return Response
 	 */
 	public function store(TeacherRequest $request)
-	{
-
+	{	
 		
-		$input = $request->all();
-		$teacher = Teacher::create($input);
-
-		$teacher->classes()->attach($request->input('classe'));
-		$teacher->subjects()->attach($request->input('subject'));
-
-		return redirect()
-			->route('admin.teachers.index');
+		$teacher = Teacher::create($request->all());
+		$teacher->classes()->attach($request->input('class'));
+		$teacher->subjects()->attach($request->input('subjects'));
+		flash('New Teacher: '.$teacher->firstname.' was created successfully!');
+		return redirect('teachers');
 	}
 
 	/**
@@ -84,11 +74,6 @@ class TeachersController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$types = [
-			'Administrator'=>'Administrator',
-			'Teacher'=>'Teacher',
-			'Users'=>'Users',
-		];
 		
 		$teacher = Teacher::findOrFail($id);
 
@@ -109,9 +94,7 @@ class TeachersController extends Controller {
 
 		$teacher->update($request->all());
 
-		return redirect()
-				->route('admin.teachers.index')
-				->with('message', '<p class="alert alert-success text-center">teacher Updated</p>');
+		return redirect('teachers');
 	}
 
 	public function delete($id)
@@ -134,10 +117,7 @@ class TeachersController extends Controller {
 		if($request->get('agree')==1)
 		{
 			$teacher->delete();
-
-			return redirect()
-				->route('admin.teachers.index')
-				->with('message', '<p class="alert alert-danger text-center">teacher Deleted</p>');
+			return redirect('teachers');
 		}
 
 		return redirect('teachers');

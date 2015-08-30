@@ -13,9 +13,9 @@ class Teacher extends Model implements SluggableInterface{
         'save_to'    => 'slug',
     );
 
-	protected $fillable = ['firstname', 'lastname', 'teacherId', 
+	protected $fillable = ['firstname', 'lastname', 'staffId', 
     'phone', 'dob', 'gender', 'address', 'state',
-    'nationality', 'type', 'end_date', 'image', 'slug'];
+    'nationality', 'image', 'slug'];
 
 
    public function account() {

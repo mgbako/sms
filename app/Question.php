@@ -5,9 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model {
 
 	protected $fillable = ['subject_id', 'teacher_id',
-   'class', 'term', 'question', 'answer', 'option1',
-   'option2', 'option3'];
-
+   'class_id', 'term', 'question', 'option1',
+   'option2', 'option3', 'option4'];
 
 	public function subject() {
 	  return $this->belongsTo('Scholr\Subject');

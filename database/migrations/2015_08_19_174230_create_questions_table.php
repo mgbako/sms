@@ -15,8 +15,9 @@ class CreateQuestionsTable extends Migration {
 		Schema::create('questions', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('teacher_id')->unsigned();
+			$table->integer('class_id')->unsigned();
 			$table->integer('subject_id')->unsigned();
-			$table->integer('staff_id')->unsigned();
 			$table->string('class');
 			$table->string('term');
 			$table->text('question');
@@ -27,14 +28,20 @@ class CreateQuestionsTable extends Migration {
 			$table->string('slug');
 			$table->timestamps();
 
+			$table->foreign('teacher_id')
+				->references('id')
+				->on('teachers')
+				->onDelete('cascade');
+
+				$table->foreign('class_id')
+				->references('id')
+				->on('classes')
+				->onDelete('cascade');
+
 			$table->foreign('subject_id')
 				->references('id')
 				->on('subjects')
 				->onDelete('cascade');
-
-			$table->foreign('staff_id')
-				->references('id')
-				->on('teachers');
 		});
 	}
 

@@ -96,7 +96,7 @@ class AuthController extends Controller
         $requests['type'] = 'student';
         $student = Student::whereStudentid($requests['loginId'])->first();
         $user = new User($requests);
-        $user->slug = $user->loginId;
+        $user->slug = $user->username;
         $this->auth->login($student->account()->save($user));
 
         $slug = $this->auth->user()->slug;

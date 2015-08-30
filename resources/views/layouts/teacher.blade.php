@@ -7,6 +7,7 @@
   <title>Scholr</title>
 
   <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('/css/multi-dropdown.css') }}" rel="stylesheet">
 
   <!-- Fonts -->
   <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -26,5 +27,6 @@
   <!-- Scripts -->
   <script src="{{ asset('/js/jquery.js') }}"></script>
   <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+   <script src="{{ asset('/js/teacherQuestion.js') }}"></script>
 </body>
 </html>

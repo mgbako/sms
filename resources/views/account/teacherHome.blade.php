@@ -3,7 +3,7 @@
 @section('content')
 @include('flash::message ')
    <h2>DashBoard</h2>
-        <hr>
+      <hr>
         <article class="infoboard">
           <div class="examtaken panel panel-success">
             <div class="panel-heading">
@@ -45,11 +45,13 @@
                   </div>
               </a>
           </div>
+          
         </article>
       </section>
       <hr>
       <section class="maincontent">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, recusandae hic id, nihil, quam consequuntur esse molestias provident repellendus assumenda facere voluptas mollitia officiis sequi similique. Ducimus, nisi, harum. Har
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, recusandae hic id, nihil, quam consequuntur esse molestias provident repellendus assumenda facere voluptas mollitia officiis sequi similique. Ducimus, nisi, harum. Har
+
       </section>
 
 @stop

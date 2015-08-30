@@ -6,6 +6,7 @@ use Scholr\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Scholr\Http\Requests\ClassesRequest;
 use Scholr\Classe;
+use Scholr\Subject;
 
 class ClassesController extends Controller {
 
@@ -28,7 +29,8 @@ class ClassesController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.classes.create');
+		$subjects = Subject::lists('name', 'id');
+		return view('admin.classes.create', compact('subjects'));
 	}
 
 	/**
@@ -38,9 +40,10 @@ class ClassesController extends Controller {
 	 */
 	public function store(ClassesRequest $request)
 	{
-		$input = $request->all();
 
-		Classe::create($input);
+		$class = Classe::create($request->all());
+		$class->subjects()->attach($request->input('subject'));
+		flash('New Class: '.$class->name.' was created successfully!');
 		return redirect('classes');
 	}
 

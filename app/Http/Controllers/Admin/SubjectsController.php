@@ -5,6 +5,7 @@ use Scholr\Http\Controllers\Controller;
 
 use Scholr\Http\Requests\SubjectRequest;
 use Scholr\Subject;
+use Scholr\Classe;
 
 
 class SubjectsController extends Controller {
@@ -29,7 +30,7 @@ class SubjectsController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.subjects.create');
+		return view('admin.subjects.create', compact('classes'));
 	}
 
 	/**
@@ -39,12 +40,8 @@ class SubjectsController extends Controller {
 	 */
 	public function store(SubjectRequest $request)
 	{
-		$input = $request->all();
-
-		 Subject::create($input);
-
-
-		 $subjects = Subject::all();
+		 $subject = Subject::create($request->all());
+		 flash('New subject: '.$subject->name.' was created successfully!');
 		 return redirect('subjects');
 	}
 

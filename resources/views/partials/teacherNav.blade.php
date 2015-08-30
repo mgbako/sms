@@ -16,12 +16,6 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="{{ url('/questions/create') }}">
-                <i class="fa fa-book fa-fw"></i>
-                  New Questions
-              </a>
-            </li>
              <li>
               <a href="{{ url('/subjects/create?') }}">
                 <i class="fa fa-book fa-fw"></i>

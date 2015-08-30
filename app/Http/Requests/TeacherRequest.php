@@ -24,15 +24,13 @@ class TeacherRequest extends Request {
 		return [
 			'firstname' => 'required|min:4|max:25',
 			'lastname' => 'required|min:4|max:25',
-			'employee_id' => 'required|min:4',
+			'staffId' => 'required|min:4',
 			'nationality' => 'required',
-			'email' => 'required|email',
+			'email' => 'required|email|unique:teachers',
 			'dob' => 'required|date',
-			'end_date' => 'required',
 			'address' => 'required',
 			'phone' => 'required',
 			'state' => 'required',
-			'type' => 'required'
 		];
 	}
 
