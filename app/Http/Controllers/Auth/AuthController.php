@@ -120,7 +120,7 @@ class AuthController extends Controller
         $requests['type'] = 'teacher';
         $teacher = Teacher::whereStaffid($requests['loginId'])->firstOrFail();
         $user = new User($requests);
-        $user->slug = $user->loginId;
+        $user->slug = $user->username;
         $this->auth->login($teacher->account()->save($user));
         $slug = $this->auth->user()->slug;
         $this->redirectTo = 'account/teacher/'.$slug;
