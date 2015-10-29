@@ -168,7 +168,6 @@ class AuthController extends Controller
     public function postTeacherlogin(Request $request){
 
         $credentials = $request->only('email', 'password');
-
         if ($this->auth->attempt($credentials, $request->has('remember')))
         {
             $slug = $this->auth->user()->slug;

@@ -26,6 +26,7 @@ class TeacherRequest extends Request {
 			'lastname' => 'required|min:4|max:25',
 			'staffId' => 'required|min:4',
 			'nationality' => 'required',
+			'gender' => 'required',
 			'email' => 'required|email|unique:teachers',
 			'dob' => 'required|date',
 			'address' => 'required',

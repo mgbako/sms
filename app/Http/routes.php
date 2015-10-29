@@ -15,6 +15,7 @@ Route::resource('questions', 'Admin\QuestionsController');
 Route::get('users/{id}/delete', ['as'=>'users.delete', 'uses'=>'UsersController@delete']);
 Route::resource('users', 'UsersController');
 Route::resource('exams', 'ExamsController');
+Route::resource('admins', 'Admin\AdminController');
 Route::controllers([
   'account' => 'Auth\AuthController',
   'password' => 'Auth\PasswordController',

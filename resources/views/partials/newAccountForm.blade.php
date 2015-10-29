@@ -1,39 +1,28 @@
-<section class="form-group">
-  {!! Form::label('loginId', $name, ['class'=>'col-md-4 control-label']) !!}
-  <div class="col-md-6">
+<section class="form-group has-feedback">
     {!! Form::text('loginId', null, ['class'=>'form-control', 'placeholder'=>'Enter Your Student Id']) !!}
-  </div>
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 </section>
-<section class="form-group">
-  {!! Form::label('username', 'Username', ['class'=>'col-md-4 control-label']) !!}
-  <div class="col-md-6">
+
+<section class="form-group has-feedback">
     {!! Form::text('username', null, ['class'=>'form-control', 'placeholder'=>'chose a username']) !!}
-  </div>
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 </section>
 
-<section class="form-group">
-  {!! Form::label('email', 'Email Address', ['class'=>'col-md-4 control-label']) !!}
-  <div class="col-md-6">
+<section class="form-group has-feedback">
    {!! Form::input('email', 'email', null, ['class'=>'form-control', 'placeholder'=>'example@gmail.com']) !!}
-  </div>
+   <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 </section>
 
-<section class="form-group">
-  {!! Form::label('password', 'Password', ['class'=>'col-md-4 control-label']) !!}
-  <div class="col-md-6">
-     {!! Form::input('password','password', null, ['class'=>'form-control', 'placeholder'=>'Choose a Password']) !!}  
-  </div>
+<section class="form-group has-feedback">
+     {!! Form::input('password','password', null, ['class'=>'form-control', 'placeholder'=>'Choose a Password']) !!}
+     <span class="glyphicon glyphicon-lock form-control-feedback"></span>  
 </section>
 
-<section class="form-group">
-  {!! Form::label('password_confirmation', 'Confirm Password', ['class'=>'col-md-4 control-label']) !!}
-  <div class="col-md-6">
-     {!! Form::input('password','password_confirmation', null, ['class'=>'form-control', 'placeholder'=>'Type Password Again']) !!}  
-  </div>
+<section class="form-group has-feedback">
+     {!! Form::input('password','password_confirmation', null, ['class'=>'form-control', 'placeholder'=>'Type Password Again']) !!}
+     <span class="glyphicon glyphicon-lock form-control-feedback"></span>  
 </section>
 
-<section class="form-group">
-  <div class="col-md-6 col-md-offset-4">
-    {!! Form::submit('Create Account', ['class'=>'btn btn-primary']) !!}
-  </div>
+<section class="form-group has-feedback">
+    {!! Form::submit('Create Account', ['class'=>'btn btn-primary btn-block btn-flat']) !!}
 </section>

@@ -21,7 +21,7 @@
 </head>
 <body>
   @include('partials.teacherNav')
-  @include('partials.teacherDashboard');
+  @include('partials.teacherDashboard')
  
 
   <!-- Scripts -->

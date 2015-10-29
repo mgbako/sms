@@ -1,6 +1,4 @@
  @inject('teachers', 'Scholr\Teacher')
-
-
  <section class="containers">
   <aside class="items">
     <ul class="nav nav-pills nav-stacked">
@@ -45,28 +43,6 @@
               </li>
             @endforeach
            @endforeach
-          
-        </ul>
-      </li>
-       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-          <i class="fa fa-book fa-fw"></i>
-          Suject
-          <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li>
-            <a href="{{ url('/subjects') }}">
-              <i class="fa fa-book fa-fw"></i>
-                Subjects Created
-            </a>
-          </li>
-          <li>
-            <a href="{{ url('/subjects/create?') }}">
-              <i class="fa fa-book fa-fw"></i>
-              New Subject
-            </a>
-          </li>
         </ul>
       </li>
     </ul>

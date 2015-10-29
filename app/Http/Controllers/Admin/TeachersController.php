@@ -76,8 +76,9 @@ class TeachersController extends Controller {
 	{
 		
 		$teacher = Teacher::findOrFail($id);
+		$class = $teacher->classes()->lists('name');
 
-		return view('admin.teachers.edit', compact('teacher', 'types'));
+		return view('admin.teachers.edit', compact('teacher', 'class'));
 	}
 
 	/**
@@ -86,11 +87,9 @@ class TeachersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+	public function update($id, TeacherRequest $request)
 	{
 		$teacher = Teacher::findOrFail($id);
-
-		$this->validate($request, Teacher::updateRules());
 
 		$teacher->update($request->all());
 

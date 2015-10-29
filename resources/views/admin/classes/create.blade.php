@@ -1,4 +1,4 @@
-@extends('layouts.teacher')
+@extends('layouts.staff')
 
 @section('content')
 @include('errors.formError')

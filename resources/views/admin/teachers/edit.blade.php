@@ -8,9 +8,6 @@
 			  <div class="panel-heading text-center"><h1>Edit Teacher</h1></div>
 			  <div class="panel-body">
 				{!! Form::model($teacher, ['method'=>'patch', 'route'=>['teachers.update', $teacher->id]])!!}
-	 				<div class="form-group">
-						{!! Form::text('teacherId', null, ['class'=>'form-control', 'placeholder'=>'Enter Staff ID']) !!}
-					</div>
 
 					<div class="form-group">	
 						{!! Form::text('firstname', null, ['class'=>'form-control', 'placeholder'=>'Enter First Name']) !!}
@@ -45,7 +42,7 @@
 					</div>
 
 					<div class="form-group">
-						{!! Form::select('type', $types, $teacher->type, ['class'=>'form-control']) !!}
+						{!! Form::select('class[]', $class, null, ['class'=>'form-control', 'multiple']) !!}
 					</div>
 
 					<div class="form-group">

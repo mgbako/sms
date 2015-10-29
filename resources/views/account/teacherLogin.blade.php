@@ -1,19 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.login')
 @section('content')
-    <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">Teachers Login Area</div>
-        <div class="panel-body">
-            @include('errors.formError')
-            {!! Form::open(['class'=>'form-horizontal', 'role'=>'form']) !!}
-              @include('partials.loginForm')
-
-            {!! Form::close() !!}
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <p class="login-box-msg">Sign in to start your session</p>
+  @include('errors.formError')
+  {!! Form::open(['class'=>'form-horizontal', 'role'=>'form']) !!}
+    @include('partials.loginForm')
+  {!! Form::close() !!}
+  <a href="/account/newteacher" class="text-center">
+  	Register a as new member
+  </a><br>
+    <a href="/">This is not your login page? Go Back</a>
 @stop

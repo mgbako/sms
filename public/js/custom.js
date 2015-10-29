@@ -6,10 +6,8 @@
 	var checked = 0;
 
 	function countBoxes(){
-		var divider = $('#quest').children("div").children("input[type=radio]").length/ $('#quest').length;
+		var divider = $('ol').children("li").length / $('ol').length;
 		count = $("input[type='radio']").length / divider;
-
-		console.log(count);
 	}
 
 	countBoxes();
@@ -20,27 +18,18 @@
 		checked = $('input:checked').length;
 
 		var percentage = parseInt( ( (checked / count) * 100), 10);
-
-		if(percentage < 50){
-	      $(".ui-progressbar-value").css({
-	        'background':'Red'
-	      });
-	    }
-	    else if(percentage < 100){
-	      $(".ui-progressbar-value").css({
-	        'background':'yellow'
-	      });
-	    }
-	    else{
-	       $(".ui-progressbar-value").css({
-	        'background':'lightgreen'
-	      });
-	    }
-
-		$(".progress-bar").progressbar({
-			value: percentage
-		});
-
+		if(percentage < 50 ){
+			$('.progress-bar').addClass('progress-bar-danger')
+		}
+		else if(percentage < 100){
+			$('.progress-bar').removeClass('progress-bar-danger')
+			$('.progress-bar').addClass('progress-bar-warning')
+		}
+		else{
+			$('.progress-bar').removeClass('progress-bar-warning')
+			$('.progress-bar').addClass('progress-bar-success')
+		}
+		$('.progress-bar').css('width', percentage + '%')
 		$(".progressbar-label").text(percentage + "%");
 	}
 
@@ -64,5 +53,15 @@
 	}
 
 	$('#countdown').countdown({date: '15 August 2015 15:53:00'});
+
+	$('nav.paginate').customPaginate({
+		itemsToPaginate: ".post"
+	});
+
+
+	/**
+	 * GUI i for Multiple Select
+	 */
+	$('#selected').select2();
 
 }(jQuery));

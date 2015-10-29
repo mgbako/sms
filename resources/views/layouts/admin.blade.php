@@ -6,10 +6,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Scholr</title>
 
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+	<link href="/css/app.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/AdminLTE.min.css">
+	
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+	  <!-- fullCalendar 2.2.5-->
+    <link rel="stylesheet" href="{{ asset('/css/fullcalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/fullcalendar.print.css') }}" media="print">
+
+    <link rel="stylesheet" href="{{ asset('/css/square/blue.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/skin-blue.min.css') }}" >
+
+    <link rel="icon" href="{{ asset('/img/logoo3.png') }}" type="image/x-icon">
+	<link rel="shortcut icon" href="{{ asset('/img/logoo3.png') }}" type="image/png" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,53 +33,86 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle Navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Scholr</a>
-			</div>
+<body class="skin-blue sidebar-mini">
+	<div class="wrapper">
 
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Home</a></li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					@if(!Auth::guest())
-							<li>
-								<a href="{{ url('admin/students/create') }}" > New Student </a>
-							</li>
-							<li>
-								<a href="{{ url('admin/teachers/create') }}" > New Teacher 
-								</a>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-									{{ Auth::user()->firstname }}
-									<span class="caret"></span>
-									
-								</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="{{ url('/account/logout') }}">Logout</a></li>
-								</ul>
-							</li>
-						@endif
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	@yield('content')
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="/" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>A</b>10</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><img src="{{ asset('/img/logo.png') }}" alt="Add Ten" /><b>Add</b>Ten</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <div class="navbar-custom-menu">
+			@if(!Auth::guest())
+            <ul class="nav navbar-nav">
+				<li>
+					<a href="{{ url('admin/students/create') }}" > New Student </a>
+				</li>
+				<li>
+					<a href="{{ url('admin/teachers/create') }}" > New Teacher 
+					</a>
+				</li>
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="/{{$user->image}}" class="user-image" alt="User Image">
+                  <span class="hidden-xs">{{ Auth::user()->firstname }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                  <img src="/{{$user->image}}" class="img-circle" alt="User Image">
+                    <p>
+                      {{ Auth::user()->firstname }}
+                      <small>School Admin</small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-right">
+                      <a href="{{ url('/auth/logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+                @endif
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+            </ul>
+        </nav>
+      </header>
+	  @yield('content')
+	 </div><!-- ./wrapper -->
 
 	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="{{ asset('/js/jQuery-2.1.4.min.js')}}"></script>
+	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('/js/jquery.slimscroll.min.js') }}"></script>
+    <!-- FastClick -->
+    <script src="{{ asset('/js/fastclick.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('/js/app.min.js') }}"></script>
+    <script src="{{ asset('/js/dropzone.js') }}"></script>
+	<script src="{{ asset('/js/icheck.min.js') }}"></script>
+	<script src="{{ asset('/js/select2.min.js') }}"></script>
+	<script src="{{ asset('/js/countdown.jquery.js')}}"></script>
+	<script src="{{ asset('/js/paginate.js')}}"></script>
+	<script src="{{ asset('/js/custom.js')}}"></script>
+	<script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>
 </body>
 </html>

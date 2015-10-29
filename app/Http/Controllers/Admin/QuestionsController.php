@@ -43,21 +43,6 @@ class QuestionsController extends Controller {
 		$questions = Question::all();
 		return view('admin.questions.index', compact('questions', 'count', 'subject_id', 'classe_id', 'term'));
 	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		$subjectList = Subject::lists('name','id');
-		$classList = Classe::lists('name');
-		$teacher_id = 1;
-
-		return view('admin.questions.create', compact('subjectList', 'teacher_id', 'classList'));
-	}
-
 	/**
 	 * Store a newly created resource in storage.
 	 *

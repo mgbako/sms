@@ -10,7 +10,7 @@
 
 
             	{!! Form::open(['route'=>'teachers.store'])!!}
-				 				@include('partials.staffForm', ['submitButtonText'=>'Create New Taecher'])
+				 				@include('partials.teacherForm', ['submitButtonText'=>'Create New Taecher'])
 							{!!Form::close()!!}
           </div>
       </div>

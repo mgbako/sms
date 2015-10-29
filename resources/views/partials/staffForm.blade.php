@@ -69,16 +69,9 @@
 </div>
 
 <div class="form-group">
-  {!! Form::label('class', 'Select Classes Assigned', ['class'=>'col-md-4 control-label']) !!}
+  {!! Form::label('type', 'Type', ['class'=>'col-md-4 control-label']) !!}
   <div class="col-md-6">
-    {!! Form::select('class[]', $class, null, ['class'=>'form-control ', 'multiple']) !!}
-  </div>
-</div>
-
-<div class="form-group">
-  {!! Form::label('subjects', 'Select Subjects Assigned', ['class'=>'col-md-4 control-label']) !!}
-  <div class="col-md-6">
-    {!! Form::select('subjects[]', $subjects, null, ['class'=>'form-control ', 'multiple']) !!}
+    {!! Form::select('type', ['operator'=>'operator', 'principal'=>'principal'], null, ['class'=>'form-control']) !!}
   </div>
 </div>
 
