@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         //factory(User::class)->create();
-    factory(Student::class, 2)->create();
+    factory(Admin::class, 2)->create();
 
         Model::reguard();
     }

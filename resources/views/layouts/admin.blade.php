@@ -53,24 +53,17 @@
           <div class="navbar-custom-menu">
 			@if(!Auth::guest())
             <ul class="nav navbar-nav">
-				<li>
-					<a href="{{ url('admin/students/create') }}" > New Student </a>
-				</li>
-				<li>
-					<a href="{{ url('admin/teachers/create') }}" > New Teacher 
-					</a>
-				</li>
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="/{{$user->image}}" class="user-image" alt="User Image">
-                  <span class="hidden-xs">{{ Auth::user()->firstname }}</span>
+                  <img src="/{{Auth::user()->image}}" class="user-image" alt="User Image">
+                  <span class="hidden-xs">{{ Auth::user()->username }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                  <img src="/{{$user->image}}" class="img-circle" alt="User Image">
+                  <img src="/{{Auth::user()->image}}" class="img-circle" alt="User Image">
                     <p>
-                      {{ Auth::user()->firstname }}
+                      {{ Auth::user()->username }}
                       <small>School Admin</small>
                     </p>
                   </li>
@@ -78,21 +71,36 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-right">
-                      <a href="{{ url('/auth/logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="{{ url('/account/logout') }}" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
-                @endif
+                
               </li>
               <!-- Control Sidebar Toggle Button -->
             </ul>
+            @endif
+          </div>
         </nav>
       </header>
-	  @yield('content')
-	 </div><!-- ./wrapper -->
+      @if(Session::has('message'))
+        {!! Session::get('message') !!}
+      @endif
+      @yield('content')
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0
+        </div>
+        <strong>Copyright &copy; 2015 
+          <a href="http://www.pottersmedia.com">
+            Pottersmedia Support Services
+          </a>.
+        </strong> All rights reserved.
+      </footer>
 
+	 </div><!-- ./wrapper -->
 	<!-- Scripts -->
-	<script src="{{ asset('/js/jQuery-2.1.4.min.js')}}"></script>
+	<script src="{{ asset('/js/jQuery.js')}}"></script>
 	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/js/jquery.slimscroll.min.js') }}"></script>
     <!-- FastClick -->

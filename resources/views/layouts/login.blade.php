@@ -26,7 +26,6 @@
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
-s
 	<script src="{{ asset('/js/jquery.js') }}"></script>
 	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 	<script src="plugins/iCheck/icheck.min.js"></script>

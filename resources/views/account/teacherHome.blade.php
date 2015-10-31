@@ -1,4 +1,4 @@
-@extends('layouts.teacher')
+@extends('layouts.admin')
 
 @section('content')
 @include('flash::message ')

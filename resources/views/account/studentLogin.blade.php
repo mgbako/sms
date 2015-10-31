@@ -1,6 +1,8 @@
 @extends('layouts.login')
 @section('content')
-	<p class="login-box-msg">Sign in to start your session</p>
+	<p class="login-box-msg">
+		Student login Area, Sign in to start your session
+	</p>
   @include('errors.formError')
   {!! Form::open(['class'=>'form-horizontal', 'role'=>'form']) !!}
     @include('partials.loginForm')

@@ -57,3 +57,20 @@ $factory->define(Scholr\Student::class, function ($faker) {
         'end_date' => $faker->date,
     ];
 });
+
+$factory->define(Scholr\Admin::class, function ($faker) {
+    return [
+        'firstname' =>$faker->name,
+        'lastname' =>$faker->name,
+        'staffId' => str_random(5),
+        'phone'  =>$faker->phoneNumber,
+        'email' =>$faker->email,
+        'dob' =>$faker->date,
+        'state' => $faker->state,
+        'gender' => $faker->titleFemale,
+        'nationality' =>$faker->country,
+        'address'  => $faker->address,
+        'type' => $faker->name,
+        'image' => $faker->image,
+    ];
+});

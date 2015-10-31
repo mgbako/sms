@@ -4,11 +4,12 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class Student extends Model implements SluggableInterface{
+class Student extends Model implements SluggableInterface
+{
 
   use SluggableTrait;
 
-    protected $sluggable = array(
+  protected $sluggable = array(
         'build_from' => 'firstname',
         'save_to'    => 'slug',
     );

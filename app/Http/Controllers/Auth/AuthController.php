@@ -9,6 +9,7 @@ use Scholr\http\Requests\NewAccountRequest;
 use Scholr\User;
 use Scholr\Student;
 use Scholr\Teacher;
+use Scholr\Admin;
 
 
 class AuthController extends Controller
@@ -40,10 +41,17 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => ['getLogout', 'getStudent', 'getTeacher']]);
         $this->auth = $auth;
     }
+    /**
+     * show admin login area
+     */
+    public function getAdminlogin()
+    {
+        return view('account.staffLogin');
+    }
 
-        /**
+    /**
      * shows student login form
-     * @return string
+     * 
      */
     public function getStudentlogin() {
         return view('account.studentLogin');
@@ -51,13 +59,19 @@ class AuthController extends Controller
 
     /**
      * show form for teacher login
-     * @return String 
+     * 
      */
     public function getTeacherlogin() {
         return view('account.teacherLogin');
     }
 
-
+    /**
+     * show admin user registration form
+     */
+    public function getNewadmin()
+    {
+        return view('account.newStaff');
+    }
     public function getNewstudent() {
         return view('account.newStudent');
     }
@@ -69,7 +83,13 @@ class AuthController extends Controller
     public function getNewteacher() {
         return view('account.newTeacher');
     }
-
+    public function getAdmin($slug)
+    {
+        if ($this->auth->check()) {
+            $admin = \DB::table('users')->where('slug', $slug)->first();
+            return view('account.staffHome', compact('admin'));
+        }
+    }
     public function getStudent($slug) {
         if ($this->auth->check()) {
             $student = \DB::table('users')->where('slug', $slug)->first();
@@ -85,6 +105,31 @@ class AuthController extends Controller
         }
         return redirect('/');
     }
+
+    /**
+     * handle creating admin user account
+     * @param  \Illuminate\Http\Request $request 
+     * @return \Illuminnate\Http\Response  
+     */
+    public function postNewadmin(NewAccountRequest $request) {
+
+        $requests = $request->all();
+        
+        $requests['password'] = bcrypt($requests['password']);
+        $requests['type'] = 'admin';
+        $admin = Admin::whereStaffid($requests['loginId'])->firstOrFail();
+        $user = new User($requests);
+        $user->slug = $user->username;
+        $this->auth->login($admin->account()->save($user));
+        $slug = $this->auth->user()->slug;
+        $this->redirectTo = 'account/admin/'.$slug;
+        $user = $this->auth->user();
+        flash('Welcome '.$user->username  
+                        .' Your account was created succeessfully');
+        return redirect($this->redirectPath());
+    
+    }
+
     /**
      * handels a registration request for student account
      * @param  \Illuminate\Http\Request  $request 
@@ -133,6 +178,36 @@ class AuthController extends Controller
 
 
     /**
+     * handle admin login
+     * @param  \Illuminate\Http\Request $request 
+     * @return \Illuminate\Http\Response
+     */
+    public function postAdminlogin(Request $request){
+
+        $credentials = $request->only('email', 'password');
+
+        
+
+        if ($this->auth->attempt($credentials, $request->has('remember'))){
+            $slug = $this->auth->user()->slug;
+            $this->redirectTo = 'account/admin/'.$slug;
+
+                $user = $this->auth->user();
+        flash('Welcome Back '.$user->firstname.
+                ' You have logged in succeessfully');
+
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect('/account/adminlogin')
+                    ->withInput($request->only('email', 'remember'))
+                    ->withErrors([
+                        'email' => $this->getFailedLoginMessage(),
+                    ]);
+    }
+
+
+    /**
      * handle student login
      * @param  \Illuminate\Http\Request $request 
      * @return \Illuminate\Http\Response
@@ -160,6 +235,7 @@ class AuthController extends Controller
                         'email' => $this->getFailedLoginMessage(),
                     ]);
     }
+
     /**
      * Handle teacher logining teachers
      * @param  \Illuminate\Http\Request $request 
@@ -187,4 +263,5 @@ class AuthController extends Controller
         ]);
         
     }
+
 }

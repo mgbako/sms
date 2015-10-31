@@ -20,8 +20,7 @@ class Admin extends Model implements SluggableInterface
     'email', 'phone', 'dob', 'gender', 'address', 'state',
     'nationality', 'type', 'image', 'slug'];
 
-    public function account()
-    {
-      return $ths->hasOne('Schoolr\User');
+     public function account() {
+      return $this->hasOne('Scholr\User');
     }
 }
