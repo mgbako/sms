@@ -23,7 +23,7 @@ class QuestionRequest extends Request {
 	{
 		return [
 			'subject_id'=>'required',
-			'class_id'=>'required',
+			'classe_id'=>'required',
 			'term'=>'required',
 			'question'=>'required',
 			'answer'=>'required',

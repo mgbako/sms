@@ -85,9 +85,8 @@ class ClassesController extends Controller {
 
 		$class->update($request->all());
 
-		return redirect()
-			->route('admin.classes.index')
-			->with('message', '<p class="alert alert-success">Class Updated</p>');
+		flash($class->name.' was updated successfully!');
+		return redirect('classes');
 	}
 
 	/**
@@ -117,9 +116,8 @@ class ClassesController extends Controller {
 		{
 			$class->delete();
 
-			return redirect()
-				->route('admin.classes.index')
-				->with('message', '<p class="alert alert-danger">Class Deleted</p>');
+			flash($class->name.' was deleted successfully!');
+			return redirect('classes');
 		}
 
 		return redirect('classes');
