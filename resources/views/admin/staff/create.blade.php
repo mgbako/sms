@@ -1,5 +1,5 @@
-@extends('layouts.staff')
-
+@extends('layouts.admin')
+@include('partials.adminDashboard')
 @section('content')
 @include('flash::message ')
 <div class="container-fluid">

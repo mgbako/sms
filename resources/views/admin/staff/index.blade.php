@@ -1,9 +1,9 @@
-@extends('layouts.staff')
-
+@extends('layouts.admin')
+@include('partials.adminDashboard')
 @section('content')
 @include('flash::message ')
 		<div class="panel panel-default">
-			<div class="panel-heading text-center"><h1>All Teachers</h1></div>
+			<div class="panel-heading text-center"><h1>All Admins</h1></div>
 			<div class="panel-body">
 				{!! link_to_route('admins.create', 'Add New Admin Staff', '', ['class'=>'btn btn-primary']) !!}
 				<table class="table table-bordered table-responsive">
