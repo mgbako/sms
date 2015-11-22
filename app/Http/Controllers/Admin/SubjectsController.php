@@ -7,7 +7,6 @@ use Scholr\Http\Requests\SubjectRequest;
 use Scholr\Subject;
 use Scholr\Classe;
 
-
 class SubjectsController extends Controller {
 
 	/**
@@ -19,20 +18,11 @@ class SubjectsController extends Controller {
 	public function index()
 	{
 		$count = 1;
-		$subjects = Subject::orderBy('name', 'asc')->get();
+		$subjects = Subject::all();
 		return view('admin.subjects.index', compact('subjects', 'count'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return view('admin.subjects.create', compact('classes'));
-	}
-
+	
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -45,16 +35,6 @@ class SubjectsController extends Controller {
 		 return redirect('subjects');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		
-	}
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -63,8 +43,8 @@ class SubjectsController extends Controller {
 	 * @return Response
 	 */
 	public function edit($id)
-	{
-		$subject = Subject::findOrFail($id);
+	{ 
+		$subject = $id;
 
 		return view('admin.subjects.edit', compact('subject'));
 	}
@@ -77,12 +57,12 @@ class SubjectsController extends Controller {
 	 */
 	public function update($id, Request $request)
 	{
-		$subject = Subject::findOrFail($id);
+		$subject = $id;
 
 		$this->validate($request, ['name'=>'required|min:3']);
 
 		$subject->update($request->all());
-
+		 flash($subject->name.' was updated successfully!');
 		return redirect('subjects');
 	}
 
@@ -107,17 +87,15 @@ class SubjectsController extends Controller {
 	 */
 	public function destroy($id, Request $request)
 	{
-		$subject = Subject::find($id);
+		$subject = $id;
 
 		if($request->get('agree')==1)
 		{
 			$subject->delete();
-
-			return redirect()
-				->route('admin.subjects.index')
-				->with('message', '<p class="alert alert-danger">Subject Deleted</p>');
+			flash($subject->name.' was deleted successfully!');
+			return redirect('subjects');
 		}
-
+			
 		return redirect('subjects');
 	}
 

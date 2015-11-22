@@ -10,7 +10,7 @@ use Scholr\User;
 use Scholr\Student;
 use Scholr\Teacher;
 use Scholr\Admin;
-
+use Scholr\SubjectAssigned;
 
 class AuthController extends Controller
 {
@@ -100,8 +100,15 @@ class AuthController extends Controller
 
     public function getTeacher($slug){
         if ($this->auth->check()) {
-            $teacher = \DB::table('teachers')->where('slug', $slug)->first();
-             return view('account.teacherHome', compact('teacher'));
+            $user = $this->auth->user();
+            if ($user->type == 'teacher') {
+                $teacher = \DB::table('teachers')->where('staffId', $user->loginId)->first();
+                $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+                 return view('account.teacherHome', compact('teacher', 'assigned'));
+            }else{
+                flash('Ops you do not have access!');
+                return redirect('back');
+            }
         }
         return redirect('/');
     }

@@ -16,7 +16,7 @@
 <div class="form-group">
   {!! Form::label('student_id', 'Student ID', ['class'=>'col-md-4 control-label']) !!}
   <div class="col-md-6">
-    {!! Form::text('student_id', null, ['class'=>'form-control', 'placeholder'=>'Enter Student Student Id']) !!}
+    {!! Form::text('student_id', null, ['class'=>'form-control', 'placeholder'=>'Enter Student Id']) !!}
   </div>
 </div>
 

@@ -1,53 +1,40 @@
-@extends('layouts.teacher')
-
+@extends('layouts.admin')
 @section('content')
+@include('partials.adminDashboard')
 	<div class="row">
 		<div class="col-lg-9">
 			<div class="panel panel-default">
 				<div class="panel-heading"><h1 class="text-center">Edit Question</h1></div>
 				<div class="panel-body">
-					{!! Form::model($question, ['method'=>'patch', 'route'=>['questions.update', $question->id]])!!}
-				<div class="form-group">
-					{!! Form::select('subject_id', $subjectList, $question->subject_id, ['class'=>'form-control']) !!}
-				</div>
+				{!! Form::model($question, ['method'=>'patch', 'route'=>['classes.subjects.questions.update', $id, $subjectId, $question->id]])!!}
 
-				<div class="form-group">
-					{!! Form::select('class', $classList, $question->class, ['class'=>'form-control']) !!}
-				</div>
+					<div class="form-group">	
+							{!! Form::textarea('question', null, ['class'=>'form-control', 'placeholder'=>'Enter Question']) !!}
+						</div>
 
-				<div class="form-group">
-					{!! Form::select('term', ['1'=>'First Term', '2'=>'Second Term', '3'=>'Third Term'], $question->term,['class'=>'form-control'])!!}
-				</div>
+						<div class="form-group">
+							<p>{!! Form::radio('answer', 'option1') !!} Answer</p>
+							{!! Form::text('option1', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 1']) !!}
+						</div>
 
-				<div class="form-group">	
-					{!! Form::textarea('question', null, ['class'=>'form-control', 'placeholder'=>'Enter Question']) !!}
-				</div>
+						<div class="form-group">
+							<p>{!! Form::radio('answer', 'option2') !!} Answer</p>
+							{!! Form::text('option2', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 2']) !!}
+						</div>
 
-				<div class="form-group">
-					{!! Form::text('answer', null, ['class'=>'form-control', 'placeholder'=>'Enter Answer']) !!}
-				</div>
+						<div class="form-group">
+							<p>{!! Form::radio('answer', 'option3') !!} Answer</p>
+							{!! Form::text('option3', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 3']) !!}
+						</div>
 
-				<div class="form-group">
-					{!! Form::text('option1', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 1']) !!}
-				</div>
-
-				<div class="form-group">
-					{!! Form::text('option2', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 2']) !!}
-				</div>
-
-				<div class="form-group">
-					{!! Form::text('option3', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 3']) !!}
-				</div>
-
-				<div class="form-group">
-					{!! Form::hidden('teacher_id', $teacher_id) !!}
-				</div>
-
-				<div class="form-group">
-					{!! Form::submit('Add Question', ['class'=>'btn btn-primary form-control', 'placeholder'=>'Enter Option 3']) !!}
-				</div>
-
-			{!!Form::close()!!}
+						<div class="form-group">
+							<p>{!! Form::radio('answer', 'option4') !!} Answer</p>
+							{!! Form::text('option4', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 4']) !!}
+						</div>
+						<div class="form-group">
+							{!! Form::submit('Update', ['class'=>'btn btn-success form-control']) !!}
+						</div>
+				{!!Form::close()!!}
 				</div>
 			</div>
 		</div>

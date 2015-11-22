@@ -1,6 +1,5 @@
 @extends('layouts.login')
 @section('content')
-    <div class="container-fluid">
       <p class="login-box-msg">
         Admin Users Login Area, Sign in to start your session
       </p>

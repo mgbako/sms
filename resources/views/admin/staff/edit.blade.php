@@ -1,6 +1,6 @@
-@extends('layouts.staff')
-
+@extends('layouts.admin')
 @section('content')
+@include('partials.adminDashboard')
 	<div class="row">
 		<div class="col-lg-8 panel">
 

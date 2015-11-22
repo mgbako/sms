@@ -6,78 +6,37 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Scholr</title>
 
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{{ asset('/css/AdminLTE.min.css') }}">
+	<link href="/css/app.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="/css/AdminLTE.min.css">
+	<link rel="stylesheet" href="/css/square/blue.css">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-	 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	@yield('css')
+	<link rel="icon" href="{{ asset('/img/logoo3.png') }}" type="image/x-icon">
+	<link rel="shortcut icon" href="{{ asset('/img/logoo3.png') }}" type="image/png" />
 </head>
-<body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle Navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Scholr</a>
-			</div>
+<body class="login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="/"><img src="{{ asset('/img/logo.png') }}" alt="Add Ten" /><b>Add</b>Ten</a>
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+          @yield('content')
 
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Home</a></li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					@if (Auth::guest())
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Student 
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/account/studentlogin') }}">Login</a></li>
-								<li><a href="{{ url('/account/newstudent') }}">Register</a></li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Teacher 
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/account/teacherlogin') }}">Login</a></li>
-								<li><a href="{{ url('/account/newteacher') }}">Register</a></li>
-							</ul>
-						</li>
-					@else
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->firstname }} 
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/account/logout') }}">Logout</a></li>
-							</ul>
-						</li>
-					@endif
-				</ul>
-			</div>
-		</div>
-	</nav>
-	@yield('content')
-
-	<!-- Scripts -->
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
 	<script src="{{ asset('/js/jquery.js') }}"></script>
 	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-	@yield('scripts')
+	<script src="plugins/iCheck/icheck.min.js"></script>
+	    <script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>
 </body>
 </html>

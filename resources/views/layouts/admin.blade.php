@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Scholr</title>
+	<title>AddTen</title>
 
 	<link href="/css/app.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/AdminLTE.min.css">
@@ -103,11 +103,11 @@
 	<script src="{{ asset('/js/jQuery.js')}}"></script>
 	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 	<script src="{{ asset('/js/jquery.slimscroll.min.js') }}"></script>
-    <!-- FastClick -->
-    <script src="{{ asset('/js/fastclick.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('/js/app.min.js') }}"></script>
-    <script src="{{ asset('/js/dropzone.js') }}"></script>
+  <!-- FastClick -->
+  <script src="{{ asset('/js/fastclick.min.js') }}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{ asset('/js/app.min.js') }}"></script>
+  <script src="{{ asset('/js/dropzone.js') }}"></script>
 	<script src="{{ asset('/js/icheck.min.js') }}"></script>
 	<script src="{{ asset('/js/select2.min.js') }}"></script>
 	<script src="{{ asset('/js/countdown.jquery.js')}}"></script>

@@ -21,12 +21,11 @@
 		            </li>
 		            <li class="treeview">
 		              <a href="#">
-		                <i class="fa fa-group"></i> <span>Staffs</span>
+		                <i class="fa fa-group"></i> <span>Teachers</span>
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		              <ul class="treeview-menu">
-		                <li><a href=""><i class="fa fa-circle-o"></i> Profile</a></li>
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i>All Staffs</a></li>
+		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i>All Teachers</a></li>
 		              </ul>
 		            </li>
 		            <li class="treeview">
@@ -35,7 +34,6 @@
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		              <ul class="treeview-menu">
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Profile</a></li>
 		                <li><a href="{{ route('students.index') }}"><i class="fa fa-circle-o"></i> All Students </a></li>
 		              </ul>
 		            </li>
@@ -45,7 +43,6 @@
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		              <ul class="treeview-menu">
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Profile</a></li>
 		                <li><a href="{{ route('classes.index') }}"><i class="fa fa-circle-o"></i> All Classes </a></li>
 		              </ul>
 		            </li>
@@ -54,13 +51,14 @@
 		                <i class="fa fa-list-alt"></i> <span>Subject</span>
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
-		              <ul class="treeview-menu">
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Subject Analysis</a></li>
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Subject Assigned</a></li>
-		                <li><a href="{{ route('subjects.index') }}"><i class="fa fa-circle-o"></i> Subject List</a></li>
-		                <li><a href="{{ route('subjects.index') }}"><i class="fa fa-circle-o"></i> Subject Progress</a></li>
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Subject Question</a></li>
-		              </ul>
+		               <ul class="treeview-menu">
+									  <li><a href=""><i class="fa fa-circle-o"></i> Subject Analysis</a></li>
+									  <li><a href="{{ route('subjectAssigned.index') }}"><i class="fa fa-circle-o"></i> Subject Assigned</a></li>
+									  <li><a href="{{ route('subjects.index') }}"><i class="fa fa-circle-o"></i> Subject List</a></li>
+									  <li><a href="{{ route('subjectProgess.index') }}"><i class="fa fa-circle-o"></i> Subject Progress</a></li>
+									  <li><a href="{{ route('subjectQuestions.index') }}"><i class="fa fa-circle-o"></i> Subject Question</a></li>
+									  <li><a href="{{ route('subjectReceptions.subjectReception') }}"><i class="fa fa-circle-o"></i> Subject Reception</a></li>
+									</ul>
 		            </li>
 		            <li>
 		              <a href="{{ route('teachers.index') }}">

@@ -10,7 +10,10 @@ use Scholr\Subject;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller {
-
+	public function __construct()
+	{
+		$this->middleware('staff');
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -42,12 +45,18 @@ class StudentsController extends Controller {
 	 */
 	public function store(StudentRequest $request)
 	{
-		$input = $request->all();
-		$student = Student::create($input);
+		$requests = $request->all();
+		$image = $request->file('image');
+		$filename = time()."-".$image->getClientOriginalName();
+		$path = public_path('img/students/'.$filename);
+		\Image::make($image->getRealPath())->resize(150, 100)->save($path);
+		$requests['image'] = 'img/students/'.$filename;
+		$student = new Student($requests);
+		$student->image = 'img/students/'.$filename;
+		$student->save();
 		$student->subjects()->attach($request->input('subject_list'));
-
-		return redirect()
-			->route('admin.students.index');
+		flash('New Teacher: '.$student->firstname.' '.$student->lastname.' was created successfully!');
+		return redirect('students');
 	}
 
 	/**
@@ -74,8 +83,11 @@ class StudentsController extends Controller {
 		$subjects = Subject::lists('name', 'id');
 
 		$student = Student::findOrFail($id);
-		
-		return view('admin.students.edit', compact('student', 'classList', 'subjects'));
+		$str = [];
+		foreach($student->subjects as $st){
+			$str[] = $st->pivot->subject_id;
+		}
+		return view('admin.students.edit', compact('student', 'classList', 'subjects',  'str'));
 	}
 
 	/**
@@ -88,20 +100,28 @@ class StudentsController extends Controller {
 	{
 		$student = Student::findOrFail($id);
 
-		$this->validate($request, Student::updateRules());
+		if ($student) {
+			if ($request->hasFile('image')) {
+				$image = $request->file('image');
+				$filename = time()."-".$image->getClientOriginalName();
+				$path = public_path('img/students/'.$filename);
+				\Image::make($image->getRealPath())->resize(150, 100)->save($path);
+				$student->image = 'img/students/'.$filename;
+			}
+			$student->firstname = $request['firstname'];
+			$student->lastname = $request['lastname'];
+			$student->phone = $request['phone'];
+			$student->dob = $request['dob'];
+			$student->gender = $request['gender'];
+			$student->address = $request['address'];
+			$student->state = $request['state'];
+			$student->nationality = $request['nationality'];
+			$student->class = $request['class'];
+			$student->update();
+			flash($student->firstname.' '.$student->lastname.' was updated successfully!');
+			return redirect('students');
+		}
 
-		$student->update($request->all());
-
-		return redirect()
-				->route('admin.students.index')
-				->with('message', '<p class="alert alert-success text-center">Student Updated</p>');
-	}
-
-	public function delete($id)
-	{
-		$student = Student::find($id);
-
-		return view('admin.students.delete', compact('student'));
 	}
 
 	/**
@@ -118,9 +138,9 @@ class StudentsController extends Controller {
 		{
 			$student->delete();
 
-			return redirect()
-				->route('admin.students.index')
-				->with('message', '<p class="alert alert-danger text-center">Student Deleted</p>');
+			return redirect('students');
+			flash($student->firstname.' '.$student->lastname.' was deleted successfully!');
+
 		}
 
 		return redirect('students');

@@ -19,7 +19,8 @@ class ClassesController extends Controller {
 	{
 		$count = 1;
 		$classes = Classe::orderBy('name', 'asc')->get();
-		return view('admin.classes.index', compact('classes', 'count'));
+		$subjectList = Subject::orderBy('name', 'asc')->lists('name', 'id');
+		return view('admin.classes.index', compact('classes', 'count','subjectList'));
 	}
 
 	/**
@@ -28,7 +29,7 @@ class ClassesController extends Controller {
 	 * @return Response
 	 */
 	public function create()
-	{
+	{ 
 		$subjects = Subject::lists('name', 'id');
 		return view('admin.classes.create', compact('subjects'));
 	}

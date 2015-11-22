@@ -33,10 +33,11 @@ class TeachersController extends Controller {
 	 */
 	public function create()
 	{
-	
-		$class = Classe::lists('name', 'id');
+
+		$classes = Classe::lists('name', 'id');
 		$subjects = Subject::lists('name', 'id');
-		return view('admin.teachers.create', compact('subjects', 'class'));
+
+		return view('admin.teachers.create', compact('subjects', 'classes'));
 	}
 
 	/**
@@ -47,9 +48,15 @@ class TeachersController extends Controller {
 	public function store(TeacherRequest $request)
 	{	
 		
-		$teacher = Teacher::create($request->all());
-		$teacher->classes()->attach($request->input('class'));
-		$teacher->subjects()->attach($request->input('subjects'));
+		$requests = $request->all();
+		$image = $request->file('image');
+		$filename = time()."-".$image->getClientOriginalName();
+		$path = public_path('img/teachers/'.$filename);
+		\Image::make($image->getRealPath())->resize(150, 100)->save($path);
+		$requests['image'] = 'img/teachers/'.$filename;
+		$teacher = new Teacher($requests);
+		$teacher->image = 'img/teachers/'.$filename;
+		$teacher->save();
 		flash('New Teacher: '.$teacher->firstname.' was created successfully!');
 		return redirect('teachers');
 	}
@@ -74,11 +81,11 @@ class TeachersController extends Controller {
 	 */
 	public function edit($id)
 	{
-		
+
 		$teacher = Teacher::findOrFail($id);
 		$class = $teacher->classes()->lists('name');
 
-		return view('admin.teachers.edit', compact('teacher', 'class'));
+		return view('admin.teachers.edit', compact('teacher', 'class', 'types'));
 	}
 
 	/**
@@ -87,13 +94,31 @@ class TeachersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, TeacherRequest $request)
+	public function update($id, Request $request)
 	{
 		$teacher = Teacher::findOrFail($id);
 
-		$teacher->update($request->all());
+		if ($teacher) {
+			if ($request->hasFile('image')) {
+				$image = $request->file('image');
+				$filename = time()."-".$image->getClientOriginalName();
+				$path = public_path('img/teachers/'.$filename);
+				\Image::make($image->getRealPath())->resize(150, 100)->save($path);
+				$student->image = 'img/teachers/'.$filename;
+			}
+			$teacher->firstname = $request['firstname'];
+			$teacher->lastname = $request['lastname'];
+			$teacher->phone = $request['phone'];
+			$teacher->dob = $request['dob'];
+			$teacher->gender = $request['gender'];
+			$teacher->address = $request['address'];
+			$teacher->state = $request['state'];
+			$teacher->nationality = $request['nationality'];
+			$teacher->update();
+			flash($teacher->firstname.' '.$teacher->lastname.' was updated successfully!');
+			return redirect('teachers');
+		}
 
-		return redirect('teachers');
 	}
 
 	public function delete($id)
@@ -116,6 +141,7 @@ class TeachersController extends Controller {
 		if($request->get('agree')==1)
 		{
 			$teacher->delete();
+			flash($teacher->firstname.' '.$teacher->lastname.' was deleted successfully!');
 			return redirect('teachers');
 		}
 

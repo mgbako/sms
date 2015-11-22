@@ -1,21 +1,47 @@
-@extends('layouts.master')
-
+@extends('layouts.admin')
 @section('content')
-	<div class="row">
-		<div class="col-lg-8">
-			<div class="panel panel-default">
-				<div class="panel-heading text-center"><h1>Edit: {!! $subject->name !!} </h1></div>
-				<div class="panel-body">
-					{!! Form::model($subject, ['method'=>'patch','route'=>['subjects.update', $subject->id]])!!}
-					@include('subjects.form', ['submitButton'=>'Update Subject'])
-					{!!Form::close()!!}
-				</div>
-			</div>
-		</div>
+	@include('partials.adminDashboard')
+	<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+	  <section class="content-header">
+	    <h1>
+	      Edit
+	      <small>Subject Editing Process</small>
+	    </h1>
+	    <ol class="breadcrumb">
+	      <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+	      <li><a href="/subjects">Staffs</a></li>
+	      <li class="active">Edit</li>
+	    </ol>
+	  </section>
+	    <!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-6"><!-- /.box --><!-- /.box -->
+				</div><!-- /.col --><!-- /.col -->
+			</div><!-- /.row -->
+			{{-- End of Right side bar --}}
 
-		<div class="col-lg-4">
-			@include('errors.list')
-		</div>
-	</div>
+			<div class="row">
+				<div class="col-xs-12">            
+					<div class="box box-info">
+						<div class="box-body">
+							<div class="col-md-12">
+								@include('errors.list')
+							</div>
+							{!! Form::model($subject, ['method'=>'patch','route'=>['subjects.update', $subject->id]])!!}
+							<div class="form-group">
+									{!! Form::text('name', null, ['placeholder'=>'Enter Subject Name', 'class'=>'form-control']) !!}
+							</div>
+							<div class="form-group">
+								{!!Form::submit('Update', ['class'=>'btn btn-primary form-control'])!!}
+							</div>
+							{!!Form::close()!!}
+						</div>{{-- End of Box Box-body --}}
+					</div>{{-- End of Box Box-info --}}
+				</div>{{-- End of col-md-12 --}}
+			</div><!-- End of row -->
+		</section><!-- End of Content -->
+</div><!-- /.content-wrapper -->
 	
 @stop

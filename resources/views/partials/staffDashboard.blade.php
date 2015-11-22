@@ -1,6 +1,4 @@
  @inject('teachers', 'Scholr\Teacher')
-
-
  <section class="containers">
   <aside class="items">
     <ul class="nav nav-pills nav-stacked">

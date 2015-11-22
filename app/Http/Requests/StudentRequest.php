@@ -24,15 +24,15 @@ class StudentRequest extends Request {
 		return [
 			'firstname' => 'required|min:4|max:25',
 			'lastname' => 'required|min:4|max:25',
-			'student_id' => 'required|min:4',
+			'studentId' => 'required|min:4',
 			'nationality' => 'required',
 			'email' => 'required|email',
 			'dob' => 'required|date',
-			'end_date' => 'required',
 			'address' => 'required',
 			'phone' => 'required',
+			'gender' => 'required',
 			'state' => 'required',
-			'type' => 'required'
+			'image' => 'required',
 		];
 	}
 
