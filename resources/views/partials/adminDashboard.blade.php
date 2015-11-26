@@ -65,7 +65,7 @@
 		              <i class="fa fa-pie-chart"></i> <span>Results</span>
 		              </a>
 		            </li>
-		            <li class="treeview active">
+		            <li class="treeview">
 		              <a href="#">
 		              <i class="fa fa-gears"></i> <span>Settings</span>
 		                <i class="fa fa-angle-left pull-right"></i>

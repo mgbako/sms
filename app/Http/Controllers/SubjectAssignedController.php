@@ -30,7 +30,7 @@ class SubjectAssignedController extends Controller
 
         $subjectAssigned = SubjectAssigned::all();
 
-        return view('Admin.subjectAssigned.index', compact('subjectList', 'classList', 'staff', 'user', 'assignedClass', 'subjectAssigned'));
+        return view('admin.subjectAssigned.index', compact('subjectList', 'classList', 'staff', 'user', 'assignedClass', 'subjectAssigned'));
     }
 
     /**

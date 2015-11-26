@@ -26,4 +26,10 @@ class Question extends Model {
 	  return $this->hasOne('Scholr\Answer');
 	}
 
+	public function scopePercentage($query, $classe_id, $subject_id)
+    {
+        return  $query->where('classe_id', $classe_id)
+                    ->where('subject_id', $subject_id);
+   }
+
 }

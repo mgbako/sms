@@ -5,7 +5,7 @@ use Scholr\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Contracts\Auth\Guard;
-use Scholr\http\Requests\NewAccountRequest;
+use Scholr\Http\Requests\NewAccountRequest;
 use Scholr\User;
 use Scholr\Student;
 use Scholr\Teacher;
