@@ -23,7 +23,7 @@
 						<div class="panel-heading">
 							<h2>Are You sure You want to Delete the Assigned Class Subject:</h2>
 							<hr>
-							<h4> {{ Scholrs\Classe::whereId($classeId)->first()->name }} {{ Scholrs\Subject::whereId($subjectId)->first()->name }}</h4>
+							<h4> {{ Scholr\Classe::whereId($classeId)->first()->name }} {{ Scholr\Subject::whereId($subjectId)->first()->name }}</h4>
 							<hr>
 
 							{!!Form::open(['method'=>'delete', 'route' => ['subjectQuestions.destroy', $classeId]]) !!}

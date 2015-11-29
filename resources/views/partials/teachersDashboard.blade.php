@@ -1,6 +1,6 @@
 <div class="container-fluid">
 		<div class="row">
-			@unless(Auth::guest())
+			@if(!Auth::guest())
 			 <!-- Left side column. contains the logo and sidebar -->
 		      <aside class="main-sidebar">
 		        <!-- sidebar: style can be found in sidebar.less -->
@@ -48,14 +48,13 @@
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		              <ul class="treeview-menu">
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Subject Assigned</a></li>
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Subject Question</a></li>
+		                <li><a href="{{ route('subjectQuestions.index') }}"><i class="fa fa-circle-o"></i> Assigne Time</a></li>
 		              </ul>
 		            </li>
 		          </ul>
 		        </section>
 		        <!-- /.sidebar -->
 		      </aside>
-			@endunless
+			@endif
 		</div>
 </div>

@@ -1,4 +1,16 @@
 @extends('layouts.admin')
+@section('scripts')
+  <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript">
+    tinymce.init({
+        selector: "#question",
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    });
+  </script>
+@stop
 @section('content')
 @include('partials.teachersDashboard')
 	<!-- Content Wrapper. Contains page content -->
@@ -94,19 +106,12 @@
 
 					<div class="col-md-12">
 						<div class="form-group">
-							<label><i class="fa fa-list-alt"></i> Subject Name</label>
+							<label><i class="fa fa-list-alt"></i> Question</label>
 							<div class="form-group">
-								{!! Form::textarea('question', null, ['class'=>'form-control', 'placeholder'=>'Enter Question', 'rows'=>6]) !!}
+								{!! Form::textarea('question', null, ['class'=>'form-control', 'placeholder'=>'Enter Question', 'rows'=>6, 'id'=>'question']) !!}
 							</div>
 						</div><!-- /.form-group -->
 					</div><!-- /.col -->
-
-					<div class="col-md-12">
-						<div class="input-group input-group-sm">
-							<span class="input-group-addon"><i class="fa fa-camera"></i></span>
-							<input type="file" class="form-control">
-						</div>
-					</div><!-- /input-group -->
 
 					<div class="col-md-12">
 						<br>

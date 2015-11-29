@@ -3,6 +3,7 @@
   @include('partials.adminDashboard')
        <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+        @include('flash::message ')
         <!-- Content Header (Page header) -->
                 <section class="content-header">
           <h1>
@@ -81,19 +82,18 @@
                     @foreach($subjectquestionstatus as $subjectquestionstatus)
                       <tr>
                         <td>{{$count++}}</td>
-                        <td>{{ Scholrs\Classe::where('id', $subjectquestionstatus->classe_id)->first()->name}}</td>
-                        <td>{{ Scholrs\Subject::where('id', $subjectquestionstatus->subject_id)->first()->name}}</td>
-                        <td><a href="{{ route('classes.subjects.questions.index', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}"><i class="fa fa-book"></i> Edit</a> | 
+                        <td>{{ Scholr\Classe::where('id', $subjectquestionstatus->classe_id)->first()->name}}</td>
+                        <td>{{ Scholr\Subject::where('id', $subjectquestionstatus->subject_id)->first()->name}}</td>
+                        <td>
                           <a href="{{ route('subjectQuestions.delete', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a> | 
-                          {!! Form::open(['method'=>'patch', 'route'=>'subjectQuestions.postApproval'])!!}
-                          <a href="{{ route('classes.subjects.questions.index', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}"><i class="fa fa-eye"></i> View</a> | 
-                          <a type="submit" class="btn"><i class="fa fa-database"></i> Submit</a></td>
-                          <button type="submit">Sub</button>
-                          {!!Form::close()!!}
+                          
+                          <a href="{{ route('subjectQuestions.submit', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}" class="btn"><i class="fa fa-database"></i> Submit</a>
+                        </td>
+                          
                         <td>
                           <div class="progress progress-xs progress-striped">
-                            <input type="hidden" id="percentage" value="{{ Scholrs\Question::Percentage($subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id)->get()->count() }}">
-                            <div class="progress-bar" style="width:{{ Scholrs\Question::Percentage($subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id)->get()->count() }}%"></div>
+                            <input type="hidden" id="percentage" value="{{ Scholr\Question::Percentage($subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id)->get()->count() }}">
+                            <div class="progress-bar" style="width:{{ Scholr\Question::Percentage($subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id)->get()->count() }}%"></div>
                           </div>
                         </td>
                         <td><span class="label progressStatus"></span></td>

@@ -11,6 +11,7 @@ use Scholr\Student;
 use Scholr\Teacher;
 use Scholr\Admin;
 use Scholr\SubjectAssigned;
+use DB;
 
 class AuthController extends Controller
 {
@@ -92,8 +93,15 @@ class AuthController extends Controller
     }
     public function getStudent($slug) {
         if ($this->auth->check()) {
-            $student = \DB::table('users')->where('slug', $slug)->first();
-            return view('account.studentHome', compact('student'));
+            if ($this->auth->user()->type == 'student') {
+                $student = DB::table('users')->where('slug', $slug)->first();
+                $records = DB::table('students')->where('id', $student->student_id)->first();
+
+                return view('account.studentHome', compact('student', 'records'));  
+            }else {
+                flash('Ops you do not have access to that area!');
+                return redirect()->back();
+            }
          }
          return redirect('/');
     }
@@ -106,8 +114,8 @@ class AuthController extends Controller
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
                  return view('account.teacherHome', compact('teacher', 'assigned'));
             }else{
-                flash('Ops you do not have access!');
-                return redirect('back');
+                flash('Ops you do not have access to that area!');
+                return redirect()->back();;
             }
         }
         return redirect('/');

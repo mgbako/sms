@@ -52,16 +52,15 @@
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		               <ul class="treeview-menu">
-									  <li><a href=""><i class="fa fa-circle-o"></i> Subject Analysis</a></li>
-									  <li><a href="{{ route('subjectAssigned.index') }}"><i class="fa fa-circle-o"></i> Subject Assigned</a></li>
+									  <li><a href="{{ route('subjectAnalysis.index') }}"><i class="fa fa-circle-o"></i> Subject Analysis</a></li>
+									  <li><a href="{{ route('subjectAssigned.index') }}"><i class="fa fa-circle-o"></i> Assign Subjects </a></li>
 									  <li><a href="{{ route('subjects.index') }}"><i class="fa fa-circle-o"></i> Subject List</a></li>
-									  <li><a href="{{ route('subjectProgess.index') }}"><i class="fa fa-circle-o"></i> Subject Progress</a></li>
-									  <li><a href="{{ route('subjectQuestions.index') }}"><i class="fa fa-circle-o"></i> Subject Question</a></li>
-									  <li><a href="{{ route('subjectReceptions.subjectReception') }}"><i class="fa fa-circle-o"></i> Subject Reception</a></li>
+									  <li><a href="{{ route('subjectProgess.index') }}"><i class="fa fa-circle-o"></i> Question Progress</a></li>
+									  <li><a href="{{ route('exams.activate') }}"><i class="fa fa-circle-o"></i>Activate Exams</a></li>
 									</ul>
 		            </li>
 		            <li>
-		              <a href="{{ route('teachers.index') }}">
+		              <a href="{{ route('results.all') }}">
 		              <i class="fa fa-pie-chart"></i> <span>Results</span>
 		              </a>
 		            </li>
@@ -84,8 +83,6 @@
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		              <ul class="treeview-menu">
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Login</a></li>
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Register</a></li>
 		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
 		              </ul>
 		            </li>

@@ -11,6 +11,7 @@ use Scholr\Classe;
 use Scholr\Subject;
 use Scholr\Question;
 use Scholr\Subjectquestionstatus;
+use DB;
 
 class SubjectQuestionsController extends Controller
 {
@@ -21,11 +22,6 @@ class SubjectQuestionsController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user();
-
-       /* $percentage = Question::Percentage(3, 5)->get()->count();
-
-        dd($percentage);*/
 
         $count = 1;
         $classList = Classe::orderBy('name', 'asc')->lists('name', 'id');
@@ -34,19 +30,43 @@ class SubjectQuestionsController extends Controller
 
         $subjectquestionstatus = Subjectquestionstatus::all();
 
-        return view('status.subjectQuestion.index', compact('user', 'count', 'subjectList', 'classList', 'time', 'subjectquestionstatus'));
+        return view('status.subjectQuestion.index', compact('count', 'subjectList', 'classList', 'time', 'subjectquestionstatus'));
     }
 
-    
+    public function submit($classeId, $subjectId)
+    {   
+  
+        $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classeId)
+                                ->where('subject_id', $subjectId)->first();
+        if ($subjectquestionstatus) {
+            $affacted = DB::update('update subjectquestionstatus set progress = 1 where classe_id = ? and subject_id = ?', [$classeId, $subjectId]);
+            if ($affacted) {
+                flash('Time for Exam Submited for Approval');
+                return redirect('subjectQuestions');
+            }else {
+                flash('Error Submiting time for Exams please contact the IT department');
+                return redirect('subjectQuestions');
+            }
+        }
+        
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
+    public function approve($classeId, $subjectId)
+    {   
+  
+        $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classeId)
+                                ->where('subject_id', $subjectId)->first();
+        if ($subjectquestionstatus) {
+            $affacted = DB::update('update subjectquestionstatus set progress = 2 where classe_id = ? and subject_id = ?', [$classeId, $subjectId]);
+           if($affacted) {
+            flash('Time for Exam Approved');
+            return redirect('subjectAnalysis');
+           }else {
+            flash('Error Approving time for Exam please contact the IT department');
+            return redirect('subjectAnalysis');
+           }
+        }
+        
     }
 
     /**
@@ -79,36 +99,15 @@ class SubjectQuestionsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function subjectReception()
+    public function activate()
     {
-        $user = \Auth::user();
-        $subjectquestionstatus = Subjectquestionstatus::whereProgress(0)->get();
+        $subjectquestionstatus = Subjectquestionstatus::whereProgress(2)->get();
         $count = 1;
 
-        return view('status.subjectQuestion.subjectReception', compact('subjectquestionstatus', 'count', 'user'));
+        return view('status.subjectQuestion.activate', compact('subjectquestionstatus', 'count'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
 
     /**
      * Show the form for Deleting the specified resource.
@@ -118,12 +117,11 @@ class SubjectQuestionsController extends Controller
      */
     public function delete($classeId, $subjectId)
     {
-        $user = \Auth::user();
         $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classeId)
                                                         ->where('subject_id', $subjectId)->first();
                                                         //return $subjectquestionstatus;
 
-        return view('status.subjectQuestion.delete', compact('subjectquestionstatus', 'classeId', 'subjectId', 'user'));
+        return view('status.subjectQuestion.delete', compact('subjectquestionstatus', 'classeId', 'subjectId'));
     }
 
     /**

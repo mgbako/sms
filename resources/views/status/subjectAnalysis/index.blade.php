@@ -4,6 +4,7 @@
   
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+  @include('flash::message ')
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
@@ -42,12 +43,12 @@
               </tr>
               @foreach($subjectAnalysis as $subjectAnalysis)
                 <tr>
-                  <td>{{ Scholrs\Subject::where('id', $subjectAnalysis->subject_id)->first()->name}}</td>
-                  <td>{{ Scholrs\Classe::where('id', $subjectAnalysis->classe_id)->first()->name}}</td>
+                  <td>{{ Scholr\Subject::where('id', $subjectAnalysis->subject_id)->first()->name}}</td>
+                  <td>{{ Scholr\Classe::where('id', $subjectAnalysis->classe_id)->first()->name}}</td>
                   <td>
                         <a href="{{ route('classes.subjects.questions.index', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-eye"></i> View</a> | 
                         <a href="{{ route('subjectQuestions.delete', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a> | 
-                        <a href=""><i class="fa fa-database"></i> Approve</a>
+                        <a href="{{ route('subjectQuestions.approve', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-database"></i> Approve</a>
                   </td>
                   <td>{{ $subjectAnalysis->time }} minutes</td>
                   <td><span class="progressStatus label"></span></td>

@@ -9,18 +9,18 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="active treeview">
-                <a href="profile.html"><i class="fa fa-user"></i>
+                <a href=""><i class="fa fa-user"></i>
                   <span>Bio Data</span> 
                 </a>
             </li>
             <li class="treeview">
-                <a href="subjectev.html">
+                <a href="">
                   <i class="fa fa-list-alt"></i>
                     <span>Subjects Offered</span> 
                 </a>
             </li>
             <li class="treeview">
-                <a href="examev.html">
+                <a href="">
                   <i class="fa fa-file-text-o"></i>
                     <span>
                        Exam Hall 
@@ -29,10 +29,11 @@
                 </a>
             </li>
             <li class="treeview">
-                <a href="results.html">
+                <a href="{{ route('results.myresult', [$student->slug]) }}">
                 <i class="fa fa-pie-chart"></i> 
                   <span>Results</span>
                 </a>
+                
             </li>
           </ul>
         </section>

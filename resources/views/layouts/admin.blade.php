@@ -25,6 +25,7 @@
 
     <link rel="icon" href="{{ asset('/img/logoo3.png') }}" type="image/x-icon">
 	<link rel="shortcut icon" href="{{ asset('/img/logoo3.png') }}" type="image/png" />
+  @yield('scripts')
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -34,8 +34,8 @@
               <tbody>
                 @foreach($subjectquestionstatus as $subjectquestionstatu)
                   <tr>
-                    <td>{{ Scholrs\Subject::where('id', $subjectquestionstatu->subject_id)->first()->name}}</td>
-                    <td>{{ Scholrs\Classe::where('id', $subjectquestionstatu->classe_id)->first()->name}}</td>
+                    <td>{{ Scholr\Subject::where('id', $subjectquestionstatu->subject_id)->first()->name}}</td>
+                    <td>{{ Scholr\Classe::where('id', $subjectquestionstatu->classe_id)->first()->name}}</td>
                     <td>{{ $subjectquestionstatu->time }} minutes</td>
                     <td><a href="" class="btn btn-success">Write</a></td>
                   </tr>

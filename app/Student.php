@@ -43,11 +43,6 @@ class Student extends Model implements SluggableInterface
       return $this->subjects->lists('id');
     } 
 
-    public function answer()
-    {
-      return $this->hasOne('Scholr\Answer');
-    }
-
     public function grades()
     {
       return $this->hasMany('Scholr\Grade');

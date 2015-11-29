@@ -17,7 +17,10 @@ class CreateGradesTable extends Migration {
 			$table->increments('id');
 			$table->integer('student_id')->unsigned();
 			$table->integer('subject_id')->unsigned();
+			$table->string('session');
+			$table->string('term');
 			$table->integer('total');
+			$table->string('remark');
 			$table->string('slug');
 			$table->timestamps();
 

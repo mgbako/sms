@@ -24,7 +24,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading"><h1>Question</h1></div>
 		<div class="panel-body">
-			<h3>{!! link_to_route('classes.subjects.questions.edit', $question->question, [$classe_id, $subject_id, $question->id] ) !!}</h3>
+			<h3>{!! link_to_route('classes.subjects.questions.edit', {!! $question->question !!}, [$classe_id, $subject_id, $question->id] ) !!}</h3>
 			<hr>
 			<h5>{!! $question->option1 !!}</h5><hr>
 			<h5>{!! $question->option2 !!}</h5><hr>

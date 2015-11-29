@@ -3,6 +3,7 @@
 namespace Scholr\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Scholr\Student;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('partials.studentDashboard', function($view) {
+            $view->with('student', Student::where('id', \Auth::user()->student_id)->first());
+        });
     }
 
     /**

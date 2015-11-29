@@ -32,8 +32,17 @@ Route::resource('classes.subjects.questions', 'QuestionsController');
 Route::resource('/subjectQuestions', 'SubjectQuestionsController');
 Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/delete', ['as'=>'subjectQuestions.delete', 'uses'=>'SubjectQuestionsController@delete']);
 
+Route::get('/result/myresult/{slug}', ['as'=>'results.myresult', 'uses'=>'ResultsController@myresult']);
+Route::get('/results/all', ['as'=>'results.all', 'uses'=>'ResultsController@index']);
+
+Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/submit', ['as'=>'subjectQuestions.submit', 'uses'=>'SubjectQuestionsController@submit']);
+Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/approve', ['as'=>'subjectQuestions.approve', 'uses'=>'SubjectQuestionsController@approve']);
+Route::get('activateexams', ['as'=>'exams.activate', 'uses'=>'SubjectQuestionsController@activate']);
+Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/delete', ['as'=>'subjectQuestions.delete', 'uses'=>'SubjectQuestionsController@delete']);
+
 Route::resource('/subjectProgess', 'SubjectProgressController');
 Route::resource('/subjectAssigned', 'SubjectAssignedController');
+Route::resource('/subjectAnalysis', 'SubjectAnalysisController');
 Route::resource('users', 'UsersController');
 Route::resource('exams', 'ExamsController');
 Route::resource('admins', 'Admin\AdminController');
