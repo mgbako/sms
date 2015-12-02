@@ -29,6 +29,10 @@ Route::resource('classes.subjects', 'ClassesSubjectsController');
 Route::get('classes/{id}/subjects/{subjectId}/questions/{questionId}/delete', ['as'=>'classes.subjects.questions.delete', 'uses'=>'QuestionsController@delete']);
 Route::resource('classes.subjects.questions', 'QuestionsController');
 
+Route::get('/classes/{id}/exams',  ['as'=>'classes.exams.index', 'uses'=>'ExamsController@index']);
+Route::get('/classes/{id}/subjects/{subjectId}/exams',  ['as'=>'classes.subjects.exams.show', 'uses'=>'ExamsController@show']);
+Route::resource('classes.subjects.exams', 'ExamsController');
+
 Route::resource('/subjectQuestions', 'SubjectQuestionsController');
 Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/delete', ['as'=>'subjectQuestions.delete', 'uses'=>'SubjectQuestionsController@delete']);
 
@@ -38,7 +42,9 @@ Route::get('/results/all', ['as'=>'results.all', 'uses'=>'ResultsController@inde
 Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/submit', ['as'=>'subjectQuestions.submit', 'uses'=>'SubjectQuestionsController@submit']);
 Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/approve', ['as'=>'subjectQuestions.approve', 'uses'=>'SubjectQuestionsController@approve']);
 Route::get('activateexams', ['as'=>'exams.activate', 'uses'=>'SubjectQuestionsController@activate']);
-Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/delete', ['as'=>'subjectQuestions.delete', 'uses'=>'SubjectQuestionsController@delete']);
+Route::get('writeexam/classes/{classeId}/subject/{subjectId}', ['as'=>'exam.write', 'uses'=>'SubjectQuestionsController@write']);
+Route::get('/subjectQuestions/class/{classeId}/subjects/{subjectId}/delete', ['as'=>'subjectQuestions.delete', 'uses'=>'SubjectQuestionsController@delete']);
+Route::resource('profile', 'ProfileController');
 
 Route::resource('/subjectProgess', 'SubjectProgressController');
 Route::resource('/subjectAssigned', 'SubjectAssignedController');

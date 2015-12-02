@@ -96,9 +96,9 @@ class QuestionsController extends Controller
     {
         $user = \Auth::user();
         $question = Question::findOrFail($questionId);
-        //return $question;
-
-        return view('admin.questions.edit', compact('question', 'id', 'subjectId', 'user'));
+        $teacher = \DB::table('teachers')->where('staffId', $user->loginId)->first();
+        $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+        return view('admin.questions.edit', compact('question', 'id', 'subjectId', 'assigned'));
     }
 
     /**

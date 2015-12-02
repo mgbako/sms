@@ -47,15 +47,23 @@
 		              </ul>
 		            </li>
 		            <li class="treeview">
-		              <a href="#">
+		              <a href="">
 		                <i class="fa fa-list-alt"></i> <span>Subject</span>
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		               <ul class="treeview-menu">
-									  <li><a href="{{ route('subjectAnalysis.index') }}"><i class="fa fa-circle-o"></i> Subject Analysis</a></li>
-									  <li><a href="{{ route('subjectAssigned.index') }}"><i class="fa fa-circle-o"></i> Assign Subjects </a></li>
-									  <li><a href="{{ route('subjects.index') }}"><i class="fa fa-circle-o"></i> Subject List</a></li>
-									  <li><a href="{{ route('subjectProgess.index') }}"><i class="fa fa-circle-o"></i> Question Progress</a></li>
+		               	<li><a href="{{ route('subjects.index') }}"><i class="fa fa-circle-o"></i> Subject List</a></li>
+		               	<li><a href="{{ route('subjectAssigned.index') }}"><i class="fa fa-circle-o"></i> Assign Subjects </a></li>
+		              </ul>
+		            </li>
+		            <li class="treeview">
+		              <a href="">
+		                <i class="fa fa-list-alt"></i> <span>Exams</span>
+		                <i class="fa fa-angle-left pull-right"></i>
+		              </a>
+		               <ul class="treeview-menu">
+		               	<li><a href="{{ route('subjectProgess.index') }}"><i class="fa fa-circle-o"></i> Question Progress</a></li>
+									  <li><a href="{{ route('subjectAnalysis.index') }}"><i class="fa fa-circle-o"></i> Exam Analysis</a></li>
 									  <li><a href="{{ route('exams.activate') }}"><i class="fa fa-circle-o"></i>Activate Exams</a></li>
 									</ul>
 		            </li>

@@ -58,7 +58,9 @@
 								@foreach($questions as $question)
 								<tbody>
 									<td>{!! $count++ !!}</td>
-									<td>{!! link_to_route('classes.subjects.questions.show', $question->question, [$classe_id, $subject_id, $question->id]) !!}</td>
+									<td>
+										<a href="{{ route('classes.subjects.questions.show', [$classe_id, $subject_id, $question->id]) }}">{!! $question->question !!}</a>
+									</td>
 									<td>{!! $question->answer['answer'] !!}</td>
 									<td>
 										{!! link_to_route('classes.subjects.questions.edit', 'Edit', 

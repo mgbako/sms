@@ -56,7 +56,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsTo('Scholr\Admin');
     }
 
-    public function photos() {
-        return $this->morphMany('Scholr\Photo', 'imageable');
+    public function profile()
+    {
+        return $this->hasOne('Scholr\Profile');
     }
 }

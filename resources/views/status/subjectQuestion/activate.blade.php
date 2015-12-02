@@ -3,6 +3,7 @@
   @include('partials.adminDashboard')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+  @include('flash::message')
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
@@ -37,7 +38,10 @@
                     <td>{{ Scholr\Subject::where('id', $subjectquestionstatu->subject_id)->first()->name}}</td>
                     <td>{{ Scholr\Classe::where('id', $subjectquestionstatu->classe_id)->first()->name}}</td>
                     <td>{{ $subjectquestionstatu->time }} minutes</td>
-                    <td><a href="" class="btn btn-success">Write</a></td>
+                    <td>
+                      <a href="{{ route('exam.write', [$subjectquestionstatu->classe_id, $subjectquestionstatu->subject_id]) }}" class="btn btn-success">Write
+                      </a>
+                    </td>
                   </tr>
                 @endforeach
               </tbody>

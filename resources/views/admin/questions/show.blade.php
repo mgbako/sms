@@ -6,8 +6,8 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Delete
-			<small>Question Deleting Process</small>
+			View a particular question
+			<small></small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,7 +24,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading"><h1>Question</h1></div>
 		<div class="panel-body">
-			<h3>{!! link_to_route('classes.subjects.questions.edit', {!! $question->question !!}, [$classe_id, $subject_id, $question->id] ) !!}</h3>
+			<h3>{!! $question->question !!}</h3>
 			<hr>
 			<h5>{!! $question->option1 !!}</h5><hr>
 			<h5>{!! $question->option2 !!}</h5><hr>

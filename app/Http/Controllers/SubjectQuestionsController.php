@@ -47,6 +47,9 @@ class SubjectQuestionsController extends Controller
                 flash('Error Submiting time for Exams please contact the IT department');
                 return redirect('subjectQuestions');
             }
+        }else {
+            flash('Exam status was not changed please try again later');
+            return redirect('subjectQuestion');
         }
         
     }
@@ -65,6 +68,9 @@ class SubjectQuestionsController extends Controller
             flash('Error Approving time for Exam please contact the IT department');
             return redirect('subjectAnalysis');
            }
+        }else {
+            flash('Exam status was not changed please try again later');
+            return redirect('subjectAnalysis');
         }
         
     }
@@ -80,34 +86,51 @@ class SubjectQuestionsController extends Controller
         $Subjectquestionstatus = Subjectquestionstatus::where('classe_id', $request['classe_id'])
         ->where('subject_id', $request['subject_id'])->get()->count();
         if($Subjectquestionstatus == 1)
-        {
-            return redirect()
-                ->route("subjectQuestions.index")
-                ->with(['message'=> '<p class="alert alert-success">Time Already Assigned to Subject</p>', 'user']);
+        {   flash('Time Already Assigned to Subject');
+            return redirect('subjectQuestions');
         }
 
         Subjectquestionstatus::create($request->all() );
-
-        return redirect()
-            ->route("subjectQuestions.index")
-            ->with(['message'=> '<p class="alert alert-success">Time Assigned to Subject</p>', 'user']);
+        flash('Time Assigned to Subject');
+        return redirect('subjectQuestions');
     }
 
     /**
-     * Display the specified resource.
+     * activate exams and makes them ready to be writen.
      *
-     * @param  int  $id
      * @return Response
      */
     public function activate()
     {
-        $subjectquestionstatus = Subjectquestionstatus::whereProgress(2)->get();
+        $subjectquestionstatus = Subjectquestionstatus::where('progress',2)
+                               ->where('write_now', 0)->get();
         $count = 1;
-
         return view('status.subjectQuestion.activate', compact('subjectquestionstatus', 'count'));
     }
 
 
+    /**
+     * prepares exams to be written
+     *@return Response
+     */
+    public function write($classId, $subjectId)
+    {
+        $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classId)
+                                ->where('subject_id', $subjectId)->first();
+        if ($subjectquestionstatus) {
+        $affacted = DB::update('update subjectquestionstatus set write_now = 1 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
+            if ($affacted) {
+                flash('Exam ready to be written');
+                return redirect()->back();
+            }else {
+                flash('Error making Exams ready to be Written Please contact the IT department');
+                return redirect()->back();
+            }
+        }else {
+            flash('Exam status was not changed please try again later');
+            return redirect()->back();
+        }
+    }
 
     /**
      * Show the form for Deleting the specified resource.
@@ -118,9 +141,7 @@ class SubjectQuestionsController extends Controller
     public function delete($classeId, $subjectId)
     {
         $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classeId)
-                                                        ->where('subject_id', $subjectId)->first();
-                                                        //return $subjectquestionstatus;
-
+                                ->where('subject_id', $subjectId)->first();
         return view('status.subjectQuestion.delete', compact('subjectquestionstatus', 'classeId', 'subjectId'));
     }
 
@@ -133,18 +154,16 @@ class SubjectQuestionsController extends Controller
     public function destroy(Request $request, $classeId)
     {
         $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classeId)
-                                         ->where('subject_id', $request->get('subjectId'));
+                                 ->where('subject_id', $request->get('subjectId'));
 
         if($request->get('agree')==1)
         {
             $subjectquestionstatus->delete();
 
-            return redirect()
-                ->route("subjectQuestions.index")
-                ->with('message', '<p class="alert alert-success">Assigned Class Subject Deleted</p>');
+            flash('Assigned Class Subject Deleted');
+            return redirect('subjectQuestions');
         }
-
-        return redirect()
-                ->route("subjectQuestions.index");
+        flash('exam status not deleted');
+        return redirect('subjectQuestions');
     }
 }

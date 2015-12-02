@@ -23,7 +23,7 @@
 					<div class="panel panel-danger">
 						<div class="panel-heading"><h2>Are You sure You want to Delete the Question:</h2></div>
 						<div class="panel-body">
-							<h3> {{$question->question}}</h3>
+							<h3>{!! $question->question !!}</h3>
 							<hr>
 							<h5>{!! $question->option1 !!}</h5><hr>
 							<h5>{!! $question->option2 !!}</h5>

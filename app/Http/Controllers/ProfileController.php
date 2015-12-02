@@ -1,11 +1,12 @@
 <?php
-
 namespace Scholr\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use Scholr\Http\Requests;
 use Scholr\Http\Controllers\Controller;
+use Auth;
+use Scholr\Profile;
 
 class ProfileController extends Controller
 {
@@ -16,7 +17,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -26,7 +27,8 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('account.makeProfile');
+
     }
 
     /**

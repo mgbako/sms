@@ -16,6 +16,7 @@ class CreateSubjectQuestionStatusTable extends Migration
             $table->integer('classe_id')->unsigned();
             $table->integer('subject_id')->unsigned();
             $table->integer('time');
+            $table->integer('write');
             $table->integer('progress');
 
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
