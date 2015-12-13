@@ -1,19 +1,19 @@
-@extends('layouts.master')
-
+@extends('layouts.admin')
 @section('content')
-<!-- Content Wrapper. Contains page content -->
+@include('partials.profileDashboard')
+	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
+	@include('flash::message ')
+	<!-- Content Wrapper. Contains page content -->
+		<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Registration
-			<small>Student Registration Process</small>
+			Creation
+			<small>Profile Creation Process</small>
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="dashboard.html">Dashboard</a></li>
-			<li><a href="#">Student</a></li>
-			<li><a href="stafflist.html">Student List</a></li>
+			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="/students">Student</a></li>
 			<li class="active">Registration</li>
 		</ol>
 	</section>
@@ -21,24 +21,15 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-6"><!-- /.box --><!-- /.box -->
-			</div><!-- /.col --><!-- /.col -->
-		</div><!-- /.row -->
-		<div class="col-md-12">
-			@include('errors.list')
-		</div>{{-- End of Right side bar --}}
+			<div class="col-md-12">
+				@include('errors.list')
+			</div>
 
-		<div class="row">
 			<div class="col-xs-12">            
-				<div class="box box-info">
-					<div class="box-body">
-						{!! Form::model($student, ['method'=>'patch', 'route'=>['students.update', $student->id], 'files' => true])!!}
-						<div class="col-md-6"><br>
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								{!! Form::text('studentId', null, ['class'=>'form-control', 'placeholder'=>'Enter Student ID', 'disabled']) !!}
-							</div>
-						</div>
+	          <div class="box box-info">
+	            <div class="box-body">
+					<div class="row">
+						{!! Form::open(['route'=>'profile.store', 'files'=> true ])!!}
 
 						<div class="col-md-6"><br>
 							<div class="input-group">
@@ -54,17 +45,18 @@
 							</div>
 						</div>
 
+
 						<div class="col-md-6"><br>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								{!! Form::select('gender', [''=>'Select Gender', 'Male'=>'Male', 'Female'=>'Female'], $student->gender, ['class'=>'form-control guiSelect'])!!}
+								{!! Form::select('gender', [''=>'Select Gender', 'Male'=>'Male', 'Female'=>'Female'], '', ['class'=>'form-control'])!!}
 							</div>
 						</div>
 
 						<div class="col-md-6"><br>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								{!! Form::input('date', 'dob', $student->dob, ['class'=>'form-control']) !!}
+								{!! Form::input('date', 'dob', date('Y-m-d'), ['class'=>'form-control']) !!}
 							</div>
 						</div>
 
@@ -96,39 +88,35 @@
 							</div>
 						</div>
 						
-						<div class="col-md-6"><br>
-							{!! Form::label('class', 'Select Starting Class') !!}
+						<div class="col-md-6">	<br>
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								{!! Form::select('class', $classList, $student->class, ['class'=>'form-control']) !!}
-							</div>
-						</div>
-
-						<div class="col-md-6">	<br>						<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user"></i></span>
 								{!! Form::textarea('address', null, ['class'=>'form-control', 'placeholder'=>'Enter Home Address', 'rows'=>3]) !!}
 							</div>
 						</div>
 
-
-						<div class="col-md-6"><br>
-							{!! Form::label('subject_list', 'Select Subjects to be Taken') !!}
-							{!! Form::select('subject_list[]', $subjects, $str, ['id'=>'selected', 'class'=>'form-control', 'multiple']) !!}
+						<div class="col-md-6">	<br>
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-user"></i></span>
+								{!! Form::textarea('bio', null, ['class'=>'form-control', 'placeholder'=>'Describe yourself a little', 'rows'=>3]) !!}
+							</div>
 						</div>
-						
+						<div class="col-md-6"><br>
+							
+						</div>
 						<div class="col-md-12">
 							<div class="box-footer">
-								{!! Form::submit('Update Student', ['class'=>'btn btn-success pull-left']) !!}
+								{!! Form::submit('Add Student', ['class'=>'btn btn-success pull-left']) !!}
 								<a href="{{ route('students.index') }}" class="btn btn-default pull-right">Cancel</a>
 							</div>
 						</div>
 
 						{!!Form::close()!!}
-					</div>{{-- End of Box Box-body --}}
-				</div>{{-- End of Box Box-info --}}
-			</div>{{-- End of col-md-12 --}}
-		</div><!-- End of row -->
+					</div>{{-- End of Row --}}
+		   		</div>{{-- End of box body --}}
+		  	  </div>{{-- End of box info --}}
+			</div>{{-- End of col-12 --}}
+		</div>{{-- End of Row --}}
 	</section><!-- End of Content -->
-</div><!-- /.content-wrapper -->
-	
+</div>
 @stop

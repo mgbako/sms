@@ -3,7 +3,8 @@
 namespace Scholr\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
+use Scholr\School;
 use Scholr\Http\Requests;
 use Scholr\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class QuestionsController extends Controller
      * @return Response
      */
     public function index($classe_id, $subject_id)
-    {
+    {   
         $term = 'First Term';
         $count = 1;
         $subject_id = $subject_id->id;
@@ -33,16 +34,6 @@ class QuestionsController extends Controller
         $teacher = \DB::table('teachers')->where('staffId', $user->loginId)->first();
         $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
         return view('admin.questions.index', compact('questions', 'count', 'subject_id', 'classe_id', 'term', 'assigned'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        
     }
 
     /**

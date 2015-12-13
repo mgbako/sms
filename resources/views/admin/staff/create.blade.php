@@ -12,7 +12,7 @@
 
 
             	{!! Form::open(['route'=>'admins.store'])!!}
-				 				@include('partials.staffForm', ['submitButtonText'=>'Create New Admin Staff'])
+				 				
 							{!!Form::close()!!}
           </div>
       </div>

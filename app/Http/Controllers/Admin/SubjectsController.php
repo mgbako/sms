@@ -2,7 +2,7 @@
 use Illuminate\Http\Request;
 use Scholr\Http\Requests;
 use Scholr\Http\Controllers\Controller;
-
+use DB;
 use Scholr\Http\Requests\SubjectRequest;
 use Scholr\Subject;
 use Scholr\Classe;
@@ -29,7 +29,12 @@ class SubjectsController extends Controller {
 	 * @return Response
 	 */
 	public function store(SubjectRequest $request)
-	{
+	{		
+		$school = DB::table('schools')->first();
+		if (!$school) {
+            flash("You have to setup school before any other thing");
+            return redirect('schools');
+     }
 		 $subject = Subject::create($request->all());
 		 flash('New subject: '.$subject->name.' was created successfully!');
 		 return redirect('subjects');

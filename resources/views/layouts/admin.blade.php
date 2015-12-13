@@ -34,8 +34,9 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body class="skin-blue sidebar-mini">
-	<div class="wrapper">
+@if(!Auth::guest())
+  <body class="skin-blue sidebar-mini">
+  <div class="wrapper">
 
       <header class="main-header">
         <!-- Logo -->
@@ -52,17 +53,25 @@
             <span class="sr-only">Toggle navigation</span>
           </a>
           <div class="navbar-custom-menu">
-			@if(!Auth::guest())
             <ul class="nav navbar-nav">
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="/{{Auth::user()->image}}" class="user-image" alt="User Image">
+                  @if (Auth::user()->profile)
+                    <img src="/{{Auth::user()->profile->image}}" class="user-image" alt="User Image">
+                  @else
+                    <img src="/" class="user-image" alt="User Image">
+                  @endif
                   <span class="hidden-xs">{{ Auth::user()->username }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                  <img src="/{{Auth::user()->image}}" class="img-circle" alt="User Image">
+
+                    @if (Auth::user()->profile)
+                      <img src="/{{Auth::user()->profile->image}}" class="user-image" alt="User Image">
+                    @else
+                      <img src="/" class="user-image" alt="User Image">
+                    @endif
                     <p>
                       {{ Auth::user()->username }}
                       <small>School Admin</small>
@@ -80,13 +89,10 @@
               </li>
               <!-- Control Sidebar Toggle Button -->
             </ul>
-            @endif
           </div>
         </nav>
       </header>
-      @if(Session::has('message'))
-        {!! Session::get('message') !!}
-      @endif
+  
       @yield('content')
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -99,22 +105,22 @@
         </strong> All rights reserved.
       </footer>
 
-	 </div><!-- ./wrapper -->
-	<!-- Scripts -->
-	<script src="{{ asset('/js/jQuery.js')}}"></script>
-	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('/js/jquery.slimscroll.min.js') }}"></script>
+   </div><!-- ./wrapper -->
+  <!-- Scripts -->
+  <script src="{{ asset('/js/jQuery.js')}}"></script>
+  <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('/js/jquery.slimscroll.min.js') }}"></script>
   <!-- FastClick -->
   <script src="{{ asset('/js/fastclick.min.js') }}"></script>
   <!-- AdminLTE App -->
   <script src="{{ asset('/js/app.min.js') }}"></script>
   <script src="{{ asset('/js/dropzone.js') }}"></script>
-	<script src="{{ asset('/js/icheck.min.js') }}"></script>
-	<script src="{{ asset('/js/select2.min.js') }}"></script>
-	<script src="{{ asset('/js/countdown.jquery.js')}}"></script>
-	<script src="{{ asset('/js/paginate.js')}}"></script>
-	<script src="{{ asset('/js/custom.js')}}"></script>
-	<script>
+  <script src="{{ asset('/js/icheck.min.js') }}"></script>
+  <script src="{{ asset('/js/select2.min.js') }}"></script>
+  <script src="{{ asset('/js/countdown.jquery.js')}}"></script>
+  <script src="{{ asset('/js/paginate.js')}}"></script>
+  <script src="{{ asset('/js/custom.js')}}"></script>
+  <script>
       $(function () {
         $('input').iCheck({
           checkboxClass: 'icheckbox_square-blue',
@@ -124,4 +130,5 @@
       });
     </script>
 </body>
+@endif
 </html>

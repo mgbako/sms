@@ -9,15 +9,20 @@
 		          <ul class="sidebar-menu">
 		            <li class="header">MAIN NAVIGATION</li>
 		            <li>
-		              <a href="">
+		              <a href="/account/admin/{{ Auth::user()->slug }}">
 		                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
 		              </a>
 		            </li>
-		            
 		            <li>
-		              <a href="">
-		              <i class="fa fa-user"></i> <span>Profile ( {{Auth::user()->type }} )</span>
+		              @if (!Auth::user()->profile)
+		              	<a href="{{ route('profile.create') }}">
+		              		<i class="fa fa-user"></i> <span>Create Profile ( {{Auth::user()->type }} )</span>
 		              </a>
+		              @else
+		              	<a href="{{ route('profile.show', [Auth::user()->profile->slug]) }}">
+		              		<i class="fa fa-user"></i> <span>Profile ( {{Auth::user()->type }} )</span>
+		              	</a>
+		              @endif
 		            </li>
 		            <li class="treeview">
 		              <a href="#">
@@ -78,11 +83,7 @@
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		              <ul class="treeview-menu">
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> School</a></li>
-		                <li><a href="{{ route('exams.index') }}"><i class="fa fa-circle-o"></i> Exam</a></li>
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Password</a></li>
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Questions</a></li>
-		                <li class="active"><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Role</a></li>
+		                <li><a href="{{ route('schools.index') }}"><i class="fa fa-circle-o"></i> School</a></li>
 		              </ul>
 		            </li>
 		            <li class="treeview">

@@ -1,19 +1,20 @@
 @extends('layouts.admin')
 @section('content')
-  @include('partials.adminDashboard')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+@include('partials.profileDashboard')
+	<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	@include('flash::message ')
+	    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Welcome, to <span>{{ ucwords($student->firstname) }} Biodata</span>
+        Welcome, to <span>{{ ucwords($profile->firstname) }} Profile</span>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="/students">Students</a></li>
-        <li class="active">{{ ucwords($student->firstname) }} Biodata</li>
+        <li class="active">{{ ucwords($profile->firstname) }} Biodata</li>
       </ol>        
-      </section>
+    </section>
 
     <!-- Main content -->
     <section class="content">
@@ -26,51 +27,49 @@
               
             <div class="alert alert-info alert-dismissable">
                 <h1>
-                    Student's Detail
+                    profile's Detail
                   </h1>
             </div>
            
         <div class="col-md-1">
-<div class="col-sm-2 invoice-col">
-        <div class="pull-left image">
-          <img src="/{{$student->image}}" alt="User Image" width="82" height="82" class="img-circle">
-        </div>
-          
-</div> 
-</div>            
+      <div class="col-sm-2 invoice-col">
+              <div class="pull-left image">
+                <img src="/{{$profile->image}}" alt="User Image" width="82" height="82" class="img-circle">
+              </div>
+                
+      </div> 
+      </div>            
         <div class="col-md-11">
               <dl class="dl-horizontal">
          
                 <dt>Surname</dt>
-                <dd>{{$student->firstname}}</dd>
+                <dd>{{$profile->firstname}}</dd>
                 <dt>First Name</dt>
-                <dd>{{$student->lastname}}</dd>
-                <dt>Other Name</dt>
-                <dd>C.</dd>
+                <dd>{{$profile->lastname}}</dd>
                 <br><br>
-                <dt>Student Id</dt>
-                <dd>{{$student->studentId}}</dd>
+                <dt>Username</dt>
+                <dd>{{$profile->user->username}}</dd>
                 <dt>Gender</dt>
-                <dd>{{$student->gender}}</dd>
+                <dd>{{$profile->gender}}</dd>
                 <dt>Date of Birth</dt>
-                <dd>{{$student->dob}}</dd>
+                <dd>{{$profile->dob}}</dd>
                 <dt>Country</dt>
-                <dd>{{$student->nationality}}</dd>
+                <dd>{{$profile->nationality}}</dd>
                 <br><br>
                 <dt>Telephone</dt>
-                <dd>{{$student->phone}}</dd>
+                <dd>{{$profile->phone}}</dd>
                 <dt>Adress</dt>
-                <dd>{{$student->address}}</dd>
+                <dd>{{$profile->address}}</dd>
                 
                 <dt>Role</dt>
-                <dd>Student</dd>
+                <dd>{{ $profile->user->type }}</dd>
             </dl>
             
           
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="{{ route('students.edit', $student->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>Print Details</a>
+          <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i> Edit</a>
         </div>
         
        </div>
@@ -90,5 +89,5 @@
         </div><!-- /.col -->
       </div><!-- /.row -->
     </section><!-- /.content -->
-  </div><!-- /.content-wrapper -->
+</div>
 @stop

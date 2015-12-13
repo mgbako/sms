@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('content')
 @include('partials.adminDashboard')
-@include('flash::message ')
 	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+@include('flash::message ')
 <!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
@@ -14,11 +14,9 @@
 			<li class="active">Classes</li>
 		</ol>        
 	</section>
-
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-
 			<div class="col-xs-12">
 				<div class="box box-info">
 		            <div class="box-body">

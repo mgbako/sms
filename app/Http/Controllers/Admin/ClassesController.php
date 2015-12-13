@@ -2,7 +2,7 @@
 
 use Scholr\Http\Requests;
 use Scholr\Http\Controllers\Controller;
-
+use DB;
 use Illuminate\Http\Request;
 use Scholr\Http\Requests\ClassesRequest;
 use Scholr\Classe;
@@ -41,9 +41,13 @@ class ClassesController extends Controller {
 	 */
 	public function store(ClassesRequest $request)
 	{
-
+		$school = DB::table('schools')->first();
+		if (!$school) {
+            flash("You have to setup school before any other thing");
+            return redirect('schools');
+    }
 		$class = Classe::create($request->all());
-		$class->subjects()->attach($request->input('subject'));
+		$class->subjects()->attach($request->input('subjects'));
 		flash('New Class: '.$class->name.' was created successfully!');
 		return redirect('classes');
 	}

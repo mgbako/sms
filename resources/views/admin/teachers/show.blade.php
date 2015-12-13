@@ -6,14 +6,14 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Welcome, to <span>{{ ucwords($student->firstname) }} Biodata</span>
+        Welcome, to <span>{{ ucwords($teacher->firstname) }} Biodata</span>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="/students">Students</a></li>
-        <li class="active">{{ ucwords($student->firstname) }} Biodata</li>
+        <li class="active">{{ ucwords($teacher->firstname) }} Biodata</li>
       </ol>        
-      </section>
+    </section>
 
     <!-- Main content -->
     <section class="content">
@@ -26,51 +26,51 @@
               
             <div class="alert alert-info alert-dismissable">
                 <h1>
-                    Student's Detail
+                    teacher's Detail
                   </h1>
             </div>
            
         <div class="col-md-1">
-<div class="col-sm-2 invoice-col">
-        <div class="pull-left image">
-          <img src="/{{$student->image}}" alt="User Image" width="82" height="82" class="img-circle">
-        </div>
-          
-</div> 
-</div>            
+      <div class="col-sm-2 invoice-col">
+              <div class="pull-left image">
+                <img src="/{{$teacher->image}}" alt="User Image" width="82" height="82" class="img-circle">
+              </div>
+                
+      </div> 
+      </div>            
         <div class="col-md-11">
               <dl class="dl-horizontal">
          
                 <dt>Surname</dt>
-                <dd>{{$student->firstname}}</dd>
+                <dd>{{$teacher->firstname}}</dd>
                 <dt>First Name</dt>
-                <dd>{{$student->lastname}}</dd>
+                <dd>{{$teacher->lastname}}</dd>
                 <dt>Other Name</dt>
                 <dd>C.</dd>
                 <br><br>
-                <dt>Student Id</dt>
-                <dd>{{$student->studentId}}</dd>
+                <dt>Staff Id</dt>
+                <dd>{{$teacher->staffId}}</dd>
                 <dt>Gender</dt>
-                <dd>{{$student->gender}}</dd>
+                <dd>{{$teacher->gender}}</dd>
                 <dt>Date of Birth</dt>
-                <dd>{{$student->dob}}</dd>
+                <dd>{{$teacher->dob}}</dd>
                 <dt>Country</dt>
-                <dd>{{$student->nationality}}</dd>
+                <dd>{{$teacher->nationality}}</dd>
                 <br><br>
                 <dt>Telephone</dt>
-                <dd>{{$student->phone}}</dd>
+                <dd>{{$teacher->phone}}</dd>
                 <dt>Adress</dt>
-                <dd>{{$student->address}}</dd>
+                <dd>{{$teacher->address}}</dd>
                 
                 <dt>Role</dt>
-                <dd>Student</dd>
+                <dd>Teacher</dd>
             </dl>
             
           
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="{{ route('students.edit', $student->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>Print Details</a>
+          <a href="{{ route('teachers.edit', $teacher->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i> Print Details</a>
         </div>
         
        </div>

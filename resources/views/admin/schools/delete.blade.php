@@ -1,9 +1,8 @@
 @extends('layouts.admin')
 @section('content')
-  @include('partials.adminDashboard')
-<!-- Content Wrapper. Contains page content -->
+@include('partials.adminDashboard')
+	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
- @include('flash::message ')
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
@@ -21,20 +20,18 @@
 			<div class="box box-info">	
 				<div class="box-body">
 					<div class="panel panel-danger">
-						<div class="panel-heading">
-							<h2>Are You sure You want to Delete the Assigned Class Subject:</h2>
-							<hr>
-							<h4> {{ Scholrs\Classe::whereId($classeId)->first()->name }} {{ Scholrs\Subject::whereId($subjectId)->first()->name }}</h4>
-							<hr>
-
-							{!!Form::open(['method'=>'delete', 'route' => ['subjectQuestions.destroy', $classeId]]) !!}
+						<div class="panel-heading text-center">
+							<h2>Are You sure You want to Delete the Teacher:</h2>
+							<h2> {!! ucwords($teacher->firstname) !!} {!! ucwords($teacher->lastname) !!}</h2>
+						</div>
+						<div class="panel-body">
+							{!!Form::open(['method'=>'delete', 'route' => ['teachers.destroy', $teacher->id]]) !!}
 								<div class="form-group">{!! Form::radio('agree', 0, true)!!} {!!Form::label('agree', 'No') !!}</div>
 								<div class="form-group">{!! Form::radio('agree', 1) !!} {!!Form::label('agree', 'Yes') !!}</div>
-								{!! Form::hidden('subjectId', $subjectId) !!}
 
-								<div class="form-group">{!! Form::submit('Delete', array('class'=>'btn btn-danger')) !!}</div>
+								<div class="form-group">{!! Form::submit('Delete', array('class'=>'btn btn-danger pull-right')) !!}</div>
 							{!!Form::close()!!}
-
+						</div>
 					</div>
 				</div>
 			</div>

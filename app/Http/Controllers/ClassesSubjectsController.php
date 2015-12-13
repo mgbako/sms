@@ -3,6 +3,7 @@
 namespace Scholr\Http\Controllers;
 
 use Scholr\Http\Requests;
+use Illuminate\Http\Request;
 use Scholr\Http\Requests\ClassesSubjectsRequest;
 use Scholr\Http\Controllers\Controller;
 use Scholr\Classe;
@@ -18,19 +19,11 @@ class ClassesSubjectsController extends Controller
      */
     public function index($classe_id)
     {
-
-        $user = \Auth::user();
-
         $count = 1;
-
         $subjectList = Subject::orderBy('name', 'asc')->lists('name', 'id');
-
         $subjectName = Classe::findOrFail($classe_id)->name;
-
         $subjects = Classe::orderBy('name', 'asc')->findOrFail($classe_id)->subjects;
-
         $classes = Classe::findOrFail($classe_id);
-
         $str = [];
         foreach($classes->subjects as $st){
             $str[] = $st->pivot->subject_id;
@@ -59,42 +52,9 @@ class ClassesSubjectsController extends Controller
         $classSubject = Classe::findOrFail($classe_id);
 
         $classSubject->subjects()->sync($request->input('subject_id'));
+        flash('Subject Created');
         return redirect()
-                ->route('classes.subjects', $classe_id)
-                ->with('message', '<p class="alert alert-success text-center">Subject Created</p>');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
+                ->route('classes.subjects', $classe_id);
     }
 
     /**
@@ -124,10 +84,9 @@ class ClassesSubjectsController extends Controller
         if($request->get('agree')==1)
         {
              $classe->subjects()->detach($subjectId);
-
+             flash('Subject Deleted');
             return redirect()
-                ->route("classes.subjects.index", [$id])
-                ->with('message', '<p class="alert alert-success text-center">Subject Deleted</p>');
+                ->route("classes.subjects.index", [$id]);
         }
 
         return redirect()

@@ -56,61 +56,14 @@ class SubjectAssignedController extends Controller
         
         if($subjectAssigned > 0)                                    
         {
-            return redirect()
-                ->route('subjectAssigned.index')
-                ->with('message', '<p class="alert alert-success text-center">Class and Subject Already been Assigned to Teacher</p>');        
+            flash('Class and Subject Already been Assigned to Teacher');
+            return redirect('subjectAssigned');
         }
 
         $input = $request->all();
 
         SubjectAssigned::create($input);
-
-        return redirect()
-                ->route('subjectAssigned.index')
-                ->with('message', '<p class="alert alert-success text-center">Class and Subject has been Assigned to Teacher</p>');        
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Shaow the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        flash('Class and Subject has been Assigned to Teacher');
+        return redirect('subjectAssigned');
     }
 }

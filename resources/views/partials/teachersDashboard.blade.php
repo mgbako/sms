@@ -9,15 +9,20 @@
 		          <ul class="sidebar-menu">
 		            <li class="header">MAIN NAVIGATION</li>
 		            <li>
-		              <a href="">
+		              <a href="/account/teacher/{{ Auth::user()->slug }}">
 		                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
 		              </a>
 		            </li>
-		            
 		            <li>
-		              <a href="">
-		              <i class="fa fa-user"></i> <span>Profile ( {{Auth::user()->type }} )</span>
+		              @if (!Auth::user()->profile)
+		              	<a href="{{ route('profile.create') }}">
+		              		<i class="fa fa-user"></i> <span>Create Profile ( {{Auth::user()->type }} )</span>
 		              </a>
+		              @else
+		              	<a href="{{ route('profile.show', [Auth::user()->profile->slug]) }}">
+		              		<i class="fa fa-user"></i> <span>Profile ( {{Auth::user()->type }} )</span>
+		              	</a>
+		              @endif
 		            </li>
 		            <li class="treeview">
 		              <a href="#">

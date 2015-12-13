@@ -47,10 +47,16 @@
             							<td>{!! $count++ !!}</td>
             							<td>{!! $teacher->lastname !!}</td>
             							<td>{!! $teacher->firstname !!}</td>
-            							<td>{!! $teacher->staffId !!}</td>
-            							
-            							<td>{!! link_to_route('teachers.edit', 'Edit', $teacher->id, ['class'=>'btn btn-info btn-xs']) !!}</td>
-            							<td>{!! link_to_route('teachers.delete', 'Delete', $teacher->id, ['class'=>'btn btn-danger btn-xs']) !!}</td>
+            							<td>
+                            {!! link_to_route('teachers.show', 
+                            $teacher->staffId, $teacher->id) !!}
+                          </td>
+            							<td>
+                            {!! link_to_route('teachers.edit', 'Edit', $teacher->id, ['class'=>'btn btn-info btn-xs']) !!}
+                          </td>
+            							<td>
+                            {!! link_to_route('teachers.delete', 'Delete', $teacher->id, ['class'=>'btn btn-danger btn-xs']) !!}
+                          </td>
             						</tr>
             						@endforeach
                       </tbody>

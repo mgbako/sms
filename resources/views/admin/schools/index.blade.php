@@ -1,71 +1,66 @@
 @extends('layouts.admin')
 @section('content')
-	@include('partials.adminDashboard')
+@include('partials.adminDashboard')
 	<!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         @include('flash::message ')
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Students
-            <small>All Students</small>
+            School
+            <small>Set Up school</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Students</li>
+            <li class="active">Staffs</li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <div class="col-xs-12">
-            	{!! link_to_route('students.create', "Add New", '', ['class'=>'btn btn-success']) !!}
+            @if(!$myschool)
+             <div class="col-xs-12">
+              {!! link_to_route('schools.create', "Add School Details", '', ['class'=>'btn btn-success']) !!}
               <p>&nbsp;</p>
-              <!-- /.box -->
+            @endif
 
               <div class="box">
                 <div class="box-header">
-                              
+              
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div align="center">
                     <table align="center" class="table table-bordered table-striped" id="example1">
                       <thead>
                         <tr>
-                          <th>#</th>
-                          <th>First Name</th>
-                          <th>Surname</th>
-                          <th>ID No.</th>
-                          <th>Class</th>
+                          <th>Name</th>
+                          <th>Term</th>
+                          <th>Number of questions for the term</th>
                           <th>Edit</th>
-						              <th>Delete</th>
                         </tr>
                       </thead>
                       <tbody>
-                      	@foreach($students as $student)
+                      	@foreach($schools as $school)
                       	<tr>
-							<td>{!! $count++ !!}</td>
-							<td>{!! $student->firstname !!}</td>
-							<td>{!! $student->lastname !!}</td>
-							<td>
-                {!! link_to_route('students.show', $student->studentId, $student->id) !!}
-              </td>
-							<td>{!! $student->class !!}</td>
-							<td>{!! link_to_route('students.edit', 'Edit', $student->id, ['class'=>'btn btn-info btn-xs']) !!}</td>
-							<td>{!! link_to_route('students.delete', 'Delete', $student->id, ['class'=>'btn btn-danger btn-xs']) !!}</td>
-						</tr>
-						@endforeach
+            							<td>{!! $school->name !!}</td>
+            							<td>{!! $school->term !!}</td>
+            							<td>{!! $school->number !!}</td>
+            							<td>
+                            {!! link_to_route('schools.edit', 'Edit', $school->id, ['class'=>'btn btn-info btn-xs']) !!}
+                          </td>
+            							<td>
+                           
+                          </td>
+            						</tr>
+            						@endforeach
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>#</th>
-                          <th>First Name</th>
-                          <th>Surname</th>
-                          <th>ID No.</th>
-                          <th>Role</th>
+                         <th>Name</th>
+                          <th>Term</th>
+                          <th>Number of questions for the term</th>
                           <th>Edit</th>
-						  <th>Delete</th>
                         </tr>
                       </tfoot>
                     </table>
@@ -75,5 +70,5 @@
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->	
+      </div><!-- /.content-wrapper -->
 @stop

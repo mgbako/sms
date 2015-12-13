@@ -10,10 +10,15 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-              <a href="{{ route('profile.create') }}">
-              <i class="fa fa-user"></i> 
-              <span>Update Profile ( {{Auth::user()->type }} )</span>
-              </a>
+              @if (!Auth::user()->profile)
+                    <a href="{{ route('profile.create') }}">
+                      <i class="fa fa-user"></i> <span>Create Profile ( {{Auth::user()->type }} )</span>
+                  </a>
+                  @else
+                    <a href="{{ route('profile.show', [Auth::user()->profile->slug]) }}">
+                      <i class="fa fa-user"></i> <span>Profile ( {{Auth::user()->type }} )</span>
+                    </a>
+                  @endif
             </li>
             <li class="active treeview">
                 <a href="/">
@@ -38,9 +43,10 @@
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                   <li>
-                    <a href="{{ route('classes.exams.index', [$class::whereName($student->class)->first()->id]) }}">
+
+                    <a href="{{ route('classes.exams.index', [$class::whereId($student->class)->first()->id]) }}">
                       <i class="fa fa-graduation-cap">
-                        {{ $student->class }}
+                        {{ $class::whereId($student->class)->first()->name}}
                       </i>
                     </a>
                   </li>
@@ -51,7 +57,6 @@
                 <i class="fa fa-pie-chart"></i> 
                   <span>Results</span>
                 </a>
-                
             </li>
           </ul>
         </section>

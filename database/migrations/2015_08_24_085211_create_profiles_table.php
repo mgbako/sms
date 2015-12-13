@@ -23,8 +23,9 @@ class CreateProfilesTable extends Migration
             $table->string('address');
             $table->string('state');
             $table->string('nationality');
-            $table->string('class');
+            $table->text('bio');
             $table->string('image')->nullable();
+            $table->string('slug');
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')

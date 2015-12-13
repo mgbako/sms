@@ -110,7 +110,7 @@ class AuthController extends Controller
         if ($this->auth->check()) {
             $user = $this->auth->user();
             if ($user->type == 'teacher') {
-                $teacher = \DB::table('teachers')->where('staffId', $user->loginId)->first();
+                $teacher = DB::table('teachers')->where('staffId', $user->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
                  return view('account.teacherHome', compact('teacher', 'assigned'));
             }else{
@@ -140,7 +140,7 @@ class AuthController extends Controller
         $this->redirectTo = 'account/admin/'.$slug;
         $user = $this->auth->user();
         flash('Welcome '.$user->username  
-                        .' Your account was created succeessfully');
+                        .' Your account was created succeessfully, Setup Your school if not setup yet');
         return redirect($this->redirectPath());
     
     }

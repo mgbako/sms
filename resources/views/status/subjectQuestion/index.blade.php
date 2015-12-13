@@ -4,9 +4,6 @@
        <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         @include('flash::message ')
-        <!-- Content Header (Page header) -->
-                <section class="content-header">
-          <h1>
             Subject Question
             <small>Setup Assigned Subject against Time and Questions</small>
           </h1>

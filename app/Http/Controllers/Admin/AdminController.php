@@ -96,7 +96,7 @@ class AdminController extends Controller {
 	 */
 	public function destroy($slug, Request $request)
 	{
-		$admin = Teacher::whereSlug($slug)->first();
+		$admin = Admin::whereSlug($slug)->first();
 		if($request->get('agree')===1){
 			$admin>delete();
 			redirect('admins');

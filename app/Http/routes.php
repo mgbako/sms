@@ -46,6 +46,7 @@ Route::get('writeexam/classes/{classeId}/subject/{subjectId}', ['as'=>'exam.writ
 Route::get('/subjectQuestions/class/{classeId}/subjects/{subjectId}/delete', ['as'=>'subjectQuestions.delete', 'uses'=>'SubjectQuestionsController@delete']);
 Route::resource('profile', 'ProfileController');
 
+Route::resource('/schools', 'SchoolController');
 Route::resource('/subjectProgess', 'SubjectProgressController');
 Route::resource('/subjectAssigned', 'SubjectAssignedController');
 Route::resource('/subjectAnalysis', 'SubjectAnalysisController');

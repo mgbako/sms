@@ -6,7 +6,7 @@ use Scholr\Http\Controllers\Controller;
 use Scholr\Student;
 use Scholr\Classe;
 use Scholr\Subject;
-
+use DB;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller {
@@ -44,7 +44,12 @@ class StudentsController extends Controller {
 	 * @return Response
 	 */
 	public function store(StudentRequest $request)
-	{
+	{	
+		$school = DB::table('schools')->first();
+		if (!$school) {
+            flash("You have to setup school before any other thing");
+            return redirect('schools');
+    }
 		$requests = $request->all();
 		$image = $request->file('image');
 		$filename = time()."-".$image->getClientOriginalName();
