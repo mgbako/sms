@@ -19,8 +19,10 @@ class ResultsController extends Controller
 
 
     public function __construct(Guard $auth)
-    {
+    {   
+        $this->middleware('staff');
         $this->user = $auth->user();
+
     }
     /**
      * Display a listing of the resource.
@@ -48,6 +50,7 @@ class ResultsController extends Controller
         if ($this->user->type == 'student') {
             $student = Student::where('id', $this->user->student_id)->first();
             if ($student->slug == $slug) {
+                $grades = Grade::whereStudent_id($student->id);
                 flash('Find out how you have been performing in Exams below');
                 return view('results.myresult', compact('student'));
             }else {
@@ -62,69 +65,52 @@ class ResultsController extends Controller
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+     public function subjects($subject)
+    {   
+        if ($this->user->type == 'admin') {
+
+            $grades = Grade::whereSubject_id($subject);
+            return view('results.subjects', compact('grades'));
+        }else {
+            flash('You are not allowed Access to that Area');
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+
+
+     public function classes($class)
+    {   
+        if ($this->user->type == 'admin' || $this->user->type == 'teacher') {
+
+            $grades = Grade::whereSubject_id($subject);
+            if ($this->user->type == 'teacher') {
+                $teacher = DB::table('teachers')->where('staffId', $this->user->loginId)->first();
+                $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+                return view('results.classes', compact('assigned', 'grades'));
+            }
+            return view('results.classes', compact('grades'));
+        }else {
+            flash('You are not allowed Access to that Area');
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function student($student)
+    {   
+        if ($this->user->type == 'admin' || $this->user->type == 'teacher') {
+
+            $grades = Grade::whereSubject_id($subject);
+            if ($this->user->type == 'teacher') {
+                $teacher = DB::table('teachers')->where('staffId', $this->user->loginId)->first();
+                $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+                return view('results.students', compact('assigned', 'grades'));
+            }
+            return view('results.students', compact('grades'));
+        }else {
+            flash('You are not allowed Access to that Area');
+            return redirect()->back();
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

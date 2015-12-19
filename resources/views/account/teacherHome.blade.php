@@ -24,7 +24,7 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                   <div class="inner">
-                    <h3>4</h3>
+                    <h3>{{ $class_number }}</h3>
                     <p>Classes Assigned</p>
                   </div>
                   <div class="icon">

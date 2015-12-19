@@ -56,6 +56,7 @@
 		                <li><a href="{{ route('subjectQuestions.index') }}"><i class="fa fa-circle-o"></i> Assigne Time</a></li>
 		              </ul>
 		            </li>
+		             <li><a href="{{ route('results.classes') }}"><i class="fa fa-circle-o"></i>Class Results</a></li>
 		          </ul>
 		        </section>
 		        <!-- /.sidebar -->

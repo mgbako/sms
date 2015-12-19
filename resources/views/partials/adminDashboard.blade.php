@@ -72,10 +72,16 @@
 									  <li><a href="{{ route('exams.activate') }}"><i class="fa fa-circle-o"></i>Activate Exams</a></li>
 									</ul>
 		            </li>
-		            <li>
+		            <li class="treeview">
 		              <a href="{{ route('results.all') }}">
-		              <i class="fa fa-pie-chart"></i> <span>Results</span>
+		              	<i class="fa fa-pie-chart"></i> <span>Results</span>
+		              	<i class="fa fa-angle-left pull-right"></i>
 		              </a>
+		              <ul class="treeview-menu">
+		                <li><a href="{{ route('results.all') }}"><i class="fa fa-circle-o"></i>All Results</a></li>
+		                <li><a href="{{ route('results.subjects') }}"><i class="fa fa-circle-o"></i>Results by Subjects</a></li>
+		                <li><a href="{{ route('results.classes') }}"><i class="fa fa-circle-o"></i>Results by Classes</a></li>
+		              </ul>
 		            </li>
 		            <li class="treeview">
 		              <a href="#">
@@ -84,15 +90,6 @@
 		              </a>
 		              <ul class="treeview-menu">
 		                <li><a href="{{ route('schools.index') }}"><i class="fa fa-circle-o"></i> School</a></li>
-		              </ul>
-		            </li>
-		            <li class="treeview">
-		              <a href="#">
-		                <i class="fa fa-folder"></i> <span>Others</span>
-		                <i class="fa fa-angle-left pull-right"></i>
-		              </a>
-		              <ul class="treeview-menu">
-		                <li><a href="{{ route('teachers.index') }}"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
 		              </ul>
 		            </li>
 		          </ul>

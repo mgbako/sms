@@ -8,20 +8,21 @@
 
 	<link href="/css/app.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	
-
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
 	  <!-- fullCalendar 2.2.5-->
-    <link rel="stylesheet" href="{{ asset('/css/fullcalendar.min.css') }}">
+    <link rel="stylesheet" href="/css/fullcalendar.min.css">
     <link rel="stylesheet" href="{{ asset('/css/fullcalendar.print.css') }}" media="print">
 
-    <link rel="stylesheet" href="{{ asset('/css/square/blue.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/_all-skins.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/skin-blue.min.css') }}" >
+    <link rel="stylesheet" href="/css/square/blue.css">
+    <link rel="stylesheet" href="/css/select2.min.css">
+    <link rel="stylesheet" href="/css/_all-skins.min.css">
+    <link rel="stylesheet" href="/css/skin-blue.min.css" >
 
     <link rel="icon" href="{{ asset('/img/logoo3.png') }}" type="image/x-icon">
 	<link rel="shortcut icon" href="{{ asset('/img/logoo3.png') }}" type="image/png" />

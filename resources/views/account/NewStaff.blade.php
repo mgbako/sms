@@ -4,6 +4,6 @@
     <div class="container-fluid">
       @include('errors.formError')
       {!! Form::open(['class'=>'form-horizontal', 'role'=>'form']) !!}
-        @include('partials.newStaffForm', [ 'name'=>'Staff ID'])
+        @include('partials.newStaffForm')
       {!! Form::close() !!}
 @stop

@@ -16,7 +16,7 @@ class CreateQuestionsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('teacher_id')->unsigned();
-			$table->integer('class_id')->unsigned();
+			$table->integer('classe_id')->unsigned();
 			$table->integer('subject_id')->unsigned();
 			$table->string('class');
 			$table->string('term');
@@ -33,7 +33,7 @@ class CreateQuestionsTable extends Migration {
 				->on('teachers')
 				->onDelete('cascade');
 
-				$table->foreign('class_id')
+				$table->foreign('classe_id')
 				->references('id')
 				->on('classes')
 				->onDelete('cascade');

@@ -22,4 +22,8 @@ class Classe extends Model {
 		return $this->belongsToMany('Scholr\Subject');
 	}
 
+	public function grades()
+	{
+		return $this->hasMnay('Scholr\Grade');
+	}
 }

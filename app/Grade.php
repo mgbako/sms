@@ -14,6 +14,10 @@ class Grade extends Model {
 	  return $this->belongsTo('Scholr\Subject');
 	}
 
+	public function classes()
+	{
+		return $this->belongsToMnay('Scholr\Classe');
+	}
 }
 
 
