@@ -13,7 +13,7 @@ use Scholr\Http\Requests\ExamRequest;
 use Auth;
 use Scholr\SubjectAssigned;
 use Scholr\Teacher;
-use Scholr\Subjectquestionstatus;
+use Scholr\SubjectQuestionstatus;
 use Scholr\School;
 
 
