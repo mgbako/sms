@@ -89,7 +89,7 @@ class ExamsController extends Controller
         $user = Auth::user();
         $time = Subjectquestionstatus::where('classe_id', $classe_id)
                 ->where('subject_id', $subject_id)
-                ->where('write_now', 1)->first();
+                ->where('write', 1)->first();
        
         
         $questions = Question::where('classe_id', $time->classe_id)

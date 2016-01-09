@@ -156,17 +156,22 @@ class AuthController extends Controller
         $requests['password'] = bcrypt($request['password']);
         $requests['type'] = 'student';
         $student = Student::whereStudentid($requests['loginId'])->first();
-        $user = new User($requests);
-        $user->slug = $user->username;
-        $this->auth->login($student->account()->save($user));
+        if ($student) {
+            $user = new User($requests);
+            $user->slug = $user->username;
+            $this->auth->login($student->account()->save($user));
 
-        $slug = $this->auth->user()->slug;
-        $this->redirectTo = 'account/student/'.$slug;
+            $slug = $this->auth->user()->slug;
+            $this->redirectTo = 'account/student/'.$slug;
 
-        $user = $this->auth->user();
-        flash('Welcome '.$user->firstname .' '.$user->lastname 
-                        .' Your account was created succeessfully');
-        return redirect($this->redirectPath());
+            $user = $this->auth->user();
+            flash('Welcome '.$user->firstname .' '.$user->lastname 
+                            .' Your account was created succeessfully');
+            return redirect($this->redirectPath());
+        }else{
+            flash('Invalid Student Id');
+            return redirect()->back();
+        }
     }
     /**
      * handle creating teacher account
