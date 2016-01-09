@@ -18,7 +18,6 @@
 
 			progress.removeClass('label-danger');
 			progress.addClass('label-warning');
-
 			progress.text("Processing");
 			remarks.text("Processing");
 		}

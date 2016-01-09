@@ -75,7 +75,7 @@
 								<li>
 									<a href="{{ route('results.all') }}">
 										<i class="fa fa-pie-chart"></i> 
-										<span>Results</span>All Results
+										<span>All Results</span>
 									</a>
 								</li>
 		            <li class="treeview">
