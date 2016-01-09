@@ -42,7 +42,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                  @if($user->type == 'student')
+                  @if(Auth::user()->type == 'student')
                   <li>
                     <a href="{{ route('classes.exams.index', [$class::whereId($student->class)->first()->id]) }}">
                       <i class="fa fa-graduation-cap">
@@ -54,7 +54,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="{{ route('results.myresult', [$student->slug]) }}">
+                <a href="{{ route('results.student', [$class::whereId($student->class)->first()->id, $student->slug]) }}">
                 <i class="fa fa-pie-chart"></i> 
                   <span>Results</span>
                 </a>

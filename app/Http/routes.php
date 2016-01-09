@@ -61,7 +61,11 @@ Route::resource('classes.subjects.exams', 'ExamsController');
 
 /*------------------ Results -----------------*/
 Route::get('/student/{id}/classe/{classeId}/subject/{subjectId}/result', ['as'=>'results.show', 'uses'=>'ResultsController@show']);
+
+Route::get('/classes/{id}/subjects/{subjectId}/results',  ['as'=>'results.classes', 'uses'=>'ResultsController@classes']);
+Route::get('/classes/{classeId}/student{student}/results',  ['as'=>'results.student', 'uses'=>'ResultsController@student']);
 Route::post('/classes/{id}/subjects/{subjectId}/result',  ['as'=>'results.store', 'uses'=>'ResultsController@store']);
+
 Route::resource('/results', 'ResultsController');
 
 

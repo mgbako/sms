@@ -32,9 +32,11 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-xs-12">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+				@if($questionCount < $school->number)
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 				Add New Question
 				</button>
+				@endif
 				<p>&nbsp;</p>
 				<!-- /.box -->
 

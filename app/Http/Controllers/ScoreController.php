@@ -42,6 +42,7 @@ class ScoreController extends Controller
      */
     public function store(Request $request)
     {
+        $school = \DB::table('schools')->first();
         $user = \Auth::user();
         $student_id = Student::where('studentId', $user->loginId)->first();
 
@@ -58,6 +59,22 @@ class ScoreController extends Controller
                     $count++;
                 }
             }
+        }
+
+        if($count <= 40)
+        {
+            $remark = "Poor";
+        }
+        else if($count <= 60)
+        {
+            $remark = "Goood";
+        }
+        else if($count <= 80)
+        {
+            $remark = "Very Goood";
+        }
+        else{
+            $remark = "Excellent";
         }
 
 
@@ -80,7 +97,9 @@ class ScoreController extends Controller
                         'classe_id' => $classe_id,
                         'subject_id' => $subject_id,
                         'term' => $term,
-                        'total' => $count
+                        'total' => $count,
+                        'remark' => $remark,
+                        'session' => $school->session
                     ]
             );
         }

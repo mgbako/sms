@@ -48,4 +48,16 @@ class Student extends Model implements SluggableInterface
       return $this->hasMany('Scholr\Grade');
     }
 
+    public function name($id)
+    {
+        $name = ucwords(Student::whereId($id)->first()->lastname." ".Student::whereId($id)->first()->firstname);
+        return $name;
+    }
+
+    public function id($id)
+    {
+        $name = Student::whereId($id)->first()->studentId;
+        return $name;
+    }
+
 }

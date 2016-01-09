@@ -32,4 +32,9 @@ class Subject extends Model {
 	  return $this->morphMany('Scholr\Photo', 'imageable');
 	}
 
+	public function name($id)
+    {
+        return Subject::whereId($id)->first()->name;
+    }
+
 }

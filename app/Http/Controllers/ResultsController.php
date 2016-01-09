@@ -8,7 +8,10 @@ use Scholr\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Auth;
 use Scholr\Student;
+use Scholr\Classe;
 use Scholr\Grade;
+use Scholr\SubjectAssigned;
+use Scholr\Subject;
 
 class ResultsController extends Controller
 {   
@@ -79,15 +82,39 @@ class ResultsController extends Controller
 
 
 
-     public function classes($class)
+    public function classes($classId, $subjectId)
     {   
+        $school = \DB::table('schools')->first();
+        $student = new Student;
+        $class = new Classe;
+        $subject = new Subject;
         if ($this->user->type == 'admin' || $this->user->type == 'teacher') {
 
-            $grades = Grade::whereSubject_id($subject);
+            $grades = Grade::where(['Subject_id'=>$subjectId, 'classe_id'=>$classId])->get();
+            $totalGrades = Grade::where(['Subject_id'=>$subjectId, 'classe_id'=>$classId])->sum('total');
+            $total = Grade::where(['Subject_id'=>$subjectId, 'classe_id'=>$classId])->count();
+            $average = round(Grade::where(['Subject_id'=>$subjectId, 'classe_id'=>$classId])->avg('total'));
+
+            if($average <= 40)
+            {
+                $remark = "Poor";
+            }
+            else if($average <= 60)
+            {
+                $remark = "Goood";
+            }
+            else if($average <= 80)
+            {
+                $remark = "Very Goood";
+            }
+            else{
+                $remark = "Excellent";
+            }
+
             if ($this->user->type == 'teacher') {
-                $teacher = DB::table('teachers')->where('staffId', $this->user->loginId)->first();
+                $teacher = \DB::table('teachers')->where('staffId', $this->user->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
-                return view('results.classes', compact('assigned', 'grades'));
+                return view('results.classes', compact('assigned', 'grades', 'student', 'class', 'subject', 'subjectId', 'totalGrades', 'school', 'average', 'remark'));
             }
             return view('results.classes', compact('grades'));
         }else {
@@ -96,11 +123,11 @@ class ResultsController extends Controller
         }
     }
 
-    public function student($student)
+    public function student($classId, $student)
     {   
-        if ($this->user->type == 'admin' || $this->user->type == 'teacher') {
+        if ($student) {
 
-            $grades = Grade::whereSubject_id($subject);
+            return $grades = Grade::where(['student_id'=>$student, 'classe_id'=>$classId])->get();
             if ($this->user->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', $this->user->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
