@@ -31,7 +31,7 @@ class ExamsController extends Controller
     {
 
         
-        $user = \Auth::user();
+        $user = Auth::user();
         $term = School::first()->term;
 
         //return $user->hasQuestion(1, 2);
@@ -39,22 +39,6 @@ class ExamsController extends Controller
         /**
          * Checking if exam as been taken
          */
-
-
-        if($user->type != 'student')
-        {
-            if($user->type == 'teacher')
-            {
-                $teacherId = Teacher::where('staffId', $user->loginId)->first()->id;
-            }
-            else{
-                $teacherId = Admin::where('staffId', $user->loginId)->first()->id;
-            }
-
-            $subjectAssigneds = SubjectAssigned::whereTeacherId($teacherId)
-                                                ->whereClasseId($classe_id)
-                                                ->get();
-        }
 
         $subjects = Classe::find($classe_id)->subjects()->get();
 
@@ -96,8 +80,7 @@ class ExamsController extends Controller
         $time = Subjectquestionstatus::where('classe_id', $classe_id)
                                     ->where('subject_id', $subject_id)
                                     ->first();
-        $term = 'First Term';
-
+        $term = School::first()->term;
         $count = 1;
         $questions = Question::where('classe_id', $classe_id)
                                ->where('subject_id', $subject_id)
@@ -112,36 +95,4 @@ class ExamsController extends Controller
         return view('exams.examHall', compact('questions', 'count', 'subject_id', 'classe_id', 'term', 'totals', 'user', 'time'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function result()
-    {
-        
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

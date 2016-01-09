@@ -1,3 +1,6 @@
+@inject('student', 'Scholr\Student')
+@inject('class', 'Scholr\Classe')
+@inject('subject', 'Scholr\Subject')
 @extends('layouts.admin')
 @section('content')
 	@include('partials.adminDashboard')
@@ -7,7 +10,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            General Mathematics Results
+            All Results
             <small>The Subject Broad Sheet</small>
           </h1>
           <ol class="breadcrumb">
@@ -31,68 +34,62 @@
                       <thead>
                         <tr>
                           <th>Student Name</th>
-                          <th>Class</th>
                           <th>ID No.</th>
+                          <th>Class</th>
+                          <th>Subject</th>
                           <th>Score (%)</th>
                         </tr>
                       </thead>
-                      <tbody>
+                     @foreach ($grades as $grade)
+                        <tbody>
                         <tr>
-                          <td><a href="results2.html">Alex Pierce</a></td>
-                          <td><a href="results3.html">JSS3</a></td>
-                          <td><a href="bio.html">Pfc119</a></td>
-                          <td>60</td>
+                          <td>
+                              {{ $student::whereId($grade->student_id)->first()->firstname.' '.$student::whereId($grade->student_id)->first()->lastname}}
+                          </td>
+                          <td>
+                            <a 
+                              href="/results/student/{{ $grade->student_id }}">
+                              {{ $student::whereId($grade->student_id)->first()->studentId }}
+                            </a>
+                          </td>
+                          <td>
+                            <a 
+                              href="/results/classes/{{ $grade->classe_id }}">
+                              {{ $class::whereId($grade->classe_id)->first()->name }}
+                            </a>
+                          </td>
+                           <td>
+                            <a 
+                              href="/results/subjects/{{ $grade->subject_id }}">
+                              {{ $subject::whereId($grade->subject_id)->first()->name }}
+                            </a>
+                          </td>
+                          <td>
+                            {{ $grade->total }}
+                          </td>
                         </tr>
                       </tbody>
+                     @endforeach
                       <tfoot>
                         <tr>
-                          <th>Student Name</th>
-                          <th>Class</th>
+                           <th>Student Name</th>
                           <th>ID No.</th>
+                          <th>Class</th>
+                          <th>Subject</th>
                           <th>Score (%)</th>
                         </tr>
                       </tfoot>
                     </table>
                   </div>
+                  <div class="row no-print">
+                    <div class="col-xs-12">
+                      <a href="exam-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                    </div>
+                    <br><br>
+                  </div>
                 </div><!-- /.box-body -->
             </div>
-            <!-- /.box-header -->     
-            <div class="col-xs-12 table-responsive">
-              <div class="row">
-                <!-- accepted payments column -->
-                <div class="col-xs-8 pull-right">
-                 <p class="lead">Summary</p>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <tr>
-                          <th style="width:50%">Total Grades:</th>
-                          <td>120</td>
-                        </tr>
-                        <tr>
-                          <th>Total Questions:</th>
-                          <td>200</td>
-                        </tr>
-                        <tr>
-                          <th>Average:</th>
-                          <td>60/100</td>
-                        </tr>
-                        <tr>
-                          <th>Remarks:</th>
-                          <td>V Good</td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>    <!-- /.col --><!-- /.col -->
-                <!-- /.col -->
-              </div><!-- /.row -->
-              <!-- this row will not appear when printing -->
-              <div class="row no-print">
-                <div class="col-xs-12">
-                  <a href="exam-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-                </div>
-                <br><br>
-              </div>
-            </div><!-- /.box-body -->
+           
             <div class="box-footer no-padding">
             </div>
           </div><!-- /. box -->

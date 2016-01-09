@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
-@include('partials.studentDashboard')
+@include('partials.adminDashboard')
 	<!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         @include('flash::message ')

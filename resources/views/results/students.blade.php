@@ -1,3 +1,5 @@
+@inject('subject', 'Scholr\Subject')
+@inject('class', 'Scholr\Classe')
 @extends('layouts.admin')
 @section('content')
 	@include('partials.profileDashboard')
@@ -69,32 +71,18 @@
                     <th width="12%">Remarks</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>English</td>
-                    <td>25</td>
-                    <td>AVG</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Mathematics</td>
-                    <td>30</td>
-                    <td>GOOD</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Chemistry</td>
-                    <td>20</td>
-                    <td>PASS</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Biology</td>
-                    <td>45</td>
-                    <td>V GOOD</td>
-                  </tr>
-                </tbody>
+               @foreach ($grades as $grade)
+                  <tbody>
+                    <tr>
+                      <td>{{ $count++ }}</td>
+                      <td>
+                        {{ $subject::where('id', $grade->subject_id)->first()->name}}
+                      </td>
+                      <td>{{ $grade->total }}</td>
+                      <td>{{ $grade->remark }}</td>
+                    </tr>
+                  </tbody>
+                @endforeach
               </table>
                     <div class="row">
             <!-- accepted payments column --><!-- /.col -->
@@ -104,19 +92,19 @@
                 <table class="table">
                   <tr>
                     <th style="width:50%">Total Grades:</th>
-                    <td>120</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th>Total Questions:</th>
-                    <td>200</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th>Average:</th>
-                    <td>60/100</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <th>Remarks:</th>
-                    <td>V Good</td>
+                    <td></td>
                   </tr>
                 </table>
               </div>

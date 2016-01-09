@@ -38,8 +38,8 @@ Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/delete', [
 Route::get('/result/myresult/{slug}', ['as'=>'results.myresult', 'uses'=>'ResultsController@myresult']);
 Route::get('/results/all', ['as'=>'results.all', 'uses'=>'ResultsController@index']);
 Route::get('results/subjects/{subjects}', ['as'=>'results.subjects', 'uses'=>'ResultsController@subjects']);
-Route::get('results/class/{class}', ['as'=>'results.classes', 'uses'=>'ResultsController@class']);
-Route::get('results/class/{student}', ['as'=>'results.students', 'uses'=>'ResultsController@student']);
+Route::get('results/classes/{class}', ['as'=>'results.classes', 'uses'=>'ResultsController@classes']);
+Route::get('results/student/{student}', ['as'=>'results.students', 'uses'=>'ResultsController@student']);
 
 Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/submit', ['as'=>'subjectQuestions.submit', 'uses'=>'SubjectQuestionsController@submit']);
 Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/approve', ['as'=>'subjectQuestions.approve', 'uses'=>'SubjectQuestionsController@approve']);
