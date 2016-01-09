@@ -11,8 +11,9 @@ use Scholr\Classe;
 use Scholr\Subject;
 use Scholr\Question;
 use Scholr\Subjectquestionstatus;
+use Scholr\SubjectAssigned;
 use DB;
-
+use Auth;
 class SubjectQuestionsController extends Controller
 {
     /**
@@ -29,8 +30,12 @@ class SubjectQuestionsController extends Controller
         $time = [""=>"Choose", 15=>15, 30=>30, 45=>45, 60=>60, 75=>75, 90=>90, 105=>105, 120=>120];
 
         $subjectquestionstatus = Subjectquestionstatus::all();
-
-        return view('status.subjectQuestion.index', compact('count', 'subjectList', 'classList', 'time', 'subjectquestionstatus'));
+        $assigned = '';
+         if (Auth::user()->type == 'teacher') {
+                $teacher = DB::table('teachers')->where('staffId', Auth::user()->loginId)->first();
+                $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+        }
+        return view('status.subjectQuestion.index', compact('count', 'subjectList', 'classList', 'time', 'subjectquestionstatus', 'assigned'));
     }
 
     public function submit($classeId, $subjectId)
@@ -81,8 +86,8 @@ class SubjectQuestionsController extends Controller
      * @return Response
      */
     public function store(SubjectquestionstatusRequest $request)
-    {
-
+    {   
+        
         $Subjectquestionstatus = Subjectquestionstatus::where('classe_id', $request['classe_id'])
         ->where('subject_id', $request['subject_id'])->get()->count();
         if($Subjectquestionstatus == 1)

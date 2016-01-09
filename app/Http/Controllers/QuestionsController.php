@@ -29,16 +29,25 @@ class QuestionsController extends Controller
      */
     public function index($classe_id, $subject_id)
     {   
+        $user = Auth::user();
         $school = DB::table('schools')->first();
         $count = 1;
         $subject_id = $subject_id->id;
+
+        $valid = false;
+
+        $questionCount = (int)Question::where('classe_id', $classe_id)
+                               ->where('subject_id', $subject_id)
+                               ->where('teacher_id', $user->teacher_id)
+                               ->get()->count();
+
         $questions = Question::where('classe_id', $classe_id)
                                ->where('subject_id', $subject_id)
                                ->get();
         $user = Auth::user();
         $teacher = DB::table('teachers')->where('staffId', $user->loginId)->first();
         $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
-        return view('admin.questions.index', compact('questions', 'count', 'subject_id', 'classe_id', 'school', 'assigned'));
+        return view('admin.questions.index', compact('questions', 'count', 'subject_id', 'classe_id', 'school', 'assigned', 'questionCount'));
     }
 
     /**
@@ -49,13 +58,19 @@ class QuestionsController extends Controller
     public function store(QuestionRequest $request, $id, $subjectId)
     {   
         $user = Auth::user();
-        $questions = Question::where('classe_id', $classe_id)
-                               ->where('subject_id', $subject_id)
+        $questions = Question::where('classe_id', $id)
+                               ->where('subject_id', $subjectId)
                                ->where('teacher_id', $user->teacher_id)
                                ->get()->count();
 
-        $school = School::all();
-        if( >=$School->number)
+        $school = School::first();
+        if($questions >= $school->number)
+        {
+            flash('Maximum Question Added');
+            return redirect()
+            ->route("classes.subjects.questions.index", [$id, $subjectId]);
+        }
+
         $question = new Question($request->all() );
         $teacher = Teacher::where('staffId', Auth::user()->loginId)->first();
         

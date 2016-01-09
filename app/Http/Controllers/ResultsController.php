@@ -12,6 +12,7 @@ use Scholr\Grade;
 use Scholr\Classe;
 use Scholr\Subject;
 use Scholr\School;
+use Scholr\SubjectAssigned;
 
 class ResultsController extends Controller
 {   
