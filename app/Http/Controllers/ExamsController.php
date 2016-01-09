@@ -14,6 +14,7 @@ use Auth;
 use Scholr\SubjectAssigned;
 use Scholr\Teacher;
 use Scholr\Subjectquestionstatus;
+use Scholr\School;
 
 
 class ExamsController extends Controller
@@ -28,13 +29,38 @@ class ExamsController extends Controller
      */
     public function index($classe_id)
     {
-        $term = 'First Term';
+
+        
+        $user = Auth::user();
+        $term = School::first()->term;
+
+        //return $user->hasQuestion(1, 2);
+
+        /**
+         * Checking if exam as been taken
+         */
+
+
+        if($user->type != 'student')
+        {
+            if($user->type == 'teacher')
+            {
+                $teacherId = Teacher::where('staffId', $user->loginId)->first()->id;
+            }
+            else{
+                $teacherId = Admin::where('staffId', $user->loginId)->first()->id;
+            }
+
+            $subjectAssigneds = SubjectAssigned::whereTeacherId($teacherId)
+                                                ->whereClasseId($classe_id)
+                                                ->get();
+        }
 
         $subjects = Classe::find($classe_id)->subjects()->get();
 
         $count = 1;
         
-        return view('exams.index', compact('classe_id', 'subjects'));
+        return view('exams.index', compact('classe_id', 'subjects', 'subjectAssigneds'));
     }
 
     /**
@@ -52,28 +78,9 @@ class ExamsController extends Controller
      *
      * @return Response
      */
-    public function store(ExamRequest $request, $classe_id, $subject_id)
+    public function store(ExamRequest $request)
     {
-        $user = Auth::user();
-        return Student::where('studentId', $user->userId)->first();
-        $result;
-        $selected;
-        $count = 0;
-        foreach($request->all() as $index => $answer)
-        {
-            $results = Answer::where('question_id', $index)->lists('answer');
-            foreach ($results as $result)
-            {
-                if ($result == $answer)
-                {
-                    $count ++;
-                }
-            }
-        }
-
-        return $request->all();
-
-        return $classe_id;
+       
     }
 
     /**
@@ -82,20 +89,26 @@ class ExamsController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($classe_id, $subject_id)
-    {   
-        $term = 'First Term';
-        $count = 1;
+    public function hall($classe_id, $subject_id)
+    {
         $user = Auth::user();
-        $time = Subjectquestionstatus::where('classe_id', $classe_id)
-                ->where('subject_id', $subject_id)
-                ->where('write', 1)->first();
-       
-        
-        $questions = Question::where('classe_id', $time->classe_id)
-                    ->where('subject_id', $time->subject_id)
-                    ->orderBy(\DB::raw('RAND()'))->get();
-        return view('exams.show', compact('user', 'questions', 'count', 'subject_id', 'classe_id', 'term', 'totals', 'time'));
-    }
 
+        $time = Subjectquestionstatus::where('classe_id', $classe_id)
+                                    ->where('subject_id', $subject_id)
+                                    ->first();
+        $term = 'First Term';
+
+        $count = 1;
+        $questions = Question::where('classe_id', $classe_id)
+                               ->where('subject_id', $subject_id)
+                               ->orderBy(\DB::raw('RAND()'))
+                               ->get();
+
+        $totals = Question::where('classe_id', $classe_id)
+                               ->where('subject_id', $subject_id)
+                               ->get();
+
+
+        return view('exams.examHall', compact('questions', 'count', 'subject_id', 'classe_id', 'term', 'totals', 'user', 'time'));
+    }
 }

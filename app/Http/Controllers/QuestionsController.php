@@ -15,7 +15,12 @@ use Scholr\SubjectAssigned;
 use Scholr\Http\Requests\QuestionRequest;
 
 class QuestionsController extends Controller
-{
+{   
+
+    public function __contruct()
+    {
+        $this->middleware('staff');
+    }
     
     /**
      * Display a listing of the resource.
@@ -24,16 +29,16 @@ class QuestionsController extends Controller
      */
     public function index($classe_id, $subject_id)
     {   
-        $term = 'First Term';
+        $school = DB::table('schools')->first();
         $count = 1;
         $subject_id = $subject_id->id;
         $questions = Question::where('classe_id', $classe_id)
                                ->where('subject_id', $subject_id)
                                ->get();
-        $user = \Auth::user();
-        $teacher = \DB::table('teachers')->where('staffId', $user->loginId)->first();
+        $user = Auth::user();
+        $teacher = DB::table('teachers')->where('staffId', $user->loginId)->first();
         $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
-        return view('admin.questions.index', compact('questions', 'count', 'subject_id', 'classe_id', 'term', 'assigned'));
+        return view('admin.questions.index', compact('questions', 'count', 'subject_id', 'classe_id', 'school', 'assigned'));
     }
 
     /**
@@ -43,7 +48,14 @@ class QuestionsController extends Controller
      */
     public function store(QuestionRequest $request, $id, $subjectId)
     {   
+        $user = Auth::user();
+        $questions = Question::where('classe_id', $classe_id)
+                               ->where('subject_id', $subject_id)
+                               ->where('teacher_id', $user->teacher_id)
+                               ->get()->count();
 
+        $school = School::all();
+        if( >=$School->number)
         $question = new Question($request->all() );
         $teacher = Teacher::where('staffId', Auth::user()->loginId)->first();
         
@@ -70,6 +82,7 @@ class QuestionsController extends Controller
     {
         $count = 1;
         $question = Question::find($questionId);
+
         $user = \Auth::user();
         $teacher = \DB::table('teachers')->where('staffId', $user->loginId)->first();
         $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();

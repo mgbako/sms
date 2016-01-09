@@ -108,6 +108,7 @@ class SchoolController extends Controller
         $school->session = $request['session'];
         $school->institution = $request['institution'];
         $school->id_format = $request['id_format'];
+        $school->number = $request['number'];
         $school->update();
         flash($school->name.' has been updated successfully');
         return redirect('schools');

@@ -103,7 +103,7 @@ class SubjectQuestionsController extends Controller
     public function activate()
     {
         $subjectquestionstatus = Subjectquestionstatus::where('progress',2)
-                               ->where('write_now', 0)->get();
+                               ->where('write', 0)->get();
         $count = 1;
         return view('status.subjectQuestion.activate', compact('subjectquestionstatus', 'count'));
     }
@@ -118,7 +118,7 @@ class SubjectQuestionsController extends Controller
         $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classId)
                                 ->where('subject_id', $subjectId)->first();
         if ($subjectquestionstatus) {
-        $affacted = DB::update('update subjectquestionstatus set write_now = 1 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
+        $affacted = DB::update('update subjectquestionstatus set write = 1 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
             if ($affacted) {
                 flash('Exam ready to be written');
                 return redirect()->back();

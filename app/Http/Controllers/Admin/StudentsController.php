@@ -60,7 +60,7 @@ class StudentsController extends Controller {
 		$student->image = 'img/students/'.$filename;
 		$student->save();
 		$student->subjects()->attach($request->input('subject_list'));
-		flash('New Astudent: '.$student->firstname.' '.$student->lastname.' was created successfully!');
+		flash('New Teacher: '.$student->firstname.' '.$student->lastname.' was created successfully!');
 		return redirect('students');
 	}
 
