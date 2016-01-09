@@ -7,7 +7,7 @@ use Scholr\Http\Controllers\Controller;
 use Scholr\Question;
 use Scholr\ANswer;
 use Scholr\Student;
-use Scholr\classe;
+use Scholr\Classe;
 use Scholr\Subject;
 use Scholr\Http\Requests\ExamRequest;
 use Auth;
