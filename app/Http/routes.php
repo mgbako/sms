@@ -38,8 +38,8 @@ Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/delete', [
 Route::get('/result/myresult/{slug}', ['as'=>'results.myresult', 'uses'=>'ResultsController@myresult']);
 Route::get('/results/all', ['as'=>'results.all', 'uses'=>'ResultsController@index']);
 Route::get('results/subjects/{subjects}', ['as'=>'results.subjects', 'uses'=>'ResultsController@subjects']);
-Route::get('results/class/{class}', ['as'=>'results.classes', 'uses'=>'ResultsController@class']);
-Route::get('results/class/{student}', ['as'=>'results.students', 'uses'=>'ResultsController@student']);
+Route::get('results/classes/{class}', ['as'=>'results.classes', 'uses'=>'ResultsController@classes']);
+Route::get('results/student/{student}', ['as'=>'results.students', 'uses'=>'ResultsController@student']);
 
 Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/submit', ['as'=>'subjectQuestions.submit', 'uses'=>'SubjectQuestionsController@submit']);
 Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/approve', ['as'=>'subjectQuestions.approve', 'uses'=>'SubjectQuestionsController@approve']);
@@ -53,8 +53,24 @@ Route::resource('/subjectProgess', 'SubjectProgressController');
 Route::resource('/subjectAssigned', 'SubjectAssignedController');
 Route::resource('/subjectAnalysis', 'SubjectAnalysisController');
 Route::resource('users', 'UsersController');
-Route::resource('exams', 'ExamsController');
+
+
+/*------------------ Exams -----------------*/
+Route::get('/classes/{id}/subjects/{subjectId}/exams',  ['as'=>'classes.subjects.examHall', 'uses'=>'ExamsController@hall']);
+Route::resource('classes.subjects.exams', 'ExamsController');
+
+/*------------------ Results -----------------*/
+Route::get('/student/{id}/classe/{classeId}/subject/{subjectId}/result', ['as'=>'results.show', 'uses'=>'ResultsController@show']);
+Route::post('/classes/{id}/subjects/{subjectId}/result',  ['as'=>'results.store', 'uses'=>'ResultsController@store']);
+Route::resource('/results', 'ResultsController');
+
+
+Route::post('/scores',  ['as'=>'score.store', 'uses'=>'ScoreController@store']);
+Route::get('/student/{id}/classe/{classeId}/subject/{subjectId}/score', ['as'=>'scores.show', 'uses'=>'ScoreController@show']);
+
+
 Route::resource('admins', 'Admin\AdminController');
+
 Route::controllers([
   'account' => 'Auth\AuthController',
   'password' => 'Auth\PasswordController',

@@ -43,7 +43,7 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li>
-            <a href="{{ url('/subjects/create?') }}">
+            <a href="{{ url('/subjects/create') }}">
               <i class="fa fa-book fa-fw"></i>
               New Subject
             </a>

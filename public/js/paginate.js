@@ -7,6 +7,7 @@
 		var itemsToPaginate;
 		var linkNumber;
 
+<<<<<<< HEAD
 		$('.previousLink').on('click', function(){
 
 			var pageLinks = $("paginate li");
@@ -41,6 +42,9 @@
 			nextLink.trigger("click");
 		});
 
+=======
+		
+>>>>>>> 2aea719a85c9720b25f830bf258fe3663f64ddd2
 		var defaults = {
 			itemsPerPage : 1
 		};
@@ -67,6 +71,11 @@
 			
 			linkNumber = $(this).text();
 
+<<<<<<< HEAD
+=======
+			$('.number').text(linkNumber);
+			
+>>>>>>> 2aea719a85c9720b25f830bf258fe3663f64ddd2
 			var itemsToHide = itemsToPaginate.filter(":lt("+ (linkNumber * itemsPerPage - 1) +")");
 			$.merge(itemsToHide, itemsToPaginate.filter(":gt("+ ((linkNumber * itemsPerPage) - 1) +")"));
 			itemsToHide.hide();
@@ -80,7 +89,12 @@
 				link.siblings().removeClass("activeLink");
 			}
 			
+<<<<<<< HEAD
 			$('#total').text(linkNumber + "/"+numberOfPaginationLinks);
+=======
+			//$('#total').text(linkNumber + "/"+numberOfPaginationLinks);
+			
+>>>>>>> 2aea719a85c9720b25f830bf258fe3663f64ddd2
 
 			if(linkNumber == numberOfPaginationLinks){
 				$(".finish").show();
@@ -92,6 +106,11 @@
 		});
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2aea719a85c9720b25f830bf258fe3663f64ddd2
 		
 	}
 

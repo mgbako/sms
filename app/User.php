@@ -9,6 +9,8 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Scholr\Score;
+
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
@@ -60,4 +62,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasOne('Scholr\Profile');
     }
+
+    public function Taken($student_id, $classe_id, $subject_id)
+    {
+        return  Score::where('student_id', $student_id)
+                    ->where('classe_id', $classe_id)
+                    ->where('subject_id', $subject_id)
+                    ->get()->count();
+    }
+
+    public function hasQuestion($classe_id, $subject_id)
+    {
+        return  Question::where(['classe_id' =>  $classe_id, 'subject_id' => $subject_id])->get()->count();
+    }
+
+    public function subjectName($id)
+    {
+        return Subject::whereId($id)->first()->name;
+    }
+
 }

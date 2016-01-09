@@ -95,7 +95,7 @@
 	        {!! Form::open(['route'=> ['classes.subjects.questions.store', $classe_id, $subject_id] ]) !!}
 				<div class="row">
 					<div class="form-group">
-						{!! Form::hidden('term', $term) !!}
+						{!! Form::hidden('term', $school->term) !!}
 					</div>
 
 					<div class="form-group">
@@ -169,5 +169,4 @@
 	  </div>
 	</div>
 	<!-- End of Modal -->
-	
 @stop

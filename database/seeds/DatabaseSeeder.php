@@ -18,8 +18,15 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         //factory(User::class)->create();
-    factory(Admin::class, 2)->create();
 
-        Model::reguard();
+    //factory(Admin::class, 2)->create();
+
+       // Model::reguard();
+
+        //$this->call('QuestionTableSeeder');
+
+        factory('Scholr\Student', 20)->create(); 
     }
+
+
 }

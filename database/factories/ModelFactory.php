@@ -52,7 +52,8 @@ $factory->define(Scholr\Student::class, function ($faker) {
         'gender' => $faker->titleFemale,
         'nationality' =>$faker->country,
         'address'  => $faker->address,
-        'class' => $faker->word,
+
+        'class' => 'SSS2',
         'image' => $faker->image,
         'end_date' => $faker->date,
     ];
@@ -72,5 +73,27 @@ $factory->define(Scholr\Admin::class, function ($faker) {
         'address'  => $faker->address,
         'type' => $faker->name,
         'image' => $faker->image,
+    ];
+
+});
+
+$factory->define(Scholr\Question::class, function($faker){
+    return [
+        'teacher_id' => 1,
+        'classe_id' => 1,
+        'subject_id' => 2,
+        'term' => 'First Term',
+        'question' => $faker->text,
+        'option1' => $faker->name,
+        'option2' => $faker->name,
+        'option3' => $faker->name,
+        'option4' => $faker->name
+    ];
+});
+
+$factory->define(Scholr\Answer::class, function($faker){
+    return [
+        'question_id' => $faker->numberBetween($min = 1, $max = 100),
+        'answer' => $faker->name
     ];
 });

@@ -9,6 +9,9 @@ use Illuminate\Contracts\Auth\Guard;
 use Auth;
 use Scholr\Student;
 use Scholr\Grade;
+use Scholr\Classe;
+use Scholr\Subject;
+use Scholr\School;
 
 class ResultsController extends Controller
 {   
@@ -17,11 +20,13 @@ class ResultsController extends Controller
      */
     private $user;
 
+    private $term;
 
     public function __construct(Guard $auth)
     {   
-        $this->middleware('staff');
+        $this->middleware('staff', ['except'=>['myresult']]);
         $this->user = $auth->user();
+        $this->term = School::first()->term;
 
     }
     /**
@@ -48,11 +53,13 @@ class ResultsController extends Controller
     {  
 
         if ($this->user->type == 'student') {
+            $count = 1;
             $student = Student::where('id', $this->user->student_id)->first();
             if ($student->slug == $slug) {
-                $grades = Grade::whereStudent_id($student->id);
+                $grades = Grade::where('student_id', $student->id)->get();
+                $term = $this->term;
                 flash('Find out how you have been performing in Exams below');
-                return view('results.myresult', compact('student'));
+                return view('results.myresult', compact('student', 'grades', 'count', 'term'));
             }else {
                flash('There is no record for this Student on the Database');
                 return redirect()->back(); 
@@ -68,9 +75,9 @@ class ResultsController extends Controller
      public function subjects($subject)
     {   
         if ($this->user->type == 'admin') {
-
-            $grades = Grade::whereSubject_id($subject);
-            return view('results.subjects', compact('grades'));
+            $subject_name = Subject::whereId($subject->id)->first()->name;
+            $grades = Grade::whereSubject_id($subject->id)->get();
+            return view('results.subjects', compact('grades', 'subject_name'));
         }else {
             flash('You are not allowed Access to that Area');
             return redirect()->back();
@@ -82,31 +89,32 @@ class ResultsController extends Controller
      public function classes($class)
     {   
         if ($this->user->type == 'admin' || $this->user->type == 'teacher') {
-
-            $grades = Grade::whereSubject_id($subject);
+            $class_name = Classe::whereId($class)->first()->name;
+            $grades = Grade::whereClasse_id($class)->get();
             if ($this->user->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', $this->user->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
-                return view('results.classes', compact('assigned', 'grades'));
+                return view('results.classes', compact('assigned', 'grades', 'class_name'));
             }
-            return view('results.classes', compact('grades'));
+            return view('results.classes', compact('grades', 'class_name'));
         }else {
             flash('You are not allowed Access to that Area');
             return redirect()->back();
         }
     }
 
-    public function student($student)
+    public function student($slug)
     {   
         if ($this->user->type == 'admin' || $this->user->type == 'teacher') {
-
-            $grades = Grade::whereSubject_id($subject);
+            $count = 1;  
+            $student = Student::whereId($slug)->first();
+            $grades = Grade::whereStudent_id($student->id)->get();
             if ($this->user->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', $this->user->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
-                return view('results.students', compact('assigned', 'grades'));
+                return view('results.students', compact('assigned', 'grades', 'student', 'count'));
             }
-            return view('results.students', compact('grades'));
+            return view('results.students', compact('grades', 'student', 'count'));
         }else {
             flash('You are not allowed Access to that Area');
             return redirect()->back();

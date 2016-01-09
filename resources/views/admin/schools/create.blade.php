@@ -15,6 +15,7 @@
             <li class="active">School</li>
           </ol>
      </section>
+     
       {!! Form::open(['route'=>'schools.store', 'files' => true])!!}
         <section class="content">
 

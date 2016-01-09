@@ -40,27 +40,11 @@ class ExamsController extends Controller
          * Checking if exam as been taken
          */
 
-
-        if($user->type != 'student')
-        {
-            if($user->type == 'teacher')
-            {
-                $teacherId = Teacher::where('staffId', $user->loginId)->first()->id;
-            }
-            else{
-                $teacherId = Admin::where('staffId', $user->loginId)->first()->id;
-            }
-
-            $subjectAssigneds = SubjectAssigned::whereTeacherId($teacherId)
-                                                ->whereClasseId($classe_id)
-                                                ->get();
-        }
-
         $subjects = Classe::find($classe_id)->subjects()->get();
 
         $count = 1;
         
-        return view('exams.index', compact('classe_id', 'subjects', 'subjectAssigneds'));
+        return view('exams.index', compact('user', 'classe_id', 'subjects', 'subjectAssigneds'));
     }
 
     /**
@@ -96,8 +80,7 @@ class ExamsController extends Controller
         $time = Subjectquestionstatus::where('classe_id', $classe_id)
                                     ->where('subject_id', $subject_id)
                                     ->first();
-        $term = 'First Term';
-
+        $term = School::first()->term;
         $count = 1;
         $questions = Question::where('classe_id', $classe_id)
                                ->where('subject_id', $subject_id)
@@ -111,4 +94,5 @@ class ExamsController extends Controller
 
         return view('exams.examHall', compact('questions', 'count', 'subject_id', 'classe_id', 'term', 'totals', 'user', 'time'));
     }
+
 }

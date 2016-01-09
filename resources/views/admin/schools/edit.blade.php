@@ -1,124 +1,116 @@
 @extends('layouts.admin')
 @section('content')
-	@include('partials.adminDashboard')
-	<!-- Content Wrapper. Contains page content -->
+@include('partials.adminDashboard')
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Edit
-        <small>Staff Updating Process</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/teachers">Staffs</a></li>
-        <li class="active">Edit</li>
-      </ol>
-    </section>
-		<section class="content">
-			<div class="row">
-				<div class="col-md-12">
-					@include('errors.list')
-				</div>
+          <h1>
+            School Settings
+            <small>App settings</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li class="active">School</li>
+          </ol>
+     </section>
+      {!! Form::model($school, ['method'=>'patch', 'route'=>['schools.update', $school->id], 'files' => true])!!}
+        <section class="content">
 
-				<div class="col-xs-12">            
-		          <div class="box box-info">
-		            <div class="box-body">
-						<div class="row">
-							{!! Form::model($teacher, ['method'=>'patch', 'route'=>['teachers.update', $teacher->id], 'files' => true])!!}
-							
-								
-								<div class="col-md-6"><br>
-					 				<div class="input-group">
-					 					<span class="input-group-addon"><i class="fa fa-user"></i></span>
-										{!! Form::text('staffId', null, ['class'=>'form-control', 'placeholder'=>'Enter Staff ID', 'disabled']) !!}
-									</div>
-								</div>
-
-								<div class="col-md-6"><br>
-                <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span> 
-                  {!! Form::text('firstname', null, ['class'=>'form-control', 'placeholder'=>'Enter First Name']) !!}
-                </div>
+          <!-- SELECT2 EXAMPLE -->
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">Main Setup</h3>
+              <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
               </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Type of System</label>
+                    <select name="institution" class="form-control select2" style="width: 100%;">
+                      <option selected="selected">{{$school->institution}}</option>
+                      <option>Primary Institution</option>
+                      <option>Secondary Institution</option>
+                      <option>Tetiary Institution</option>
+                    </select>
+                  </div><!-- /.form-group -->
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.box-body -->
+            
+          </div><!-- /.box -->
 
-              <div class="col-md-6"> <br>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                  {!! Form::text('lastname', null, ['class'=>'form-control', 'placeholder'=>'Enter Last Name']) !!}
-                </div>
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <h3 class="box-title">School Setup</h3>
+              <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
               </div>
-
-              <div class="col-md-6"> <br>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                  {!! Form::input('email', 'email', null, ['class'=>'form-control', 'placeholder'=>'example@gmail.com']) !!}
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                      <label>School Name</label>
+                      <input type="text" name="name" class="form-control" placeholder="Enter ..." value="{{$school->name}}">
+                    </div>
                 </div>
-              </div>
-
-              <div class="col-md-6"><br>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-genderless"></i></span>
-                  {!! Form::select('gender', [$teacher->gender=>$teacher->gender], $teacher->gender, ['class'=>'form-control'])!!}
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label>School Session</label>
+                      <input type="text" name="session" class="form-control" placeholder="Enter ..." value="{{$school->session}}">
+                    </div>
                 </div>
-              </div>
-
-              <div class="col-md-6"><br>
-                <div class="input-group">
-                  <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                             </div>
-                  {!! Form::input('date', 'dob', $teacher->dob, ['class'=>'form-control']) !!}
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>School Term</label>
+                    <select name="term" class="form-control select2" style="width: 100%;">
+                      <option selected="selected">{{$school->term}}</option>
+                      <option>1st Term</option>
+                      <option>2nd Term</option>
+                      <option>3rd Term</option>
+                    </select>
+                  </div><!-- /.form-group -->
+                </div><!-- /.col -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label>School ID Format</label>
+                      <input type="text" name="id_format" class="form-control" placeholder="Enter ..." value="{{$school->id_format}}">
+                    </div>
                 </div>
-              </div>
-
-              <div class="col-md-6"><br>
-                <div class="input-group">
-                  <div class="input-group-addon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                  {!! Form::input('tel', 'phone', null, ['class'=>'form-control', 'placeholder'=>'Enter Phone Number']) !!}
+                <div class="col-md-6">
+                      <label>School Logo</label>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon"><i class="fa fa-camera"></i></span>
+                    <input type="file" name="logo" class="form-control" value="{{$school->logo}}">
+                  </div>
                 </div>
-              </div>
-
-              <div class="col-md-6"><br>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-genderless"></i></span>
-                  {!! Form::textarea('address', null, ['class'=>'form-control', 'rows'=>3, 'placeholder'=>'Enter Home Address']) !!}
-                </div>
-              </div>
-
-              <div class="col-md-6"><br>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-genderless"></i></span>
-                  {!! Form::text('state', null, ['class'=>'form-control', 'placeholder'=>'Enter State of Origin']) !!}
-                </div>
-              </div>
-
-              <div class="col-md-6"><br>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-genderless"></i></span>
-                  {!! Form::text('nationality', null, ['class'=>'form-control', 'placeholder'=>'Enter Nationality']) !!}
-                </div>
-              </div>
-
-              <div class="col-md-6"><br>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-genderless"></i></span>
-                  {!! Form::file('image', ['class'=>'form-control']) !!}
-                </div>
-              </div>
-
-								<div class="col-md-6"><br>
-										{!! Form::submit('Update', ['class'=>'btn btn-success']) !!}
-								</div>
-
-							{!!Form::close()!!}
-						</div>{{-- End of Row --}}
-			   		</div>{{-- End of box body --}}
-			  	  </div>{{-- End of box info --}}
-				</div>{{-- End of col-12 --}}
-			</div>{{-- End of Row --}}
-		</section><!-- End of Content -->
+              </div><!-- /.row -->
+            </div><!-- /.box-body -->
+          </div><!-- /.box -->
+          <div class="box box-default">
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Set number of question for the current term</label>
+                    <input type="text" name="number" class="form-control" placeholder="Enter number of questions" value="{{$school->number}}">
+                  </div><!-- /.form-group -->
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.box-body -->
+           <div class="box-footer">
+            <i class="fa fa-server"></i>
+            <input type="submit" class="btn btn-default" value="Save">
+          </div>
+        </div><!-- /.box -->
+        </section><!-- /.content -->    
+      {!!Form::close()!!}
 </div><!-- /.content-wrapper -->
 @stop
