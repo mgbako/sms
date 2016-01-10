@@ -5,7 +5,7 @@ namespace Scholr\Http\Controllers;
 use Illuminate\Http\Request;
 use Scholr\Http\Requests;
 use Scholr\Http\Controllers\Controller;
-use Scholr\Subjectquestionstatus;
+use Scholr\SubjectQuestionstatus;
 
 class SubjectAnalysisController extends Controller
 {
@@ -17,7 +17,7 @@ class SubjectAnalysisController extends Controller
     public function index()
     {
         $count = 1;
-        $subjectAnalysis = Subjectquestionstatus::whereProgress(1)->get();
+        $subjectAnalysis = SubjectQuestionstatus::whereProgress(1)->get();
 
         return view('status.subjectAnalysis.index', compact('count', 'subjectAnalysis'));
     }
