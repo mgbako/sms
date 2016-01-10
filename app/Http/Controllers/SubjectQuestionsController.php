@@ -29,7 +29,7 @@ class SubjectQuestionsController extends Controller
         $subjectList = Subject::orderBy('name', 'asc')->lists('name', 'id');
         $time = [""=>"Choose", 15=>15, 30=>30, 45=>45, 60=>60, 75=>75, 90=>90, 105=>105, 120=>120];
 
-        $subjectquestionstatus = Subjectquestionstatus::all();
+        $subjectquestionstatus = SubjectQuestionstatus::all();
         $assigned = '';
          if (Auth::user()->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', Auth::user()->loginId)->first();
@@ -41,7 +41,7 @@ class SubjectQuestionsController extends Controller
     public function submit($classeId, $subjectId)
     {   
   
-        $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classeId)
+        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
                                 ->where('subject_id', $subjectId)->first();
         if ($subjectquestionstatus) {
             $affacted = DB::update('update subjectquestionstatus set progress = 1 where classe_id = ? and subject_id = ?', [$classeId, $subjectId]);
@@ -62,7 +62,7 @@ class SubjectQuestionsController extends Controller
     public function approve($classeId, $subjectId)
     {   
   
-        $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classeId)
+        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
                                 ->where('subject_id', $subjectId)->first();
         if ($subjectquestionstatus) {
             $affacted = DB::update('update subjectquestionstatus set progress = 2 where classe_id = ? and subject_id = ?', [$classeId, $subjectId]);
@@ -88,7 +88,7 @@ class SubjectQuestionsController extends Controller
     public function store(SubjectquestionstatusRequest $request)
     {   
         
-        $Subjectquestionstatus = Subjectquestionstatus::where('classe_id', $request['classe_id'])
+        $Subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $request['classe_id'])
         ->where('subject_id', $request['subject_id'])->get()->count();
         if($Subjectquestionstatus == 1)
         {   flash('Time Already Assigned to Subject');
@@ -107,7 +107,7 @@ class SubjectQuestionsController extends Controller
      */
     public function activate()
     {
-        $subjectquestionstatus = Subjectquestionstatus::where('progress',2)
+        $subjectquestionstatus = SubjectQuestionstatus::where('progress',2)
                                ->where('write', 0)->get();
         $count = 1;
         return view('status.subjectQuestion.activate', compact('subjectquestionstatus', 'count'));
@@ -120,7 +120,7 @@ class SubjectQuestionsController extends Controller
      */
     public function write($classId, $subjectId)
     {
-        $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classId)
+        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classId)
                                 ->where('subject_id', $subjectId)->first();
         if ($subjectquestionstatus) {
         $affacted = DB::update('update subjectquestionstatus set write = 1 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
@@ -145,7 +145,7 @@ class SubjectQuestionsController extends Controller
      */
     public function delete($classeId, $subjectId)
     {
-        $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classeId)
+        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
                                 ->where('subject_id', $subjectId)->first();
         return view('status.subjectQuestion.delete', compact('subjectquestionstatus', 'classeId', 'subjectId'));
     }
@@ -158,7 +158,7 @@ class SubjectQuestionsController extends Controller
      */
     public function destroy(Request $request, $classeId)
     {
-        $subjectquestionstatus = Subjectquestionstatus::where('classe_id', $classeId)
+        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
                                  ->where('subject_id', $request->get('subjectId'));
 
         if($request->get('agree')==1)
