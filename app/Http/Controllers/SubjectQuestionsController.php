@@ -10,7 +10,7 @@ use Scholr\Http\Controllers\Controller;
 use Scholr\Classe;
 use Scholr\Subject;
 use Scholr\Question;
-use Scholr\Subjectquestionstatus;
+use Scholr\SubjectQuestionstatus;
 use Scholr\SubjectAssigned;
 use DB;
 use Auth;

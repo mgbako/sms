@@ -53,6 +53,7 @@ class TeachersController extends Controller {
             return redirect('schools');
         }
 		$requests = $request->all();
+		dd($requests);
 		$image = $request->file('image');
 		$filename = time()."-".$image->getClientOriginalName();
 		$path = public_path('img/teachers/'.$filename);
