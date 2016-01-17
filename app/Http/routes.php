@@ -79,4 +79,5 @@ Route::resource('admins', 'Admin\AdminController');
 Route::controllers([
   'account' => 'Auth\AuthController',
   'password' => 'Auth\PasswordController',
+  'print' => 'PrintController',
 ]);

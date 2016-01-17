@@ -11,7 +11,9 @@
         "intervention/image": "dev-master",
         "laracasts/flash": "dev-master",
         "cviebrock/eloquent-sluggable": "dev-master",
-        "league/csv": "^8.0"
+        "league/csv": "^8.0",
+        "barryvdh/laravel-snappy": "0.2.x",
+        "wemersonjanuario/wkhtmltopdf-windows": "~0.12"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
