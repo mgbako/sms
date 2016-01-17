@@ -33,7 +33,10 @@
 	<script src="plugins/iCheck/icheck.min.js"></script>
 	<script src="{{ asset('/js/countdown.js')}}"></script>
 	<script src="{{ asset('/js/paginate2.js')}}"></script>
-	
+	 <!-- DataTables -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+	<script src="{{ asset('/js/tables.js')}}"></script>
 	<script src="{{ asset('/js/custom.js')}}"></script>
 	    <script>
       $(function () {

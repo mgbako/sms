@@ -55,7 +55,10 @@ Route::resource('profile', 'ProfileController');
 
 Route::resource('/schools', 'SchoolController');
 Route::resource('/subjectProgess', 'SubjectProgressController');
+
 Route::resource('/subjectAssigned', 'SubjectAssignedController');
+Route::delete('/subjectAssigned/{id}/{classeId}/{subjectId}', ['as'=>'subjectAssigneds.delete', 'uses'=>'SubjectAssignedController@delete']);
+
 Route::resource('/subjectAnalysis', 'SubjectAnalysisController');
 Route::resource('users', 'UsersController');
 

@@ -42,9 +42,11 @@
 		}
 	}
 
-	countChecked();
+	//countChecked();
 	/**
 	 * GUI i for Multiple Select
 	 */
+
+	 $('#selected, #seleteId, #selected3').select2();
 
 }(jQuery));

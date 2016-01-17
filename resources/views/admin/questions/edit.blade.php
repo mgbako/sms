@@ -1,5 +1,4 @@
-@extends('layouts.admin')"
-
+@extends('layouts.admin')
 @section('scripts')
   <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
   <script type="text/javascript">
@@ -8,7 +7,8 @@
         plugins: [
             "advlist autolink lists link image charmap print preview anchor",
         ],
-        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image    });
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    });
   </script>
 @stop
 @section('content')
@@ -92,10 +92,10 @@
 					</div>
 
 					<div class="modal-footer">
-						<p><code>question progress</code></p>
+						<p><span class="badge">{{$totalPer}}% Complete</span></p>
 						<div class="progress progress-sm active">
-							<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 42%">
-								<span class="sr-only">42% Complete</span>
+							<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="{{$totalquestion}}" style="width: {{$totalAdded}}%">
+								<span class="sr-only">{{$totalAdded}}% Complete</span>
 							</div>
 						</div>                   
 						<a href="examsetv.html" class="btn btn-primary">Previous</a> &nbsp;&nbsp; <a href="examsetv.html" class="btn btn-primary">Next</a>

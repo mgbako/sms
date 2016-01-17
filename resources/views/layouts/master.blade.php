@@ -108,7 +108,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2015 
+        <strong>Copyright &copy; {{date('Y')}} 
           <a href="http://www.pottersmedia.com">
             Pottersmedia Support Services
           </a>.
@@ -116,7 +116,7 @@
       </footer>
 
    </div><!-- ./wrapper -->
-    <!-- jQuery 2.1.4 -->
+   <!-- jQuery 2.1.4 -->
     <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
     <!-- jQuery Knob Chart -->
     <script src="{{ asset('/plugins/knob/jquery.knob.js')}}"></script>
@@ -144,6 +144,10 @@
   
     <script src="{{ asset('/js/progressBar.js')}}"></script>
     <script src="{{ asset('/js/countdown.js')}}"></script>
+     <!-- DataTables -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{ asset('/js/tables.js')}}"></script>
     <script src="{{ asset('js/custom.js')}}"></script>
     
   </body>

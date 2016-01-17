@@ -46,7 +46,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <i class="fa fa-list-alt"></i> {!! Form::label('subject_id', 'Subjects') !!}
-                {!! Form::select('subject_id', $subjectList, null, ['id'=>'selected', 'class'=>'form-control', 'multiple', 'data-placeholder'=>'Select Subject', 'style'=>'width: 100%']) !!}
+                {!! Form::select('subject_id', $subjectList, null, ['id'=>'selected3', 'class'=>'form-control', 'multiple', 'data-placeholder'=>'Select Subject', 'style'=>'width: 100%']) !!}
               </div><!-- /.form-group -->
             </div><!-- /.col -->
 
@@ -63,51 +63,52 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Table</h3>
-              <div class="box-tools">
-                <div class="input-group" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
-                  <div class="input-group-btn">
-                    <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
+              
             </div><!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <table width="741%" class="table table-hover">
-                <tr>
-                  <th>Staff ID</th>
-                  <th>Staff Name</th>
-                  <th>Stubject Assigned</th>
-                  <th>Class Assigned</th>
-                </tr>
-                @foreach($subjectAssigned as $subjectAssigned)
+            <div class="box-body">
+              <table class="table table-hover table-responsive" id="assigned">
+                <thead>
                   <tr>
+                    <th>Staff ID</th>
+                    <th>Staff Name</th>
+                    <th>Stubject Assigned</th>
+                    <th>Class Assigned</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach($subjectAssigned as $subjectAssigned)
+                
+                  <tr>
+                    {!!Form::open(['method'=>'delete', 'route' => ['subjectAssigned.destroy', $subjectAssigned->teacher_id, $subjectAssigned->classe_id, $subjectAssigned->subject_id ] ]) !!}
                     <td>{{ Scholr\Teacher::whereId($subjectAssigned->teacher_id)->first()->staffId }}</td>
                     <td>{{ Scholr\Teacher::whereId($subjectAssigned->teacher_id)->first()->lastname }} {{ Scholr\Teacher::whereId($subjectAssigned->teacher_id)->first()->firstname }}</td>
                     <td>{{ Scholr\Subject::whereId($subjectAssigned->subject_id)->first()->name }}</td>
                      <td>{{ Scholr\Classe::whereId($subjectAssigned->classe_id)->first()->name }}</td>
+                    <td>
+                      <div class="form-group">{!! Form::submit('Delete', array('class'=>'btn btn-danger btn-xs', 'onclick'=>"return confirm('You are about to delete a record. This cannot be undone. Are you sure?');")) !!}</div>
+                    </td>
+                    {!!Form::close()!!}
                   </tr>
-
+                
                 @endforeach
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Staff ID</th>
+                    <th>Staff Name</th>
+                    <th>Stubject Assigned</th>
+                    <th>Class Assigned</th>
+                    <th>Delete</th>
+                  </tr>
+                </tfoot>
               </table>
             </div><!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </div>
+            
           </div><!-- /.box --><!-- /.box -->
 
         </div><!-- /.col (left) -->
-        <div class="col-md-6"><!-- /.box -->
-
-          <!-- iCheck --><!-- /.box -->
-        </div><!-- /.col (right) -->
+        
       </div><!-- /.row -->
 
     </section><!-- /.content -->

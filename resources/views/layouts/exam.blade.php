@@ -264,7 +264,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2015 <a href="http://www.pottersmedia.com">Pottersmedia Support Services</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; {{date('Y')}} <a href="http://www.pottersmedia.com">Pottersmedia Support Services</a>.</strong> All rights reserved.
       </footer>
 
 
@@ -462,6 +462,10 @@
     </script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js') }}"></script>
+     <!-- DataTables -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{ asset('/js/tables.js')}}"></script>
     
   </body>
 </html>

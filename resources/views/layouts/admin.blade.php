@@ -99,7 +99,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2015 
+        <strong>Copyright &copy; {{date('Y')}} 
           <a href="http://www.pottersmedia.com">
             Pottersmedia Support Services
           </a>.
@@ -108,6 +108,7 @@
 
    </div><!-- ./wrapper -->
   <!-- Scripts -->
+   @yield('myscript')
   <script src="{{ asset('/js/jQuery.js')}}"></script>
   <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('/js/jquery.slimscroll.min.js') }}"></script>
@@ -120,6 +121,10 @@
   <script src="{{ asset('/js/select2.min.js') }}"></script>
   <script src="{{ asset('/js/countdown.jquery.js')}}"></script>
   <script src="{{ asset('/js/paginate.js')}}"></script>
+   <!-- DataTables -->
+  <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+  <script src="{{ asset('/js/tables.js')}}"></script>
   <script src="{{ asset('/js/custom.js')}}"></script>
   <script>
       $(function () {

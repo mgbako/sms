@@ -25,7 +25,7 @@
 							Add Subject
 						</button>
 						 <p>&nbsp;</p>
-						<table class="table table-bordered table-responsive">
+						<table class="table table-bordered table-responsive" id="subjects">
 							<thead>
 								<tr>
 									<th>#</th>
@@ -34,8 +34,10 @@
 									<th>Delete</th>
 								</tr>
 							</thead>
-							@foreach($subjects as $subject)
-								<tbody>
+							
+							<tbody>
+								@foreach($subjects as $subject)
+								<tr>
 									<td>{!! $count++ !!}</td>
 									<td>{!! $subject->name !!}</td>
 									<td>
@@ -44,8 +46,10 @@
 									<td>
 									{!! link_to_route('subjects.delete', 'Delete', [$subject->id], ['class'=>'btn btn-danger btn-xs']) !!}
 									</td>
-								</tbody>
-							@endforeach
+								</tr>
+								@endforeach
+							</tbody>
+							
 						</table>
 				  	</div>
 				</div>

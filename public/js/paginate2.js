@@ -67,11 +67,6 @@
 
 }());
 
-$(document).ready(function(){
-
-
-
-});
 
 function previous(){
 	new_page = parseInt($('#current_page').val()) - 1;
