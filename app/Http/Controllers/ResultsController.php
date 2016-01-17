@@ -13,6 +13,7 @@ use Scholr\Classe;
 use Scholr\Subject;
 use Scholr\School;
 use Scholr\SubjectAssigned;
+use DB;
 
 class ResultsController extends Controller
 {   
@@ -56,6 +57,7 @@ class ResultsController extends Controller
         if ($this->user->type == 'student') {
             $count = 1;
             $student = Student::where('id', $this->user->student_id)->first();
+            //dd($student);
             if ($student->slug == $slug) {
                 $grades = Grade::where('student_id', $student->id)->get();
                 $term = $this->term;

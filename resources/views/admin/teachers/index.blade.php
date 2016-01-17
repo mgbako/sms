@@ -15,18 +15,18 @@
             <li class="active">Staffs</li>
           </ol>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
             <div class="col-xs-12">
             	{!! link_to_route('teachers.create', "Add New", '', ['class'=>'btn btn-success']) !!}
+              {!! link_to_route('teachers.download', "Download Data", '', ['class'=>'btn btn-primary']) !!}
+
+              {!! link_to_route('teachers.upload', "Upload Data", '', ['class'=>'btn btn-success']) !!}
               <p>&nbsp;</p>
               <!-- /.box -->
-
               <div class="box">
                 <div class="box-header">
-              
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div align="center">

@@ -93,7 +93,7 @@
 	        <h4 class="modal-title" id="myModalLabel">Add New Question</h4>
 	      </div>
 	      <div class="modal-body">
-	      	@include('errors.list')
+	      	@include('errors.formError')
 	        {!! Form::open(['route'=> ['classes.subjects.questions.store', $classe_id, $subject_id] ]) !!}
 				<div class="row">
 					<div class="form-group">

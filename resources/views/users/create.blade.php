@@ -65,7 +65,7 @@
 		</div>{{-- End of content area --}}
 
 		<div class="col-lg-2">
-			@include('errors.list');
+			@include('errors.formError');
 		</div>{{-- End of Right side bar --}}
 	</div>
 	

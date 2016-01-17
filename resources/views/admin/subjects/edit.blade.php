@@ -27,7 +27,7 @@
 					<div class="box box-info">
 						<div class="box-body">
 							<div class="col-md-12">
-								@include('errors.list')
+								@include('errors.formError')
 							</div>
 							{!! Form::model($subject, ['method'=>'patch','route'=>['subjects.update', $subject->id]])!!}
 							<div class="form-group">

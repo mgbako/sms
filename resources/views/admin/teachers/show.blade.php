@@ -59,6 +59,8 @@
                 <br><br>
                 <dt>Telephone</dt>
                 <dd>{{$teacher->phone}}</dd>
+                <dt>Email Adress</dt>
+                <dd>{{$teacher->email}}</dd>
                 <dt>Adress</dt>
                 <dd>{{$teacher->address}}</dd>
                 

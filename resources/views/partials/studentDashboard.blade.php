@@ -44,9 +44,9 @@
                 <ul class="treeview-menu" style="display: none;">
                   @if(Auth::user()->type == 'student')
                   <li>
-                    <a href="{{ route('classes.exams.index', [$class::whereId($student->class)->first()->id]) }}">
+                    <a href="{{ route('classes.exams.index', [$class::whereName($student->class)->first()]) }}">
                       <i class="fa fa-graduation-cap">
-                        {{ $class::whereId($student->class)->first()->name}}
+                        {{ $student->class}}
                       </i>
                     </a>
                   </li>

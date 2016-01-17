@@ -20,7 +20,7 @@
 			<div class="col-xs-12">
 				<div class="box box-info">
 		            <div class="box-body">
-		            	@include('errors.list')
+		            	@include('errors.formError')
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 							Add Class
 						</button>

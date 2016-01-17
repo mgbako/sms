@@ -7,7 +7,10 @@ use Scholr\Teacher;
 use Scholr\Classe;
 use Scholr\Subject;
 use DB;
+use Auth;
 use Illuminate\Http\Request;
+use League\Csv\Reader;
+use League\Csv\Writer;
 
 class TeachersController extends Controller {
 		public function __construct()
@@ -53,7 +56,6 @@ class TeachersController extends Controller {
             return redirect('schools');
         }
 		$requests = $request->all();
-		dd($requests);
 		$image = $request->file('image');
 		$filename = time()."-".$image->getClientOriginalName();
 		$path = public_path('img/teachers/'.$filename);
@@ -124,6 +126,76 @@ class TeachersController extends Controller {
 			return redirect('teachers');
 		}
 
+	}
+
+	public function download()
+	{
+		if(Auth::user()->type != 'admin')
+		{
+			flash('You are banned from this area');
+			return redirect()->back();
+		}else{
+			$teachers = Teacher::where('id', '>', 0)->exclude([ 'type', 'image', 'slug',
+			 'created_at', 'updated_at', 'end_date'])->get()->toArray();
+
+			$csv = Writer::createFromFileObject(new \SplTempFileObject());
+
+			//we insert the CSV header
+			$csv->insertOne(['firstname', 'lastname', 'staffId', 'email', 'phone', 
+    'dob', 'gender', 'address', 'state','nationality']);
+			$csv->insertAll($teachers);
+
+		  header('Content-Disposition: attachment');
+		  header("Cache-control: private");
+		  header("Content-type: application/force-download");
+		  header("Content-transfer-encoding: binary\n");
+
+		  $csv->output('teachers-data.csv');
+		  exit;
+		}
+	}
+
+	public function upload()
+	{
+		return view('admin.teachers.upload');
+	}
+
+	public function csvupload(Request $request)
+	{	
+		if($request->hasFile('file'))
+		{	
+			$file = $request->file('file');
+			$filename = $file->getClientOriginalName();
+			$path = public_path('csvfiles/teachers/'.$filename);
+			if(!file_exists($path))
+			{	
+
+				$file->move(public_path('csvfiles/teachers'), $filename);
+				$csv = Reader::createFromPath($path);
+				foreach ($csv->setOffset(1)->fetchAll() as $key => $row) {
+					DB::table('teachers')->insert(
+						array(
+							'firstname' => $row[0],
+							'lastname' => $row[1],
+							'staffId' => $row[2],
+							'email' => $row[3],
+							'phone' => $row[4],
+							'dob' => $row[5],
+							'gender' => $row[6],
+							'address' => $row[7],
+							'state' => $row[8],
+							'nationality' =>$row[9],
+							'slug' => $row[10]
+						)
+					);
+				}
+				flash('Records added successfully');
+				return redirect('teachers');
+			}else{
+				flash('file already exits');
+				return redirect()->back();
+			}
+		}
 	}
 
 	public function delete($id)

@@ -13,10 +13,18 @@ class Teacher extends Model implements SluggableInterface{
         'save_to'    => 'slug',
     );
 
-	protected $fillable = ['firstname', 'lastname', 'staffId', 
+	protected $fillable = ['firstname', 'lastname', 'staffId', 'email', 
     'phone', 'dob', 'gender', 'address', 'state',
     'nationality', 'image', 'slug'];
 
+  protected $columns = ['firstname', 'lastname', 'staffId', 'email', 'phone', 
+    'dob', 'gender', 'address', 'state','nationality', 'type', 
+    'image', 'slug', 'created_at', 'updated_at', 'end_date'];
+
+  public function scopeExclude($query, $value = [])   
+  {
+    return $query->select( array_diff( $this->columns,(array) $value) );
+  }
 
    public function account() {
       return $this->hasOne('Scholr\User');

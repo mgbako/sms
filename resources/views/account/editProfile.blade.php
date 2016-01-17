@@ -22,7 +22,7 @@
   <section class="content">
     <div class="row">
       <div class="col-md-12">
-        @include('errors.list')
+        @include('errors.formError')
       </div>
 
       <div class="col-xs-12">            

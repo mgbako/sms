@@ -7,7 +7,10 @@ use Scholr\Student;
 use Scholr\Classe;
 use Scholr\Subject;
 use DB;
+use Auth;
 use Illuminate\Http\Request;
+use League\Csv\Reader;
+use League\Csv\Writer;
 
 class StudentsController extends Controller {
 	public function __construct()
@@ -33,7 +36,7 @@ class StudentsController extends Controller {
 	 */
 	public function create()
 	{
-		$classList = Classe::lists('name', 'id');
+		$classList = Classe::lists('name', 'name');
 		$subjects = Subject::lists('name', 'id');
 		return view('admin.students.create', compact('classList', 'subjects'));
 	}
@@ -127,6 +130,77 @@ class StudentsController extends Controller {
 			return redirect('students');
 		}
 
+	}
+
+	public function download()
+	{
+		if(Auth::user()->type != 'admin')
+		{
+			flash('You are banned from this area');
+			return redirect()->back();
+		}else{
+			$students = Student::where('id', '>', 0)->exclude(['type', 'image', 
+				'created_at', 'updated_at', 'end_date', 'slug'])->get()->toArray();
+			$csv = Writer::createFromFileObject(new \SplTempFileObject());
+
+			//we insert the CSV header
+			$csv->insertOne(['firstname', 'lastname', 'studentId', 'phone', 
+  				'email', 'dob', 'gender', 'address', 'state','nationality', 
+  				'class']);
+
+			$csv->insertAll($students);
+		  header('Content-Disposition: attachment');
+		  header("Cache-control: private");
+		  header("Content-type: application/force-download");
+		  header("Content-transfer-encoding: binary\n");
+
+		  $csv->output('students-data.csv');
+		  exit;
+		}
+	}
+
+	public function upload()
+	{
+		return view('admin.students.upload');
+	}
+
+	public function csvupload(Request $request)
+	{	
+		if($request->hasFile('file'))
+		{	
+			$file = $request->file('file');
+			$filename = $file->getClientOriginalName();
+			$path = public_path('csvfiles/students/'.$filename);
+			if(!file_exists($path))
+			{	
+
+				$file->move(public_path('csvfiles/students'), $filename);
+				$csv = Reader::createFromPath($path);
+				foreach ($csv->setOffset(1)->fetchAll() as $key => $row) {
+					DB::table('students')->insert(
+						array(
+							'firstname' => $row[0],
+							'lastname' => $row[1],
+							'studentId' => $row[2],
+							'phone' => $row[3],
+							'email' => $row[4],
+							'dob' => $row[5],
+							'gender' => $row[6],
+							'address' => $row[7],
+							'state' => $row[8],
+							'nationality' =>$row[9],
+							'class' =>$row[10],
+							'slug' => $row[11]
+						)
+					);
+				}
+				flash('Records added successfully');
+				return redirect('students');
+			}else{
+				flash('file already exits');
+				return redirect()->back();
+			}
+		}
 	}
 
 	/**

@@ -21,6 +21,9 @@
           <div class="row">
             <div class="col-xs-12">
             	{!! link_to_route('students.create', "Add New", '', ['class'=>'btn btn-success']) !!}
+              {!! link_to_route('students.download', "Download Data", '', ['class'=>'btn btn-primary']) !!}
+
+              {!! link_to_route('students.upload', "Upload Data", '', ['class'=>'btn btn-success']) !!}
               <p>&nbsp;</p>
               <!-- /.box -->
 

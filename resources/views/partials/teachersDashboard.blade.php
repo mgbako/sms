@@ -1,3 +1,5 @@
+@inject('subject', 'Scholr\Subject')
+@inject('mainclass', 'Scholr\Classe')
 <div class="container-fluid">
 		<div class="row">
 			@if(!Auth::guest())
@@ -33,13 +35,13 @@
 		                @foreach($assigned as $class)
 		                      <li class="treeview">
 		                      	<a href="#">
-		                      		<i class="fa fa-list-alt"></i> {{ \Scholr\Classe::whereId($class->classe_id)->distinct()->first()->name }}
+		                      		<i class="fa fa-list-alt"></i> {{$mainclass::whereId($class->classe_id)->distinct()->first()->name }}
 		                      		<i class="fa fa-angle-left pull-right"></i>
 		                      	</a>
 		                        <ul class="treeview-menu">
 		                          <li>
 		                          	<a href="{{ route('classes.subjects.questions.index', [$class->classe_id, $class->subject_id]) }}">
-		                          		<i class="fa fa-list-alt"></i>{{ \Scholr\Subject::whereId($class->subject_id)->first()->name }}
+		                          		<i class="fa fa-list-alt"></i>{{ $subject::whereId($class->subject_id)->first()->name }}
 		                          	</a>
 		                          </li>
 		                        </ul>
@@ -53,10 +55,25 @@
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		              <ul class="treeview-menu">
-		                <li><a href="{{ route('subjectQuestions.index') }}"><i class="fa fa-circle-o"></i> Assigne Time</a></li>
+		                <li><a href="{{ route('subjectQuestions.index' ) }}"><i class="fa fa-circle-o"></i> Assigne Time</a></li>
 		              </ul>
 		            </li>
-		             <li><a href="{{ route('results.classes') }}"><i class="fa fa-circle-o"></i>Class Results</a></li>
+		             <li class="treeview">
+		             	<a href="#"><i class="fa fa-circle-o">
+		             		</i>Class Results
+		                <i class="fa fa-angle-left pull-right"></i>
+		             	</a>
+									<ul class="treeview-menu" style="display: none;">
+		                @foreach($assigned as $class)
+		                      <li class="treeview">
+		                      	<a href="{{ route('results.classes', [$class->classe_id]) }}">
+		                      		<i class="fa fa-list-alt"></i> {{$mainclass::whereId($class->classe_id)->distinct()->first()->name }}
+		                      	</a>
+		                        
+		                      </li>
+		                  @endforeach
+		              </ul>
+		             </li>
 		          </ul>
 		        </section>
 		        <!-- /.sidebar -->

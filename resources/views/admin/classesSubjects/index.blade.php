@@ -26,7 +26,7 @@
 			<div class="col-xs-12">
 				<div class="box box-info">
 		            <div class="box-body">
-		            	@include('errors.list')
+		            	@include('errors.formError')
 						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
 							Add Subject
 						</button>
@@ -66,7 +66,7 @@
       <div class="modal-body">
       	<div class="box box-info">
 			<div class="box-body">
-		      	@include('errors.list')
+		      	@include('errors.formError')
 		        {!! Form::open(['route'=> ['classes.subjects.store', $classe_id] ]) !!}
 					
 					<div class="form-group">

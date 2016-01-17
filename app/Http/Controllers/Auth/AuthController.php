@@ -12,6 +12,7 @@ use Scholr\Teacher;
 use Scholr\Admin;
 use Scholr\SubjectAssigned;
 use DB;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -87,7 +88,7 @@ class AuthController extends Controller
     public function getAdmin($slug)
     {
         if ($this->auth->check()) {
-            $admin = \DB::table('users')->where('slug', $slug)->first();
+            $admin = DB::table('users')->where('slug', $slug)->first();
             return view('account.staffHome', compact('admin'));
         }
     }

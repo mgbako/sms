@@ -17,7 +17,7 @@
         <!-- Main content -->
         <section class="content">
           <div class="col-md-12">
-            @include('errors.list')
+            @include('errors.formError')
           </div>
           <!-- SELECT2 EXAMPLE -->
           <div class="box box-default">

@@ -11,11 +11,16 @@ Route::get('subjects/{id}/delete', ['as'=>'subjects.delete', 'uses'=>'Admin\Subj
 Route::resource('subjects', 'Admin\SubjectsController');
 
 Route::get('students/{id}/delete', ['as'=>'students.delete', 'uses'=>'Admin\StudentsController@delete']);
+Route::get('students/download', ['as'=>'students.download', 'uses'=>'Admin\StudentsController@download']);
+Route::get('students/uploadfile', ['as'=>'students.upload', 'uses'=>'Admin\StudentsController@upload']);
+Route::post('students/csvupload', ['as'=>'students.csvupload', 'uses'=>'Admin\StudentsController@csvupload']);
 Route::resource('students', 'Admin\StudentsController');
 
 Route::get('teachers/{id}/delete', ['as'=>'teachers.delete', 'uses'=>'Admin\TeachersController@delete']);
+Route::get('teachers/download', ['as'=>'teachers.download', 'uses'=>'Admin\TeachersController@download']);
+Route::get('teachers/uploadfile', ['as'=>'teachers.upload', 'uses'=>'Admin\TeachersController@upload']);
+Route::post('teachers/csvupload', ['as'=>'teachers.csvupload', 'uses'=>'Admin\TeachersController@csvupload']);
 Route::resource('teachers', 'Admin\TeachersController');
-
 Route::get('questions/{id}/delete', ['as'=>'questions.delete', 'uses'=>'QuestionsController@delete']);
 Route::resource('questions', 'Admin\QuestionsController');
 
@@ -70,7 +75,7 @@ Route::get('/student/{id}/classe/{classeId}/subject/{subjectId}/score', ['as'=>'
 
 
 Route::resource('admins', 'Admin\AdminController');
-
+//Route::resource('password', 'Auth\PasswordController');
 Route::controllers([
   'account' => 'Auth\AuthController',
   'password' => 'Auth\PasswordController',

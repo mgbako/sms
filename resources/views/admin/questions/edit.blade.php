@@ -1,4 +1,5 @@
-@extends('layouts.admin')
+@extends('layouts.admin')"
+
 @section('scripts')
   <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
   <script type="text/javascript">
@@ -7,8 +8,7 @@
         plugins: [
             "advlist autolink lists link image charmap print preview anchor",
         ],
-        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-    });
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image    });
   </script>
 @stop
 @section('content')
@@ -37,7 +37,7 @@
 			<div class="box-body">
 				<div class="row">
 					<div class="col-md-12">
-						@include('errors.list')
+						@include('errors.formError')
 					</div>
 					<div class="col-md-12">
 						<div class="form-group">

@@ -18,9 +18,7 @@
     </section>
     <section class="content">
       <div class="row">
-        <div class="col-md-12">
-          @include('errors.list')
-        </div>
+        
 
         <div class="col-xs-12">            
               <div class="box box-info">

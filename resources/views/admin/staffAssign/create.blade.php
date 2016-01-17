@@ -25,7 +25,7 @@
 			</div><!-- /.col --><!-- /.col -->
 		</div><!-- /.row -->
 		<div class="col-md-12">
-			@include('errors.list')
+			@include('errors.formError')
 		</div>{{-- End of Right side bar --}}
 
 		<div class="row">

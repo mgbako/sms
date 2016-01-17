@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="col-lg-3">
-			@include('errors.list')
+			@include('errors.formError')
 		</div>
 	</div>
 	

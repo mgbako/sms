@@ -1,5 +1,4 @@
 @inject('subject', 'Scholr\Subject')
-@inject('class', 'Scholr\Classe')
 @extends('layouts.admin')
 @section('content')
 	@include('partials.studentDashboard')
@@ -51,7 +50,7 @@
                     <div class="col-sm-3 invoice-col">
                       <b>Session:</b> 2015/2016<br>
                       <b>Present Term:</b> {{ $term }}<br>
-                      <b>Present Class:</b> {{ $class::where('id', $student->class)->first()->name}}
+                      <b>Present Class:</b> {{ $student->class }}
 
                     </div>
                     <div class="col-xs-12 table-responsive">

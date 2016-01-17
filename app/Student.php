@@ -14,10 +14,18 @@ class Student extends Model implements SluggableInterface
         'save_to'    => 'slug',
     );
 
-	protected $fillable = ['firstname', 'lastname', 'studentId', 
-    'phone', 'dob', 'gender', 'address', 'state',
-    'nationality', 'class', 'end_date', 'image', 'slug'];
+	protected $fillable = ['firstname', 'lastname', 'studentId', 'phone', 
+  'email', 'dob', 'gender', 'address', 'state','nationality', 'class', 
+  'end_date', 'image', 'slug'];
 
+  protected $columns = ['firstname', 'lastname', 'studentId', 'phone', 
+  'email', 'dob', 'gender', 'address', 'state','nationality', 'class', 
+    'image', 'created_at', 'updated_at', 'end_date', 'slug'];
+
+  public function scopeExclude($query, $value = [])
+  {
+    return $query->select(array_diff($this->columns, (array) $value) );
+  }
 
     public function account() {
       return $this->hasOne('Scholr\User');
