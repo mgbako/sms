@@ -109,7 +109,7 @@
    </div><!-- ./wrapper -->
   <!-- Scripts -->
    @yield('myscript')
-  <script src="{{ asset('/js/jQuery.js')}}"></script>
+  <script src="{{ asset('/js/jquery.js')}}"></script>
   <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('/js/jquery.slimscroll.min.js') }}"></script>
   <!-- FastClick -->
