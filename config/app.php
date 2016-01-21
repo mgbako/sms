@@ -140,6 +140,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
 
 
         /*
@@ -200,6 +201,8 @@ return [
         'Form'      => Illuminate\Html\FormFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Flash'     => Laracasts\Flash\Flash::class,
+        'PDF'       => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'Images'     => Barryvdh\Snappy\Facades\SnappyImage::class,
 
     ],
 

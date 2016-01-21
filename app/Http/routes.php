@@ -76,6 +76,8 @@ Route::resource('/results', 'ResultsController');
 Route::post('/scores',  ['as'=>'score.store', 'uses'=>'ScoreController@store']);
 Route::get('/student/{id}/classe/{classeId}/subject/{subjectId}/score', ['as'=>'scores.show', 'uses'=>'ScoreController@show']);
 
+	
+Route::get ('github', 'PdfController@github');
 
 Route::resource('admins', 'Admin\AdminController');
 //Route::resource('password', 'Auth\PasswordController');

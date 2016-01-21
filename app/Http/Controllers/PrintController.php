@@ -6,58 +6,55 @@ use Illuminate\Http\Request;
 
 use Scholr\Http\Requests;
 use Scholr\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Guard;
+use Scholr\Student;
+use Scholr\Grade;
+use Scholr\Classe;
+use Scholr\Subject;
+use Scholr\School;
+use PDF;
 
 class PrintController extends Controller
-{
-    public function getStudentresult($id)
-    {
-        
+{   
+    private $user;
+
+    private $term;
+
+     public function __construct(Guard $auth)
+    {   
+        $this->middleware('staff', ['except'=>['getMyresult']]);
+        $this->user = $auth->user();
+        $this->term = School::first()->term;
+
     }
 
-    public function getPrint()
+
+    public function getMyresult($slug)
     {
-        try {
-            $p = new \PDFlib();
-            /* open new pdf file; insert  a file name to create the pdf on
-                on disk */
-            if($p->begin_document("", "") == 0)
-            {
-                die("Error: " . $p->get_errmsg());
+        if ($this->user->type == 'student') {
+            $count = 1;
+            $student = Student::where('id', $this->user->student_id)->first();
+            if ($student->slug == $slug) {
+                $grades = Grade::where('student_id', $student->id)->get();
+                $term = $this->term;
+                $data = [];
+                $data['term'] = $term;
+                flash('Find out how you have been performing in Exams below');
+                $pdf = PDF::loadView('pdf.result', compact('term'));
+                return $pdf->stream('myresult.pdf');
+            }else {
+               flash('There is no record for this Student on the Database');
+                return redirect()->back(); 
             }
-
-            $p->set_info("Creator", "hello.php");
-            $p->set_info("Äuthor", "Ossaija ThankGod");
-            $p->set_info("Title", "Hello World (php)!");
-
-            $p->begin_page_ext(595, 842, "");
-            $font = $p->load_font("Helvetica-Bold", "winansi", "");
-            $p->setfont($font, 24.0);
-            $p->set_text_pos(50, 700);
-            $p->show("Hello World");
-            $p->continue_text("(Says PHP)");
-            $p->end_page_ext("");
-
-            $p->end_document("");
-
-            $buf = $p->get_buffer();
-            $len = strlen($buf);
-
-            header("Content-type: application/pdf");
-            header("Content-length: $len");
-            header("Content-Disposition: inline; filename=hello.pdf");
-            print $buf;
+            
+        }else {
+            flash('You are not allowed Access to that Area');
+            return redirect()->back();
         }
-        catch (PDFlibException $e)
-        {
-            die("PDFlib exception occurred in hello sample:\n" .
-                "[" . $e->get_errnum() . "]" . $e->get_apiname(). ":" .
-                $e->get_errmsg() . "\n");
-        }
+    }
 
-        catch (Exception $e) 
-        {
-            die($e);
-        }
-        $p = 0;
+     public function getGithub (){
+
+     return PDF::loadFile('http://www.github.com')->stream('github.pdf'); 
     }
 }
