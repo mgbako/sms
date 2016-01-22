@@ -73,7 +73,7 @@
                   <!-- this row will not appear when printing -->
                     <div class="row no-print">
                       <div class="col-xs-12">
-                        <a href="exam-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                        <a href="/print/mydetails/{{ $student->slug }}" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                     </div>
                   </div>
                   <br><br>               
@@ -94,7 +94,7 @@
                     
                     <div class="alert alert-info alert-dismissable">
                       <h4><i class="icon fa fa-check"></i> Note!</h4>
-                      It's real but there is no record of you. <br> 
+                      It's not real but there is no record of you. <br> 
                       in our database
                     </div>
                   </div>

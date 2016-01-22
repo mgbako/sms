@@ -112,14 +112,7 @@
             <!-- /.col -->
           </div><!-- /.row -->
                     <!-- this row will not appear when printing -->
-                    <div class="row no-print">
-            <div class="col-xs-12">
-              <a href="exam-print.html" target="_blank" class="btn btn-default">
-                  <i class="fa fa-print"></i> Print
-                </a>
-            </div>
-            <br><br>
-          </div>
+                   
               
                 </div><!-- /.box-body -->
                 <div class="box-footer no-padding">

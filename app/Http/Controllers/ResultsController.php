@@ -78,7 +78,7 @@ class ResultsController extends Controller
      public function subjects($subject)
     {   
         if ($this->user->type == 'admin') {
-            $subject_name = Subject::whereId($subject->id)->first()->name;
+            $subject_name = Subject::whereId($subject->id)->first();
             $grades = Grade::whereSubject_id($subject->id)->get();
             return view('results.subjects', compact('grades', 'subject_name'));
         }else {
@@ -92,7 +92,7 @@ class ResultsController extends Controller
      public function classes($class)
     {   
         if ($this->user->type == 'admin' || $this->user->type == 'teacher') {
-            $class_name = Classe::whereId($class)->first()->name;
+            $class_name = Classe::whereId($class)->first();
             $grades = Grade::whereClasse_id($class)->get();
             if ($this->user->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', $this->user->loginId)->first();

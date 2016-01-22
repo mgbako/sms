@@ -9,7 +9,7 @@
 		 <!-- Content Wrapper. Contains page content -->
           <section class="content-header">
           <h1>
-            {{ $class_name}} Results
+            {{ $class_name->name}} Results
             <small>The Class Broad Sheet</small>
           </h1>
           <ol class="breadcrumb">
@@ -74,7 +74,7 @@
                   </div>
                   <div class="row no-print">
                     <div class="col-xs-12">
-                      <a href="exam-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                      <a href="/print/classresults/{{ $class_name->id }}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                     </div>
                     <br><br>
                   </div>
