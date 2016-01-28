@@ -23,7 +23,7 @@
               <div class="box box-primary">
                 <div class="col-xs-12">
                   <h1 class="page-header">
-                      <img src="img/photo.jpg" alt="Add Ten" /> 
+                      <img src="/img/photo.jpg" alt="Add Ten" /> 
                         Potasfield College  
                     </h1>
                     <div class="col-xs-12 table-responsive">
@@ -113,7 +113,7 @@
                     <!-- this row will not appear when printing -->
                     <div class="row no-print">
             <div class="col-xs-12">
-              <a href="/print/myresult/{{ $student->slug }}" class="btn btn-default">
+              <a href="/print/myresult/{{ $student->slug }}" target="_blank" class="btn btn-default">
                   <i class="fa fa-print"></i> Print
                 </a>
             </div>

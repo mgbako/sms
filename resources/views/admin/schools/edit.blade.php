@@ -32,7 +32,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Type of System</label>
-                    <select name="institution" class="form-control select2" style="width: 100%;">
+                    <select name="institution" class="form-control select2" style="width: 100%;" disabled>
                       <option selected="selected">{{$school->institution}}</option>
                       <option>Primary Institution</option>
                       <option>Secondary Institution</option>
@@ -40,6 +40,12 @@
                     </select>
                   </div><!-- /.form-group -->
                 </div><!-- /.col -->
+                <div class="col-md-12">
+                    <div class="form-group">
+                      <label>School Name</label>
+                      <input type="text" name="name" class="form-control" placeholder="Enter ..." value="{{$school->name}}" disabled>
+                    </div>
+                </div>
               </div><!-- /.row -->
             </div><!-- /.box-body -->
             
@@ -55,12 +61,7 @@
             </div><!-- /.box-header -->
             <div class="box-body">
               <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                      <label>School Name</label>
-                      <input type="text" name="name" class="form-control" placeholder="Enter ..." value="{{$school->name}}">
-                    </div>
-                </div>
+                
                 <div class="col-md-6">
                     <div class="form-group">
                       <label>School Session</label>
@@ -106,7 +107,6 @@
               </div><!-- /.row -->
             </div><!-- /.box-body -->
            <div class="box-footer">
-            <i class="fa fa-server"></i>
             <input type="submit" class="btn btn-default" value="Save">
           </div>
         </div><!-- /.box -->
