@@ -5,11 +5,9 @@
   {!! Form::open(['class'=>'form-horizontal', 'role'=>'form']) !!}
     @include('partials.loginForm')
   {!! Form::close() !!}
-  <a href="/password/email">
-  	Forgot Password
-  </a><br>
+
   <a href="/account/newteacher" class="text-center">
   	Register a as new member
   </a><br>
-  <a href="/">This is not your login page? Go Back</a>
+    <a href="/">This is not your login page? Go Back</a>
 @stop

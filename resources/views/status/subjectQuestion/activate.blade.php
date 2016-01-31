@@ -34,7 +34,6 @@
               </thead>
               <tbody>
                 @foreach($subjectquestionstatus as $subjectquestionstatu)
-                 {!!Form::open(['method'=>'patch', 'route' => ['exams.write', $subjectquestionstatu->classe_id, $subjectquestionstatu->subject_id ] ]) !!}
                   <tr>
                     <td>{{ Scholr\Subject::where('id', $subjectquestionstatu->subject_id)->first()->name}}</td>
                     <td>{{ Scholr\Classe::where('id', $subjectquestionstatu->classe_id)->first()->name}}</td>
@@ -43,7 +42,7 @@
                       <a href="/writeexam/class/{{ $subjectquestionstatu->classe_id }}/subject/{{ $subjectquestionstatu->subject_id }}" class="btn btn-success">Write</a>
                     </td>
                   </tr>
-                  {!!Form::close()!!}
+
                 @endforeach
               </tbody>
               <tfoot>

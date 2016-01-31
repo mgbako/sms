@@ -3,12 +3,8 @@
 Route::get('/', 'WelcomeController@index');
 Route::get('home', 'WelcomeController@index');
 
-
-Route::get('/writeexam/class/{classeId}/subject/{subjectId}', 'SubjectQuestionsController@write');
-
 Route::group(['middleware'=> 'auth'], function(){
 	Route::get('/subjectReceptions', ['as'=>'subjectReceptions.subjectReception', 'uses'=>'SubjectQuestionsController@subjectReception']);
-
 
 
 	Route::get('classes/{id}/delete', ['as'=>'classes.delete', 'uses'=>'Admin\ClassesController@delete']);
@@ -104,6 +100,7 @@ Route::group(['middleware'=> 'auth'], function(){
 
 	Route::resource('admins', 'Admin\AdminController');
 });
+
 
 //Route::resource('password', 'Auth\PasswordController');
 Route::controllers([

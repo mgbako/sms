@@ -5,10 +5,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Scholr</title>
-	
-  <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('dist/css/AdminLTE.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('plugins/iCheck/square/blue.css') }}">
+
+
+	<link href="/css/app.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/square/blue.css">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -29,8 +31,9 @@
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 	<script src="{{ asset('/js/jquery.js') }}"></script>
-	<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-	  <script src="{{ asset('plugins/iCheck/icheck.min.js') }}"></script>	    <script>
+
+	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+	  <script src="{{ asset('/js/icheck.min.js') }}"></script>	    <script>
       $(function () {
         $('input').iCheck({
           checkboxClass: 'icheckbox_square-blue',

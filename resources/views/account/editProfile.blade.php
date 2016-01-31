@@ -108,6 +108,7 @@
               <div class="box-footer">
                 {!! Form::submit('Save', ['class'=>'btn btn-success pull-left']) !!}
                 <a href="{{ route('profile.show', [$profile->slug]) }}" class="btn btn-default pull-right">Cancel</a>
+
               </div>
             </div>
 

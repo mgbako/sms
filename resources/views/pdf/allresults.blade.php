@@ -12,6 +12,8 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="http://addten.newgenesisdesign.com/css/AdminLTE.min.css">
 	</head>
 	<body>
 		<section class="content">

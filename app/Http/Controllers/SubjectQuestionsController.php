@@ -37,7 +37,6 @@ class SubjectQuestionsController extends Controller
         $school = DB::table('schools')->first();
         $totalquestion = $school->number;
       
-
         $subjectquestionstatus = SubjectQuestionstatus::all();
         $assigned = '';
          if (Auth::user()->type == 'teacher') {
@@ -59,6 +58,7 @@ class SubjectQuestionsController extends Controller
         }
 
         return view('status.subjectQuestion.index', compact('count', 'subjectList', 'classList', 'time', 'subjectquestionstatus', 'assigned', 'status'));
+
     }
 
     public function submit($classeId, $subjectId)
@@ -150,6 +150,7 @@ class SubjectQuestionsController extends Controller
         echo "<pre>";
         var_dump($subjectquestionstatus);
 
+      
         if ($subjectquestionstatus) {
         $affacted = DB::update('update subjectquestionstatus set write = 1 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
             if ($affacted) {
@@ -165,24 +166,6 @@ class SubjectQuestionsController extends Controller
         }
     }
 
-    public function canwrite($classId, $subjectId)
-    {
-        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classId)
-                                ->where('subject_id', $subjectId)->first();
-        if ($subjectquestionstatus) {
-        $affacted = DB::update('update subjectquestionstatus set write = 2 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
-            if ($affacted) {
-                flash('Exam ready to be written');
-                return redirect()->back();
-            }else {
-                flash('Error making Exams ready to be Written Please contact the IT department');
-                return redirect()->back();
-            }
-        }else {
-            flash('Exam status was not changed please try again later');
-            return redirect()->back();
-        }
-    }
 
     /**
      * Show the form for Deleting the specified resource.

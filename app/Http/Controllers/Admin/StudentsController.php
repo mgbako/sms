@@ -37,6 +37,7 @@ class StudentsController extends Controller {
 	public function create()
 	{
 		$classList = Classe::lists('name', 'id');
+
 		$subjects = Subject::lists('name', 'id');
 		return view('admin.students.create', compact('classList', 'subjects'));
 	}

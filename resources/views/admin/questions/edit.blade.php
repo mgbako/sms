@@ -94,10 +94,12 @@
 					<div class="modal-footer">
 						<p><span class="badge">{{$totalPer}}% Complete</span></p>
 						<div class="progress progress-sm active">
+
 							<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="{{$totalquestion}}" style="width: {{$totalPer}}%">
 								<span class="sr-only">{{$totalPer}}% Complete</span>
 							</div>
 						</div>                   
+
 					</div>
 
 					</div><!-- /.col -->

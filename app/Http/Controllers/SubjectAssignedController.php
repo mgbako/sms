@@ -15,7 +15,7 @@ use Scholr\SubjectAssigned;
 
 class SubjectAssignedController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -80,4 +80,5 @@ class SubjectAssignedController extends Controller
         flash('Assigned Class Subject Deleted');
         return redirect('subjectAssigned');
     }
+
 }

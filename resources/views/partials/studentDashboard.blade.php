@@ -1,5 +1,5 @@
+@inject('class', 'Scholr\Classe')
 @if(!Auth::guest())
-  @inject('class', 'Scholr\Classe')
   <div class="container-fluid">
     <div class="row">
       <!-- Left side column. contains the logo and sidebar -->
@@ -27,34 +27,14 @@
                 </a>
             </li>
             <li class="treeview">
-                <a href="">
-                  <i class="fa fa-list-alt"></i>
-                    <span>Subjects Offered</span> 
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="">
+                <a href="{{ route('classes.exams.index', [$class::whereId($records->classe_id)->first()]) }}">
                   <i class="fa fa-file-text-o"></i>
-                    <span>
-                       Exam Hall 
-                      <span class="label label-primary pull-right">3</span>
-                    </span>
-                    <i class="fa fa-angle-left pull-right"></i>
+                    <span> Exam Hall </span>
                 </a>
-                <ul class="treeview-menu" style="display: none;">
-                  @if(Auth::user()->type == 'student')
-                  <li>
-                    <a href="{{ route('classes.exams.index', [$class::whereId($records->class)->first()]) }}">
-                      <i class="fa fa-graduation-cap">
-                        {{ $class::whereName($records->class)->first()}}
-                      </i>
-                    </a>
-                  </li>
-                  @endif
-                </ul>
+                
             </li>
             <li class="treeview">
-                <a href="{{ route('results.myresult', [$student->slug]) }}">
+                <a href="{{ route('results.myresult', [$records->slug]) }}">
                 <i class="fa fa-pie-chart"></i> 
                   <span>Results</span>
                 </a>

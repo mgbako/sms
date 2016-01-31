@@ -38,6 +38,7 @@ class QuestionRequest extends Request {
 	        }
 
 		return $rules;
+
 	}
 
 }

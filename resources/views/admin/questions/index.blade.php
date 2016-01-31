@@ -20,7 +20,7 @@
 	<section class="content-header">
 		<h1>
 			Subject Question
-			<small>Staff against Subject Question of a particular Class</small>
+			<small>Staff against Subject Question of a particular Cass</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -50,6 +50,7 @@
 						<div align="center">
 
 							<table class="table table-bordered table-responsive" id="questions">
+
 								<thead>
 									<tr>
 										<th>#</th>
@@ -74,6 +75,7 @@
 
 										<a href="/classes/{{$classe_id}}/subjects/{{$subject_id}}/questions/edits?page=1"></a>
 									</td>
+										
 									<td>
 										{!! link_to_route('classes.subjects.questions.delete', 'Delete', 
 										[$classe_id, $subject_id, $question->id], 

@@ -25,16 +25,19 @@ class CreateStudentsTable extends Migration {
 			$table->string('address');
 			$table->string('state');
 			$table->string('nationality');
+
 			$table->integer('classe_id');
 			$table->string('image');
 			$table->timestamps();
 			$table->timestamp('end_date');
 			$table->string('slug');
 
+
 			$table->foreign('classe_id')
 				->references('id')
 				->on('classes')
 				->onDelete('cascade');
+
 
 		});
 	}
