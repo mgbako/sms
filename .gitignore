@@ -1,6 +1,6 @@
 /resources/assets
 /vendor
 /node_modules
-/public/img
+
 .env
 .htaccess
