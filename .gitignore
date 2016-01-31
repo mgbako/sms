@@ -1,6 +1,5 @@
 /resources/assets
 /vendor
 /node_modules
-
 .env
 .htaccess
