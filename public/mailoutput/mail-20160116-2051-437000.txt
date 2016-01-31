@@ -1,0 +1,12 @@
+To: naijacodeninja@gmail.com
+Subject: Your Password Reset Link
+Message-ID: <f824b3ee734ee838a067e50e30286917@localhost>
+Date: Sat, 16 Jan 2016 20:51:51 +0000
+From: AddTen <codebugsolved@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Click here to reset your password: http://localhost:8000/password/reset/5dc=
+2fdd6d2d85ac34b7dfbc4f91c25b604b1e0f03afe5263c9454788f8f97e14
+
