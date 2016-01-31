@@ -1,5 +1,6 @@
+@inject('subject', 'Scholr\Subject')
+@inject('class', 'Scholr\Classes')
 @extends('layouts.master')
-
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -35,10 +36,10 @@
               <tbody>
                 @foreach($subjectquestionstatus as $subjectquestionstatu)
                   <tr>
-                    <td>{{ Scholrs\Subject::where('id', $subjectquestionstatu->subject_id)->first()->name}}</td>
-                    <td>{{ Scholrs\Classe::where('id', $subjectquestionstatu->classe_id)->first()->name}}</td>
+                    <td>{{ $subject::where('id', $subjectquestionstatu->subject_id)->first()->name}}</td>
+                    <td>{{$class::where('id', $subjectquestionstatu->classe_id)->first()->name}}</td>
                     <td>{{ $subjectquestionstatu->time }} minutes</td>
-                    <td><a href="" class="btn btn-success">Write</a></td>
+                    <td><a href="/writeexam/{{ $subjectquestionstatu->classe_id }}/{{ $subjectquestionstatu->subject_id }}" class="btn btn-success">Write</a></td>
                   </tr>
                 @endforeach
               </tbody>
