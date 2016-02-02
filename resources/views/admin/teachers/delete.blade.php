@@ -11,7 +11,7 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="/teachers">Staffs</a></li>
+			<li><a href="/teachers">Teacher</a></li>
 			<li class="active">Delete</li>
 		</ol>
 	</section>

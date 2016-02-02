@@ -4,6 +4,9 @@
        <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         @include('flash::message ')
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
             Subject Question
             <small>Setup Assigned Subject against Time and Questions</small>
           </h1>
@@ -82,17 +85,22 @@
                         <td>{{ Scholr\Classe::where('id', $subjectquestionstatus->classe_id)->first()->name}}</td>
                         <td>{{ Scholr\Subject::where('id', $subjectquestionstatus->subject_id)->first()->name}}</td>
                         <td>
-                          <a href="{{ route('subjectQuestions.delete', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a> | 
+                          <a href="{{ route('subjectQuestions.delete', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a>
 
                           @if($status)
-                          <a href="{{ route('subjectQuestions.submit', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}" class="btn"><i class="fa fa-database"></i> Submit</a>
+                           | <a href="{{ route('subjectQuestions.submit', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}" class="btn"><i class="fa fa-database"></i> Submit</a>
                           @endif
                         </td>
                           
                         <td>
                           <div class="progress progress-xs progress-striped">
                             <input type="hidden" id="percentage" value="{{ Scholr\Question::Percentage($subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id)->get()->count() }}">
-                            <div class="progress-bar" style="width:{{ Scholr\Question::Percentage($subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id)->get()->count() }}%"></div>
+                            <div class="progress-bar" style="width:{{ Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) }}%" aria-valuemin="1" aria-valuemax="{{$totalquestion}}"></div>
+                          </div>
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) }}" aria-valuemin="0" aria-valuemax="{{$totalquestion}}" style="width:{{ Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) }}%">
+                              60%
+                            </div>
                           </div>
                         </td>
                         <td><span class="label progressStatus"></span></td>

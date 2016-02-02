@@ -1,4 +1,5 @@
 @inject('subject', 'Scholr\Subject')
+@inject('class', 'Scholr\Classe')
 @extends('layouts.admin')
 @section('content')
 	@include('partials.studentDashboard')
@@ -23,7 +24,6 @@
               <div class="box box-primary">
                 <div class="col-xs-12">
                   <h1 class="page-header">
-
                       <img src="/img/photo.jpg" alt="Add Ten" /> 
                         Potasfield College  
                     </h1>
@@ -51,7 +51,7 @@
                     <div class="col-sm-3 invoice-col">
                       <b>Session:</b> 2015/2016<br>
                       <b>Present Term:</b> {{ $term }}<br>
-                      <b>Present Class:</b> {{ $student->class }}
+                      <b>Present Class:</b> {{ $class::whereId($student->class_id)->first()->name}}
 
                     </div>
                     <div class="col-xs-12 table-responsive">
@@ -114,10 +114,9 @@
                     <!-- this row will not appear when printing -->
                     <div class="row no-print">
             <div class="col-xs-12">
-
               <a href="/print/myresult/{{ $student->slug }}" target="_blank" class="btn btn-default">
-                <i class="fa fa-print"></i> Print
-              </a>
+                  <i class="fa fa-print"></i> Print
+                </a>
             </div>
             <br><br>
           </div>

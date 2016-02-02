@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Scholr\Question;
 
 class Teacher extends Model implements SluggableInterface{
 
@@ -50,4 +51,9 @@ class Teacher extends Model implements SluggableInterface{
       return $this->hasMany('Scholr\User');
     }
 
+
+    public static function totalAdded($teacher_id, $classe_id, $subject_id)
+    {
+      return Question::where(['teacher_id'=>$teacher_id, 'classe_id'=>$classe_id, 'subject_id'=>$subject_id])->get()->count();
+    }
 }

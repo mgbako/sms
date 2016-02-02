@@ -11,7 +11,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/teachers">Staffs</a></li>
+        <li><a href="/teachers">Teacher</a></li>
         <li class="active">Edit</li>
       </ol>
     </section>
@@ -31,7 +31,7 @@
 								<div class="col-md-6"><br>
 					 				<div class="input-group">
 					 					<span class="input-group-addon"><i class="fa fa-user"></i></span>
-										{!! Form::text('staffId', null, ['class'=>'form-control', 'placeholder'=>'Enter Staff ID', 'disabled']) !!}
+										{!! Form::text('staffId', null, ['class'=>'form-control', 'placeholder'=>'Enter Teacher\'s ID', 'disabled']) !!}
 									</div>
 								</div>
 

@@ -10,4 +10,13 @@ class Subjectquestionstatus extends Model
     protected $table = 'subjectquestionstatus';
 
     public $timestamps = false;
+
+    public static function canwrite($classId, $subjectId, $write)
+    {
+    	$subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classId)
+                                ->where('subject_id', $subjectId)
+                                ->where('write', $write)->first();
+
+        return $subjectquestionstatus;
+    }
 }

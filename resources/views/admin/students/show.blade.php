@@ -72,7 +72,8 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="{{ route('students.edit', $student->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>Print Details</a>
+          <a href="{{ route('students.edit', $student->id) }}" class="btn btn-primary pull-left"><i class="fa fa-edit"> Edit</i></a>
+          <a href="{{ route('students.index') }}" class="btn btn-default pull-right"><i class="fa fa-remove"> Cancel</i></a>
         </div>
         
        </div>

@@ -15,11 +15,11 @@ class Student extends Model implements SluggableInterface
     );
 
 	protected $fillable = ['firstname', 'lastname', 'studentId', 'phone', 
-  'email', 'dob', 'gender', 'address', 'state','nationality', 'class', 
+  'email', 'dob', 'gender', 'address', 'state','nationality', 'class_id', 
   'end_date', 'image', 'slug'];
 
   protected $columns = ['firstname', 'lastname', 'studentId', 'phone', 
-  'email', 'dob', 'gender', 'address', 'state','nationality', 'class', 
+  'email', 'dob', 'gender', 'address', 'state','nationality', 'class_id', 
     'image', 'created_at', 'updated_at', 'end_date', 'slug'];
 
   public function scopeExclude($query, $value = [])

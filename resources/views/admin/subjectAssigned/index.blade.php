@@ -5,7 +5,7 @@
   <div class="content-wrapper">
     @include('flash::message ')
     <!-- Content Header (Page header) -->
-            <section class="content-header">
+    <section class="content-header">
       <h1>
         Assign Subject
         <small>Staff against Subject of a particular Class</small>
@@ -80,7 +80,7 @@
                 @foreach($subjectAssigned as $subjectAssigned)
                 
                   <tr>
-                    {!!Form::open(['method'=>'delete', 'route' => ['subjectAssigned.destroy', $subjectAssigned->teacher_id, $subjectAssigned->classe_id, $subjectAssigned->subject_id ] ]) !!}
+                    {!!Form::open(['method'=>'delete', 'route' => ['subjectAssigneds.destroy', $subjectAssigned->teacher_id, $subjectAssigned->classe_id, $subjectAssigned->subject_id ] ]) !!}
                     <td>{{ Scholr\Teacher::whereId($subjectAssigned->teacher_id)->first()->staffId }}</td>
                     <td>{{ Scholr\Teacher::whereId($subjectAssigned->teacher_id)->first()->lastname }} {{ Scholr\Teacher::whereId($subjectAssigned->teacher_id)->first()->firstname }}</td>
                     <td>{{ Scholr\Subject::whereId($subjectAssigned->subject_id)->first()->name }}</td>

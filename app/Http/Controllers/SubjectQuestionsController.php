@@ -30,21 +30,44 @@ class SubjectQuestionsController extends Controller
     {
 
         $count = 1;
-        $classList = Classe::orderBy('name', 'asc')->lists('name', 'id');
-        $subjectList = Subject::orderBy('name', 'asc')->lists('name', 'id');
-        $time = [""=>"Choose", 15=>15, 30=>30, 45=>45, 60=>60, 75=>75, 90=>90, 105=>105, 120=>120];
-
-        $school = DB::table('schools')->first();
-        $totalquestion = $school->number;
-      
-        $subjectquestionstatus = SubjectQuestionstatus::all();
         $assigned = '';
+        $teacher;
+
          if (Auth::user()->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', Auth::user()->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
         }
 
-        //return $assigned[0]->classe_id;
+
+        $classList = [];
+        $subjectList = [];
+
+        foreach ($assigned as $key => $value) 
+        {
+            //dd($value);
+            $classIds[] = $assigned[0]->classe_id;
+            $subjectIds[] = $assigned[0]->subject_id;
+
+        }
+    
+        $classList = Classe::whereIn('id', $classIds)->orderBy('name', 'asc')->lists('name', 'id');
+        $subjectList = Subject::whereIn('id', $subjectIds)->orderBy('name', 'asc')->lists('name', 'id');
+        
+        //$classList = Classe::orderBy('name', 'asc')->lists('name', 'id');
+        //$subjectList = Subject::orderBy('name', 'asc')->lists('name', 'id');
+        $time = [""=>"Choose", 15=>15, 30=>30, 45=>45, 60=>60, 75=>75, 90=>90, 105=>105, 120=>120];
+
+        $school = DB::table('schools')->first();
+        $totalquestion = (int)$school->number;
+
+        //$totalAdded = Question::where(['teacher_id'=>$teacher->id, 'classe_id'=>$id, 'subject_id'=>$subjectId->id])->get()->count();
+
+        //$totalPer = ceil( ($totalAdded * 100) / $totalquestion);
+      
+        $subjectquestionstatus = SubjectQuestionstatus::all();
+        
+       
+       // return $assigned[0]->classe_id;
         $questionCount = (int)Question::where('classe_id', $assigned[0]->classe_id)
                                ->where('subject_id', $assigned[0]->subject_id)
                                ->where('teacher_id', $assigned[0]->teacher_id)
@@ -52,12 +75,12 @@ class SubjectQuestionsController extends Controller
 
         $status = false;
 
-        if($totalquestion === $questionCount)
+        if($questionCount >= $totalquestion)
         {
              $status = true;
         }
-
-        return view('status.subjectQuestion.index', compact('count', 'subjectList', 'classList', 'time', 'subjectquestionstatus', 'assigned', 'status'));
+        
+        return view('status.subjectQuestion.index', compact('count', 'subjectList', 'classList', 'time', 'subjectquestionstatus', 'assigned', 'status', 'totalquestion', 'teacher'));
 
     }
 
@@ -147,12 +170,18 @@ class SubjectQuestionsController extends Controller
         $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classId)
                                 ->where('subject_id', $subjectId)->first();
 
-        echo "<pre>";
-        var_dump($subjectquestionstatus);
+       /* echo "<pre>";
+        var_dump($subjectquestionstatus);*/
 
       
         if ($subjectquestionstatus) {
-        $affacted = DB::update('update subjectquestionstatus set write = 1 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
+        //$affacted = DB::update('update subjectquestionstatus set write = 1 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
+
+        $affacted = Subjectquestionstatus::where([
+            'classe_id' => $classId,
+            'subject_id' => $subjectId
+        ])->update(['write' => 1]);
+
             if ($affacted) {
                 flash('Exam ready to be written');
                 return redirect()->back();

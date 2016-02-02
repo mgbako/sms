@@ -185,30 +185,15 @@
 	                  <span>Bio Data</span> 
 	                </a>
 	            </li>
+	           
 	            <li class="treeview">
-	                <a href="">
-	                  <i class="fa fa-list-alt"></i>
-	                    <span>Subjects Offered</span> 
-	                </a>
-	            </li>
-	            <li class="treeview">
-                <a href="">
+                <a href="{{ route('classes.exams.index', [$class::whereId($student->class_id)->first()->id]) }}">
                   <i class="fa fa-file-text-o"></i>
                     <span>
                        Exam Hall 
-                      <span class="label label-primary pull-right">3</span>
                     </span>
-                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <ul class="treeview-menu" style="display: none;">
-                  <li>
-                    <a href="{{ route('classes.exams.index', [$class::whereId($student->class)->first()->id]) }}">
-                      <i class="fa fa-graduation-cap">
-                        {{ $class::whereId($student->class)->first()->name }}
-                      </i>
-                    </a>
-                  </li>
-                </ul>
+                
             </li>
             <li class="treeview">
                 <a href="{{ route('results.myresult', [$student->slug]) }}">

@@ -31,6 +31,7 @@
                        </div>
                          
                         @foreach($subjects as $subject)
+                        @if(Scholr\Subjectquestionstatus::canwrite($classe_id, $subject->id, 1))
                           <div class="box box-warning box-solid">
                             <div class="box-header with-border">
                               <h3 class="box-title">{{ $subject->name }}</h3>
@@ -42,6 +43,7 @@
                               The exam scripts of this exam is ready. click on the link to continue. <br> <a href="{{ route('classes.subjects.exams.show', [$classe_id, $subject->id])}}">Start</a>
                             </div><!-- /.box-body -->
                           </div><!-- /.box -->
+                          @endif
                         @endforeach
 
                     </div>

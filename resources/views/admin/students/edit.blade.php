@@ -102,7 +102,7 @@
 							{!! Form::label('class', 'Select Starting Class') !!}
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user"></i></span>
-								{!! Form::select('class', $classList, $student->class, ['class'=>'form-control']) !!}
+								{!! Form::select('class_id', $classList, $student->class, ['class'=>'form-control']) !!}
 							</div>
 						</div>
 

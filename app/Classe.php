@@ -26,4 +26,9 @@ class Classe extends Model {
 	{
 		return $this->hasMnay('Scholr\Grade');
 	}
+
+	public static function name($id)
+	{
+		return Classe::whereId($id)->first()->name;
+	}
 }

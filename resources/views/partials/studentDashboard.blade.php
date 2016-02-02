@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li class="treeview">
-                <a href="{{ route('classes.exams.index', [$class::whereId($records->classe_id)->first()]) }}">
+                <a href="{{ route('classes.exams.index', [$class::whereId($records->class_id)->first()]) }}">
                   <i class="fa fa-file-text-o"></i>
                     <span> Exam Hall </span>
                 </a>

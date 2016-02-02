@@ -25,7 +25,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::post('teachers/csvupload', ['as'=>'teachers.csvupload', 'uses'=>'Admin\TeachersController@csvupload']);
 	Route::resource('teachers', 'Admin\TeachersController');
 	Route::get('questions/{id}/delete', ['as'=>'questions.delete', 'uses'=>'QuestionsController@delete']);
-	Route::resource('questions', 'Admin\QuestionsController');
+	//Route::resource('questions', 'Admin\QuestionsController');
 
 	Route::get('users/{id}/delete', ['as'=>'users.delete', 'uses'=>'UsersController@delete']);
 	Route::get('classes/{id}/subjects', ['as'=>'classes.subjects', 'uses'=>'ClassesSubjectsController@index']);
@@ -75,8 +75,11 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::resource('/schools', 'SchoolController');
 	Route::resource('/subjectProgess', 'SubjectProgressController');
 
+	
+	
 	Route::resource('/subjectAssigned', 'SubjectAssignedController');
 	Route::delete('/subjectAssigned/{id}/{classeId}/{subjectId}', ['as'=>'subjectAssigneds.destroy', 'uses'=>'SubjectAssignedController@destroy']);
+	
 
 	Route::resource('/subjectAnalysis', 'SubjectAnalysisController');
 	Route::resource('users', 'UsersController');

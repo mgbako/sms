@@ -12,7 +12,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/teachers">Staff</a></li>
+        <li><a href="/teachers">Teachers</a></li>
         <li class="active">Upload Data</li>
       </ol>
     </section>

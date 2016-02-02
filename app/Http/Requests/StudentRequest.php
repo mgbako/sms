@@ -32,7 +32,8 @@ class StudentRequest extends Request {
 			'phone' => 'required',
 			'gender' => 'required',
 			'state' => 'required',
-			'image' => 'required',
+			'class_id' => 'required',
+			'image' => 'required'
 		];
 	}
 

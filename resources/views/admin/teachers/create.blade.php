@@ -8,11 +8,11 @@
     <section class="content-header">
       <h1>
         Registration
-        <small>Staff Registration Process</small>
+        <small>Teacher Registration Process</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/teachers">Staff</a></li>
+        <li><a href="/teachers">Teacher</a></li>
         <li class="active">Registration</li>
       </ol>
     </section>
@@ -29,7 +29,7 @@
                 <div class="col-md-6"><br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    {!! Form::text('staffId', null, ['class'=>'form-control', 'placeholder'=>'Enter  Staff Id']) !!}
+                    {!! Form::text('staffId', null, ['class'=>'form-control', 'placeholder'=>'Enter  Teacher Id']) !!}
                   </div>
                 </div>
 

@@ -10,7 +10,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/students">Students</a></li>
+        <li><a href="/teachers">Teacher</a></li>
         <li class="active">{{ ucwords($teacher->firstname) }} Biodata</li>
       </ol>        
     </section>
@@ -26,7 +26,7 @@
               
             <div class="alert alert-info alert-dismissable">
                 <h1>
-                    teacher's Detail
+                    Teacher's Detail
                   </h1>
             </div>
            
