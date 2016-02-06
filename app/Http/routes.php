@@ -111,3 +111,7 @@ Route::controllers([
   'password' => 'Auth\PasswordController',
   'print' => 'PrintController',
 ]);
+
+Route::any( '{catchall}', function ( $page ) {
+    return redirect('/');
+} )->where('catchall', '(.*)');
