@@ -52,7 +52,7 @@ class PrintController extends Controller
 
     
     public function getAllresults()
-    {
+    {   
         if ($this->user->type == 'admin') {
             $grades = Grade::all();
             $pdf = PDF::loadView('pdf.allresults', compact('grades'));
