@@ -100,7 +100,7 @@ class AuthController extends Controller
                 $grade_sum = DB::select("SELECT SUM(total) As sum FROM grades WHERE term = '1st Term'");
                 $grade_sum = (int) $grade_sum[0]->sum;
 
-                $term_average_score = $grade_sum / $total_student;
+                $term_average_score = @($grade_sum / $total_student);
 
                 return view('account.staffHome', compact('admin', 'term_average_score'));
             }

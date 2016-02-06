@@ -12,7 +12,7 @@ class SubjectAssignedTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjectAssigneds', function(Blueprint $table){
+        Schema::create('subjectassigneds', function(Blueprint $table){
             $table->integer('teacher_id')->unsigned();
             $table->integer('classe_id')->unsigned();
             $table->integer('subject_id')->unsigned();

@@ -24,7 +24,6 @@ class CreateTeachersTable extends Migration
             $table->string('address');
             $table->string('state');
             $table->string('nationality');
-            $table->string('type');
             $table->string('image');
             $table->string('slug');
             $table->timestamps();

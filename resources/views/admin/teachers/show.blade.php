@@ -72,7 +72,7 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="{{ route('teachers.edit', $teacher->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i> Print Details</a>
+          <a href="{{ route('teachers.edit', $teacher->id) }}" class="btn btn-xs btn-primary"><i class="fa"></i>Edit Details</a>
         </div>
         
        </div>

@@ -28,8 +28,11 @@ class ResultsController extends Controller
     {   
         $this->middleware('staff', ['except'=>['myresult']]);
         $this->user = $auth->user();
-        $this->term = School::first()->term;
-
+        $school = School::first();
+        if($school)
+        {
+            $this->term = $school->term;
+        }
     }
     /**
      * Display a listing of the resource.

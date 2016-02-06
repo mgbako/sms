@@ -12,7 +12,7 @@ class CreateSubjectQuestionStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjectQuestionStatus', function(Blueprint $table){
+        Schema::create('subjectquestionqtatus', function(Blueprint $table){
             $table->integer('classe_id')->unsigned();
             $table->integer('subject_id')->unsigned();
             $table->integer('time');
