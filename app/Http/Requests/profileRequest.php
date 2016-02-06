@@ -33,7 +33,7 @@ class profileRequest extends Request
             'phone' => 'required',
             'gender' => 'required',
             'state' => 'required',
-            'image' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png,jpe',
         ];
     }
 }

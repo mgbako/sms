@@ -1,9 +1,6 @@
 /resources/assets
 /vendor
 /node_modules
-<<<<<<< HEAD
-=======
-/public/img
->>>>>>> 18ca971c81aa56904c4bb273fe7be6d94fc7971c
+composer.lock
 .env
 .htaccess

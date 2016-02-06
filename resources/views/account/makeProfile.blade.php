@@ -106,7 +106,7 @@
 						</div>
 						<div class="col-md-12">
 							<div class="box-footer">
-								{!! Form::submit('Add Student', ['class'=>'btn btn-success pull-left']) !!}
+								{!! Form::submit('Create Profile', ['class'=>'btn btn-success pull-left']) !!}
 								<a href="{{ route('students.index') }}" class="btn btn-default pull-right">Cancel</a>
 							</div>
 						</div>
