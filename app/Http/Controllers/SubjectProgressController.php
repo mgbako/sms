@@ -21,7 +21,11 @@ class SubjectProgressController extends Controller
     public function index()
     {
         $subjectProgess = SubjectAssigned::all();
-        $totalQuestion = School::first()->number;
+        $school = School::first();
+        if($school){
+            $totalQuestion = School::first()->number;
+        }
+        
         $count = 1;
 
         return view('status.subjectProgess.index', compact('subjectProgess', 'totalQuestion', 'count'));
