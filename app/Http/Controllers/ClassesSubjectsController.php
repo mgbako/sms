@@ -91,7 +91,10 @@ class ClassesSubjectsController extends Controller
 
         return redirect()
                 ->route("classes.subjects.index", [$id]);
-
-        
+    }
+    
+    public function missingMethod($parameters = array())
+    {
+        return redirect('/');
     }
 }

@@ -104,5 +104,8 @@ class AdminController extends Controller {
 		flash('The Requested Record is not in our database');
 		redirect('admins');
 	}
-
+	 public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

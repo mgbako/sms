@@ -22,5 +22,8 @@ class SubjectAnalysisController extends Controller
         return view('status.subjectAnalysis.index', compact('count', 'subjectAnalysis'));
     }
 
-
+    public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

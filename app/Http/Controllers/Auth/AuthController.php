@@ -296,4 +296,8 @@ class AuthController extends Controller
         
     }
 
+    public function getMissingmethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

@@ -114,14 +114,8 @@ class SchoolController extends Controller
         return redirect('schools');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    /public function missingMethod($parameters = array())
     {
-        //
+        return redirect('/');
     }
 }

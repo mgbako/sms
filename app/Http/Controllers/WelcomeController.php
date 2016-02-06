@@ -33,4 +33,8 @@ class WelcomeController extends Controller {
 		return view('welcome');
 	}
 
+	public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

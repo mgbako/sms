@@ -104,4 +104,8 @@ class SubjectsController extends Controller {
 		return redirect('subjects');
 	}
 
+ 	public function missingMethod($parameters = array())
+  {
+      return redirect('/');
+  }
 }

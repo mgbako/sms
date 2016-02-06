@@ -67,5 +67,8 @@ class ExamsController extends Controller
             return view('exams.examHall', compact('questions', 'count', 'subject_id', 'classe_id', 'term', 'totals', 'user', 'time', 'records'));
         }
     }
-
+    public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

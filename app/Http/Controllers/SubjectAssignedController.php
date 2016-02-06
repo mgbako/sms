@@ -81,4 +81,8 @@ class SubjectAssignedController extends Controller
         return redirect('subjectAssigned');
     }
 
+    public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

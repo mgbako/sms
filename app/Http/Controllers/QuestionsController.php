@@ -226,4 +226,9 @@ class QuestionsController extends Controller
                 ->route("classes.subjects.questions.index", [$id, $subjectId]);
 
     }
+
+    public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

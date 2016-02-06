@@ -127,4 +127,8 @@ class ResultsController extends Controller
         }
     }
 
+    public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

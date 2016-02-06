@@ -127,4 +127,8 @@ class ClassesController extends Controller {
 		return redirect('classes');
 	}
 
+	 public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

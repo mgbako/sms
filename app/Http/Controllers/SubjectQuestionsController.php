@@ -230,4 +230,9 @@ class SubjectQuestionsController extends Controller
         flash('exam status not deleted');
         return redirect('subjectQuestions');
     }
+
+    public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

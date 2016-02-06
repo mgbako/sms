@@ -226,4 +226,8 @@ class StudentsController extends Controller {
 		return redirect('students');
 	}
 
+	 public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

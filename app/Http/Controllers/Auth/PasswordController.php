@@ -29,4 +29,9 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function getMissingmethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }

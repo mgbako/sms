@@ -109,4 +109,9 @@ class PrintController extends Controller
 
      return PDF::loadFile('http://www.github.com')->stream('github.pdf'); 
     }
+
+    public function missingMethod($parameters = array())
+    {
+        return redirect('/');
+    }
 }
