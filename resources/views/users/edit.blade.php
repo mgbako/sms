@@ -48,7 +48,7 @@
 						{!! Form::text('nationality', null, ['class'=>'form-control', 'placeholder'=>'Enter Nationality']) !!}
 					</div>
 					<div class="form-group">
-						{!! Form::select('class', $classList, null, ['class'=>'form-control']) !!}
+						{!! Form::select('class_id', $classList, null, ['class'=>'form-control']) !!}
 					</div>
 
 					<div class="form-group">

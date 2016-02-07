@@ -18,7 +18,7 @@ class CreateTeachersTable extends Migration
             $table->string('lastname');
             $table->string('staffId')->unique();
             $table->string('email')->uniqid();
-            $table->integer('phone');
+            $table->string('phone');
             $table->date('dob');
             $table->char('gender');
             $table->string('address');

@@ -45,8 +45,6 @@
                 <dd>{{$student->firstname}}</dd>
                 <dt>First Name</dt>
                 <dd>{{$student->lastname}}</dd>
-                <dt>Other Name</dt>
-                <dd>C.</dd>
                 <br><br>
                 <dt>Student Id</dt>
                 <dd>{{$student->studentId}}</dd>

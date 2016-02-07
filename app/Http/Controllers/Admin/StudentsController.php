@@ -77,6 +77,7 @@ class StudentsController extends Controller {
 	public function show($id)
 	{
 		$student = Student::find($id);
+		dd($student);
 		return view('admin.students.show', compact('student'));
 	}
 
@@ -88,7 +89,7 @@ class StudentsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$classList = Classe::lists('name', 'name');
+		$classList = Classe::lists('name', 'id');
 		$subjects = Subject::lists('name', 'id');
 
 		$student = Student::findOrFail($id);
@@ -107,6 +108,7 @@ class StudentsController extends Controller {
 	 */
 	public function update($id, Request $request)
 	{
+		// dd($request->all());
 		$student = Student::findOrFail($id);
 
 		if ($student) {
@@ -125,7 +127,7 @@ class StudentsController extends Controller {
 			$student->address = $request['address'];
 			$student->state = $request['state'];
 			$student->nationality = $request['nationality'];
-			$student->class = $request['class'];
+			$student->class_id = $request['class_id'];
 			$student->update();
 			flash($student->firstname.' '.$student->lastname.' was updated successfully!');
 			return redirect('students');
