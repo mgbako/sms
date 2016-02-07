@@ -77,7 +77,6 @@ class StudentsController extends Controller {
 	public function show($id)
 	{
 		$student = Student::find($id);
-		dd($student);
 		return view('admin.students.show', compact('student'));
 	}
 
