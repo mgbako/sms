@@ -114,7 +114,7 @@ class SchoolController extends Controller
         return redirect('schools');
     }
 
-    /public function missingMethod($parameters = array())
+    public function missingMethod($parameters = array())
     {
         return redirect('/');
     }
