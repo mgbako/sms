@@ -75,7 +75,7 @@
                     @endif
                     <p>
                       {{ Auth::user()->username }}
-                      <small>School Admin</small>
+                      <small>{{ Auth::user()->type }}</small>
                     </p>
                   </li>
                   <!-- Menu Body -->
