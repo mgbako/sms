@@ -51,15 +51,20 @@ class SubjectAssignedController extends Controller
      */
     public function store(SubjectAssignedRequest $request)
     {
+
         $subjectAssigned = SubjectAssigned::where('teacher_id', $request->teacher_id)
                                             ->where('classe_id', $request->classe_id)
                                             ->where('subject_id', $request->subject_id)->get()->count();
-        
+
+
         if($subjectAssigned > 0)                                    
         {
             flash('Class and Subject Already been Assigned to Teacher');
             return redirect('subjectAssigned');
         }
+
+
+        dd($subjectAssigned->classe_id)
 
         $input = $request->all();
 

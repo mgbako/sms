@@ -45,29 +45,25 @@ class SubjectQuestionsController extends Controller
         foreach ($assigned as $key => $value) 
         {
             //dd($value);
-            $classIds[] = $assigned[0]->classe_id;
-            $subjectIds[] = $assigned[0]->subject_id;
+            $classIds[] = $value->classe_id;
+            $subjectIds[] = $value->subject_id;
 
         }
-    
+
+        
         $classList = Classe::whereIn('id', $classIds)->orderBy('name', 'asc')->lists('name', 'id');
         $subjectList = Subject::whereIn('id', $subjectIds)->orderBy('name', 'asc')->lists('name', 'id');
         
-        //$classList = Classe::orderBy('name', 'asc')->lists('name', 'id');
-        //$subjectList = Subject::orderBy('name', 'asc')->lists('name', 'id');
+        
         $time = [""=>"Choose", 15=>15, 30=>30, 45=>45, 60=>60, 75=>75, 90=>90, 105=>105, 120=>120];
 
         $school = DB::table('schools')->first();
         $totalquestion = (int)$school->number;
 
-        //$totalAdded = Question::where(['teacher_id'=>$teacher->id, 'classe_id'=>$id, 'subject_id'=>$subjectId->id])->get()->count();
-
-        //$totalPer = ceil( ($totalAdded * 100) / $totalquestion);
-      
+              
         $subjectquestionstatus = SubjectQuestionstatus::all();
         
        
-       // return $assigned[0]->classe_id;
         $questionCount = (int)Question::where('classe_id', $assigned[0]->classe_id)
                                ->where('subject_id', $assigned[0]->subject_id)
                                ->where('teacher_id', $assigned[0]->teacher_id)
@@ -133,13 +129,39 @@ class SubjectQuestionsController extends Controller
      */
     public function store(SubjectquestionstatusRequest $request)
     {   
-        
+        $teacher;
+
+        if (Auth::user()->type == 'teacher') {
+            $teacher = DB::table('teachers')->where('staffId', Auth::user()->loginId)->first();
+            $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+        }
+
+       
+
         $Subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $request['classe_id'])
         ->where('subject_id', $request['subject_id'])->get()->count();
         if($Subjectquestionstatus == 1)
         {   flash('Time Already Assigned to Subject');
             return redirect('subjectQuestions');
         }
+
+        $subjectAssigned = SubjectAssigned::where('teacher_id', $teacher->id)
+                                            ->where('classe_id', $request->classe_id)
+                                            ->where('subject_id', $request->subject_id)->get()->count();
+                                             //dd($subjectAssigned);
+        
+        /*if($subjectAssigned->classe_id != $request->classe_id && $subjectAssigned->subject_id != $request->subject_id)
+        {
+            flash('You are not Assigned this Class or Subject');
+            return redirect('subjectQuestions');
+        }*/
+
+        if($subjectAssigned == 0)
+        {
+            flash('You are not Assigned this Class or Subject');
+            return redirect('subjectQuestions');
+        }
+
 
         Subjectquestionstatus::create($request->all() );
         flash('Time Assigned to Subject');
