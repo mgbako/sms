@@ -42,6 +42,12 @@ class SubjectQuestionsController extends Controller
         $classList = [];
         $subjectList = [];
 
+        if(!$assigned)
+        {
+            flash('Subject Deleted for Review');
+            return redirect('subjectAnalysis');
+        }
+
         foreach ($assigned as $key => $value) 
         {
             //dd($value);
@@ -62,7 +68,7 @@ class SubjectQuestionsController extends Controller
 
               
         $subjectquestionstatus = SubjectQuestionstatus::all();
-        
+
        
         $questionCount = (int)Question::where('classe_id', $assigned[0]->classe_id)
                                ->where('subject_id', $assigned[0]->subject_id)
@@ -75,8 +81,9 @@ class SubjectQuestionsController extends Controller
         {
              $status = true;
         }
+
         
-        return view('status.subjectQuestion.index', compact('count', 'subjectList', 'classList', 'time', 'subjectquestionstatus', 'assigned', 'status', 'totalquestion', 'teacher'));
+        return view('status.subjectQuestion.index', compact('count', 'subjectList', 'classList', 'time', 'subjectquestionstatus', 'assigned', 'status', 'totalquestion', 'teacher', 'questionCount'));
 
     }
 
@@ -117,6 +124,28 @@ class SubjectQuestionsController extends Controller
            }
         }else {
             flash('Exam status was not changed please try again later');
+            return redirect('subjectAnalysis');
+        }
+        
+    }
+
+
+    public function deleteApprove($classeId, $subjectId)
+    {   
+  
+        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
+                                ->where('subject_id', $subjectId)->first();
+        if ($subjectquestionstatus) {
+            $affacted = DB::update('update subjectquestionstatus set progress = 0 where classe_id = ? and subject_id = ?', [$classeId, $subjectId]);
+           if($affacted) {
+            flash('Time for Exam Deleted for Review');
+            return redirect('subjectAnalysis');
+           }else {
+            flash('Error Deleting time for Exam please contact the IT department');
+            return redirect('subjectAnalysis');
+           }
+        }else {
+            flash('Exam status was not Deleted please try again');
             return redirect('subjectAnalysis');
         }
         

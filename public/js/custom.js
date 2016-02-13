@@ -5,6 +5,7 @@
 		var percentage = $('#percentage').val();
 		var progress = $('.progressStatus');
 		var remarks = $('.remarks');
+		var totalQ = $('#totalQ');
 
 		if(percentage == 0 ){
 			$('.progress-bar').addClass('progress-bar-danger');
@@ -12,7 +13,7 @@
 			progress.text("No Question Added");
 			remarks.text("Not Done");
 		}
-		else if(percentage < 100 ){
+		else if(percentage < totalQ ){
 			$('.progress-bar').removeClass('progress-bar-danger');
 			$('.progress-bar').addClass('progress-bar-warning');
 
@@ -21,14 +22,14 @@
 			progress.text("Processing");
 			remarks.text("Processing");
 		}
-		else if(percentage >= 100){
+		else if(percentage == totalQ){
 			$('.progress-bar').removeClass('progress-bar-warning');
 			$('.progress-bar').addClass('progress-bar-primary');
 
 			progress.removeClass('label-warning');
 			progress.addClass('label-primary');
-			progress.text("Submit");
-			remarks.text("Waiting");
+			progress.text("Finished Adding");
+			remarks.text("Finished");
 			
 		}
 		else{

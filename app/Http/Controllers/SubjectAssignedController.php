@@ -62,9 +62,7 @@ class SubjectAssignedController extends Controller
             flash('Class and Subject Already been Assigned to Teacher');
             return redirect('subjectAssigned');
         }
-
-
-        dd($subjectAssigned->classe_id)
+        
 
         $input = $request->all();
 

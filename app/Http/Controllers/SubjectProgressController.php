@@ -20,6 +20,7 @@ class SubjectProgressController extends Controller
      */
     public function index()
     {
+        $totalQuestion;
         $subjectProgess = SubjectAssigned::all();
         $school = School::first();
         if($school){

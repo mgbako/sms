@@ -16,6 +16,7 @@ use Scholr\SubjectAssigned;
 use Scholr\Teacher;
 use Scholr\SubjectQuestionstatus;
 use Scholr\School;
+use Scholr\Grade;
 
 
 class ExamsController extends Controller
@@ -33,6 +34,7 @@ class ExamsController extends Controller
         $user = Auth::user();
         if($user->type == 'student')
         {
+          
             $term = School::first()->term;
             $subjects = Classe::find($classe_id)->subjects()->get();
             $records = DB::table('students')->where('id', $user->student_id)->first();

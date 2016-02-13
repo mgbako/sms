@@ -86,24 +86,27 @@
                         <td>{{ Scholr\Subject::where('id', $subjectquestionstatus->subject_id)->first()->name}}</td>
                         <td>
                           <a href="{{ route('subjectQuestions.delete', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a>
-
-                          @if($status)
-                           | <a href="{{ route('subjectQuestions.submit', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}" class="btn"><i class="fa fa-database"></i> Submit</a>
+                          @if( ( (Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) * 100) / $totalquestion ) == 100)
+                          | <a href="{{ route('subjectQuestions.submit', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}" class="btn"><i class="fa fa-database"></i> Submit</a>
                           @endif
                         </td>
                           
                         <td>
-                          <div class="progress progress-xs progress-striped">
-                            <input type="hidden" id="percentage" value="{{ Scholr\Question::Percentage($subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id)->get()->count() }}">
-                            <div class="progress-bar" style="width:{{ Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) }}%" aria-valuemin="1" aria-valuemax="{{$totalquestion}}"></div>
-                          </div>
-                          <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) }}" aria-valuemin="0" aria-valuemax="{{$totalquestion}}" style="width:{{ Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) }}%">
-                              60%
+                          <div class="progress" id="pro">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ (Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) * 100) / $totalquestion}}" aria-valuemin="0" aria-valuemax="{{$totalquestion}}" style="width:{{ (Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) * 100) / $totalquestion}}%">
+                              {{ (Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) * 100) / $totalquestion}}%
                             </div>
                           </div>
                         </td>
-                        <td><span class="label progressStatus"></span></td>
+                        <td>
+                          @if($subjectquestionstatus->progress == 1)
+                            <span class="label label-primary">Question Submitted</span>
+                          @elseif($subjectquestionstatus->progress == 2)
+                            <span class="label label-success">Question Approved</span>
+                          @else
+                            <span class="label label-warning">Question Not Submitted</span>
+                          @endif
+                        </td>
                         {!! Form::hidden('classId', $subjectquestionstatus->classe_id) !!}
                         {!! Form::hidden('subjectId', $subjectquestionstatus->subject_id) !!}
                       </tr>

@@ -52,6 +52,7 @@ Route::group(['middleware'=> 'auth'], function(){
 
 	Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/submit', ['as'=>'subjectQuestions.submit', 'uses'=>'SubjectQuestionsController@submit']);
 	Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/approve', ['as'=>'subjectQuestions.approve', 'uses'=>'SubjectQuestionsController@approve']);
+	Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/deleteApprove', ['as'=>'subjectQuestions.deleteApprove', 'uses'=>'SubjectQuestionsController@deleteApprove']);
 
 	/*---------------------------------------------------------------------------------------------------
 	|							ACTIVATE EXAMS

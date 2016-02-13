@@ -38,7 +38,7 @@
                 <th>Class</th>
                 <th>Action</th>
                 <th>Time</th>
-                <th>Progress</th>
+                <!-- <th>Progress</th> -->
                 <th>Remarks</th>
               </tr>
               @foreach($subjectAnalysis as $subjectAnalysis)
@@ -46,13 +46,17 @@
                   <td>{{ Scholr\Subject::where('id', $subjectAnalysis->subject_id)->first()->name}}</td>
                   <td>{{ Scholr\Classe::where('id', $subjectAnalysis->classe_id)->first()->name}}</td>
                   <td>
-                        <a href="{{ route('classes.subjects.questions.index', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-eye"></i> View</a> | 
-                        <a href="{{ route('subjectQuestions.delete', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a> | 
+                        <!-- <a href="{{ route('classes.subjects.questions.index', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-eye"></i> View</a> |  -->
+                        <a href="{{ route('subjectQuestions.deleteApprove', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a> | 
                         <a href="{{ route('subjectQuestions.approve', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-database"></i> Approve</a>
                   </td>
                   <td>{{ $subjectAnalysis->time }} minutes</td>
-                  <td><span class="progressStatus label"></span></td>
-                  <td class="remarks">Done.</td>
+          <!--         <td><span class="progressStatus label"></span></td> -->
+                  <td class="remarks">
+                    @if( Scholr\SubjectQuestionstatus::where('classe_id', $subjectAnalysis->classe_id)->where('subject_id', $subjectAnalysis->subject_id)->where('progress', 1) )
+                      <span class="label label-primary">Wating for Approval</span>
+                    @endif
+                  </td>
                 </tr>
               @endforeach
             </table>

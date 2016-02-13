@@ -43,6 +43,7 @@
                 </thead>
                 
                 <tbody>
+                {!! Form::hidden('totalQuestion', $totalQuestion, ['id'=>'totalQ']) !!}
                 @foreach($subjectProgess as $subjectProgess)
                 <tr>
                   <td>{{ Scholr\Teacher::whereId($subjectProgess->teacher_id)->first()->staffId }}</td>
@@ -51,7 +52,7 @@
                   <td>{{ Scholr\Classe::where('id', $subjectProgess->classe_id)->first()->name}}</td>
                   <td>
                     @if(Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() >= $totalQuestion)
-                      <span class="label label-success">Approved</span></td>
+                      <span class="label label-success">Finished Adding Questions</span></td>
                     @elseif(Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() <= 0)
                       <span class="label label-danger">No Question Added</span>
                     @else
@@ -60,15 +61,17 @@
                   </td>
                   <td>
                     <div class="progress progress-xs progress-striped">
-                      <input type="hidden" id="percentage" value="{{ Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() }}">
-                      <div class="progress-bar" style="width:{{ Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() }}%"></div>
+                      <input type="hidden" id="percentage" value="{{ (Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() * 100) / $totalQuestion}}" >
+                      <div class="progress-bar" style="width:{{ (Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() * 100) / $totalQuestion }}%" aria-valuenow="{{ (Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() * 100) / $totalQuestion }}" aria-valuemin="0" aria-valuemax="{{ $totalQuestion }}">
+                        {{ (Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() * 100) / $totalQuestion }}%
+                      </div>
                     </div>
                   </td>
                   <td id="remarks{{$count++}}">
                    @if(Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() >= $totalQuestion)
-                      Done
+                      Finished Adding
                     @elseif(Scholr\Question::Percentage($subjectProgess->classe_id, $subjectProgess->subject_id)->get()->count() <= 0)
-                      Not Done
+                      No Question Added
                     @else
                       Processing
                     @endif

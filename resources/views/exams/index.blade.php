@@ -32,7 +32,12 @@
                          
                         @foreach($subjects as $subject)
                         @if(Scholr\Subjectquestionstatus::canwrite($classe_id, $subject->id, 1))
-                          <div class="box box-warning box-solid">
+
+                          @if( Scholr\Grade::where(['student_id'=> $records->id, 'classe_id'=> $classe_id, 'subject_id'=> $subject->id])->first() )  
+                            <div class="box box-warning box-solid" style="opacity: .5;">
+                          @else
+                            <div class="box box-warning box-solid" style="opacity: 1;">
+                          @endif
                             <div class="box-header with-border">
                               <h3 class="box-title">{{ $subject->name }}</h3>
                               <div class="box-tools pull-right">
@@ -40,7 +45,13 @@
                               </div><!-- /.box-tools -->
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                              The exam scripts of this exam is ready. click on the link to continue. <br> <a href="{{ route('classes.subjects.exams.show', [$classe_id, $subject->id])}}">Start</a>
+                              The exam scripts of this exam is ready. click on the link to continue. <br> 
+                              @if( !Scholr\Grade::where(['student_id'=> $records->id, 'classe_id'=> $classe_id, 'subject_id'=> $subject->id])->first()  )
+                                <a href="{{ route('classes.subjects.exams.show', [$classe_id, $subject->id])}}">Start</a>
+                              @else
+                                <h1 class="label label-success">You Have taken this Exam</h1>
+                              @endif
+
                             </div><!-- /.box-body -->
                           </div><!-- /.box -->
                           @endif
