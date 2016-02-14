@@ -12,6 +12,7 @@ use Scholr\Teacher;
 use Scholr\Admin;
 use Scholr\SubjectAssigned;
 use Scholr\Grade;
+use Scholr\SubjectQuestionstatus;
 use DB;
 use Auth;
 
@@ -123,16 +124,59 @@ class AuthController extends Controller
     }
 
     public function getTeacher($slug){
+         $questionCount;
+         
         if ($this->auth->check()) {
             $user = $this->auth->user();
             if ($user->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', $user->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+
                 $class_number = SubjectAssigned::where('teacher_id', $teacher->id)->count();
-                 return view('account.teacherHome', compact('teacher', 'assigned', 'class_number'));
+
+                $approvedCount = [];
+                $submitCount = [];
+                $inCount = 0;
+
+                $school = DB::table('schools')->first();
+
+                foreach($assigned as $assign)
+                {
+                    foreach(SubjectQuestionstatus::where(['classe_id'=>$assign->classe_id, 'subject_id'=>$assign->subject_id])->get(['progress']) as $progress)
+                    {
+
+                        if($progress->progress == 2)
+                        {
+                            $approvedCount[] = $progress;
+                        }
+
+                        if($progress->progress == 1)
+                        {
+                            $submitCount[] = $progress;
+                        }
+
+                        //$questionsAdd = Question::where([''])
+                        $questionCount = (int)Question::where('classe_id', $assign->classe_id)
+                               ->where('subject_id', $assign->subject_id)
+                               ->where('teacher_id', $teacher->id)->count();
+
+                        if($questionCount < $school->number)
+                        {
+                             $inCount += 1;
+                        }
+                        else{
+                            $inCount -= 1;
+                        }
+
+                    }
+                }
+
+                dd($questionCount);
+
+                return view('account.teacherHome', compact('teacher', 'assigned', 'class_number', 'approvedCount', 'submitCount', 'inCount'));
             }else{
                 flash('Ops you do not have access to that area!');
-                return redirect()->back();;
+                return redirect()->back();
             }
         }
         return redirect('/');

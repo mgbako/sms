@@ -138,7 +138,7 @@ class QuestionsController extends Controller
      * @param  int  $id, $subjectId
      * @return Response
      */
-    public function edits($id, $subjectId)
+    public function edits($id, $subjectId, $teacherId)
     {
 
 
@@ -146,18 +146,18 @@ class QuestionsController extends Controller
         $school = DB::table('schools')->first();
         $totalquestion = $school->number;
 
-        $user = \Auth::user();
+        //$user = \Auth::user();
                 
-        $teacher = \DB::table('teachers')->where('staffId', $user->loginId)->first();
+        //$teacher = \DB::table('teachers')->where('staffId', $user->loginId)->first();
 
-        $questions = Question::where(['teacher_id'=>$teacher->id, 'classe_id'=>$id, 'subject_id'=>$subjectId])->paginate(1);
+        $questions = Question::where(['teacher_id'=>$teacherId, 'classe_id'=>$id, 'subject_id'=>$subjectId])->paginate(1);
 
 
-        $totalAdded = Question::where(['teacher_id'=>$teacher->id, 'classe_id'=>$id, 'subject_id'=>$subjectId])->get()->count();
+        $totalAdded = Question::where(['teacher_id'=>$teacherId, 'classe_id'=>$id, 'subject_id'=>$subjectId])->get()->count();
 
         $totalPer = ceil( ($totalAdded * 100) / $totalquestion);
 
-        $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+        $assigned = SubjectAssigned::where('teacher_id', $teacherId)->groupBy('classe_id')->get();
         return view('admin.questions.edits', compact('questions', 'id', 'subjectId', 'assigned', 'totalquestion', 'totalAdded', 'totalPer') );
     }
 

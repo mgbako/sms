@@ -34,7 +34,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::resource('classes.subjects', 'ClassesSubjectsController');
 
 	Route::get('classes/{id}/subjects/{subjectId}/questions/{questionId}/delete', ['as'=>'classes.subjects.questions.delete', 'uses'=>'QuestionsController@delete']);
-	Route::get('classes/{id}/subjects/{subjectId}/questions/edits', ['as'=>'questions.edits', 'uses'=>'QuestionsController@edits']);
+	Route::get('classes/{id}/subjects/{subjectId}/teachers/{teacherId}/questions/edits', ['as'=>'questions.edits', 'uses'=>'QuestionsController@edits']);
 	Route::resource('classes.subjects.questions', 'QuestionsController');
 
 	Route::get('/classes/{id}/exams',  ['as'=>'classes.exams.index', 'uses'=>'ExamsController@index']);
@@ -82,7 +82,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::delete('/subjectAssigned/{id}/{classeId}/{subjectId}', ['as'=>'subjectAssigneds.destroy', 'uses'=>'SubjectAssignedController@destroy']);
 	
 
-	Route::resource('/subjectAnalysis', 'SubjectAnalysisController');
+	Route::resource('subjectAnalysis', 'SubjectAnalysisController');
 	Route::resource('users', 'UsersController');
 
 

@@ -37,7 +37,7 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                   <div class="inner">
-                    <h3>0</h3>
+                    <h3>{{ count($approvedCount) }}</h3>
                     <p>Exams approved</p>
                   </div>
                   <div class="icon">
@@ -50,7 +50,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                   <div class="inner">
-                    <h3>3</h3>
+                    <h3>{{ count($submitCount) }}</h3>
                     <p>Exams successfully created</p>
                   </div>
                   <div class="icon">
@@ -63,7 +63,7 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                   <div class="inner">
-                    <h3>2</h3>
+                    <h3>{{ $inCount }}</h3>
                     <p>Exams not yet completed</p>
                   </div>
                   <div class="icon">

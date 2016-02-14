@@ -12,7 +12,7 @@
   </script>
 @stop
 @section('content')
-@include('partials.teachersDashboard')
+@include('partials.adminDashboard')
 	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -107,9 +107,9 @@
 				</div><!-- /.row -->
 			</div><!-- /.box-body -->
 			<div class="box-footer">
-				<button type="submit" class="btn btn-default">
-					<i class="fa fa-server"></i> Save
-				</button>
+				<a class="btn btn-default" href="{{ route('subjectAnalysis.index')}}">
+					<i class="fa fa-arrow-left"></i> Back
+				</a>
 			</div>
 			{!!Form::close()!!}
 
