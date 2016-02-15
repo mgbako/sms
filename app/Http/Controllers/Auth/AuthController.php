@@ -13,6 +13,7 @@ use Scholr\Admin;
 use Scholr\SubjectAssigned;
 use Scholr\Grade;
 use Scholr\SubjectQuestionstatus;
+use Scholr\Question;
 use DB;
 use Auth;
 
