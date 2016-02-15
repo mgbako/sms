@@ -171,7 +171,7 @@ class AuthController extends Controller
                     }
                 }
 
-                dd($questionCount);
+                //sdd($questionCount);
 
                 return view('account.teacherHome', compact('teacher', 'assigned', 'class_number', 'approvedCount', 'submitCount', 'inCount'));
             }else{
