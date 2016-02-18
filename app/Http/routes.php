@@ -57,7 +57,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	/*---------------------------------------------------------------------------------------------------
 	|							ACTIVATE EXAMS
 	-----------------------------------------------------------------------------------------------------*/
-	Route::patch('activateexams/classes/{classeId}/subjects/{subjectId}/write', ['as'=>'exams.write', 'uses'=>'SubjectQuestionsController@write']);
+	//Route::patch('activateexams/classes/{classeId}/subjects/{subjectId}/write', ['as'=>'exams.write', 'uses'=>'SubjectQuestionsController@write']);
 	Route::get('activateexams', ['as'=>'exams.activate', 'uses'=>'SubjectQuestionsController@activate']);
 	
 
@@ -65,7 +65,8 @@ Route::group(['middleware'=> 'auth'], function(){
 	|							WRITE EXAMS
 	-----------------------------------------------------------------------------------------------------*/
 
-	Route::get('/writeexam/class/{classeId}/subject/{subjectId}', 'SubjectQuestionsController@write');
+	Route::get('/writeexam/class/{classeId}/subject/{subjectId}', ['as'=>'exam.write', 'uses'=> 'SubjectQuestionsController@write']);
+	Route::get('/writeexam/class/{classeId}/subject/{subjectId}/delete', ['as'=>'exam.delete', 'uses'=> 'SubjectQuestionsController@deleteWrite']);
 
 	/*---------------------------------------------------------------------------------------------------
 	|							SUBJECTS QUESTION

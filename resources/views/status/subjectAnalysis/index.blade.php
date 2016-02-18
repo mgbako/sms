@@ -32,7 +32,7 @@
             </div>
           </div><!-- /.box-header -->
           <div class="box-body table-responsive no-padding">
-            <table width="741%" class="table table-hover">
+            <table width="100%" class="table table-hover text-center">
               <tr>
                 <th>Stubject</th>
                 <th>Class</th>
@@ -42,36 +42,39 @@
                 <th>Remarks</th>
               </tr>
               @foreach($subjectAnalysis as $subjectAnalysis)
-                <tr>
-                  <td>{{ Scholr\Subject::where('id', $subjectAnalysis->subject_id)->first()->name}}</td>
-                  <td>{{ Scholr\Classe::where('id', $subjectAnalysis->classe_id)->first()->name}}</td>
-                  <td>
-                        <a href="{{ route('questions.edits', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id, Scholr\SubjectAssigned::where('classe_id', $subjectAnalysis->classe_id)->where('subject_id', $subjectAnalysis->subject_id)->first()->teacher_id]) }}">
+                @if($subjectAnalysis->progress !=0 )
+                  <tr>
+                    <td>{{ Scholr\Subject::where('id', $subjectAnalysis->subject_id)->first()->name}}</td>
+                    <td>{{ Scholr\Classe::where('id', $subjectAnalysis->classe_id)->first()->name}}</td>
+                    <td>
+                          <a href="{{ route('questions.edits', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id, Scholr\SubjectAssigned::where('classe_id', $subjectAnalysis->classe_id)->where('subject_id', $subjectAnalysis->subject_id)->first()->teacher_id]) }}">
 
-                          <i class="fa fa-eye"></i> View
-                        </a> |
-                        <a href="{{ route('subjectQuestions.deleteApprove', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a> | 
-                        <a href="{{ route('subjectQuestions.approve', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-database"></i> Approve</a>
-                  </td>
-                  <td>{{ $subjectAnalysis->time }} minutes</td>
-          <!--         <td><span class="progressStatus label"></span></td> -->
-                  <td class="remarks">
-                    @if( Scholr\SubjectQuestionstatus::where('classe_id', $subjectAnalysis->classe_id)->where('subject_id', $subjectAnalysis->subject_id)->where('progress', 1) )
-                      <span class="label label-primary">Wating for Approval</span>
-                    @endif
-                  </td>
-                </tr>
+                            <i class="fa fa-eye"></i> View
+                          </a> |
+                          @if($subjectAnalysis->progress == 2 )
+                            <a href="{{ route('subjectQuestions.deleteApprove', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a>
+                          @endif
+                          @if($subjectAnalysis->progress != 2 )
+                            <a href="{{ route('subjectQuestions.approve', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-database"></i> Approve</a>
+                          @endif
+                    </td>
+                    <td>{{ $subjectAnalysis->time }} minutes</td>
+            <!--         <td><span class="progressStatus label"></span></td> -->
+                    <td class="remarks">
+                      @if($subjectAnalysis->progress == 2 )
+                        <span class="label label-success">Approved</span>
+                      
+                      @elseif( Scholr\SubjectQuestionstatus::where('classe_id', $subjectAnalysis->classe_id)->where('subject_id', $subjectAnalysis->subject_id)->where('progress', 1) )
+                        <span class="label label-primary">Wating for Approval</span>
+                      @endif
+                    </td>
+                  </tr>
+                @endif
               @endforeach
             </table>
           </div><!-- /.box-body -->
           <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
+            
           </div>
         </div><!-- /.box -->
       </div>

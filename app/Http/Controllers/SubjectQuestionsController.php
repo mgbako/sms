@@ -134,9 +134,9 @@ class SubjectQuestionsController extends Controller
     {   
   
         $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
-                                ->where('subject_id', $subjectId)->first();
+                                ->where('subject_id', $subjectId)->get();
         if ($subjectquestionstatus) {
-            $affacted = DB::update('update subjectquestionstatus set progress = 0 where classe_id = ? and subject_id = ?', [$classeId, $subjectId]);
+            $affacted = DB::table('subjectquestionstatus')->where(['classe_id'=>$classeId, 'subject_id'=>$subjectId])->delete();
            if($affacted) {
             flash('Time for Exam Deleted for Review');
             return redirect('subjectAnalysis');
@@ -204,8 +204,7 @@ class SubjectQuestionsController extends Controller
      */
     public function activate()
     {
-        $subjectquestionstatus = SubjectQuestionstatus::where('progress',2)
-                               ->where('write', 0)->get();
+        $subjectquestionstatus = SubjectQuestionstatus::whereIn('progress', [1,2])->get();
         $count = 1;
         return view('status.subjectQuestion.activate', compact('subjectquestionstatus', 'count'));
     }
@@ -221,9 +220,6 @@ class SubjectQuestionsController extends Controller
         $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classId)
                                 ->where('subject_id', $subjectId)->first();
 
-       /* echo "<pre>";
-        var_dump($subjectquestionstatus);*/
-
       
         if ($subjectquestionstatus) {
         //$affacted = DB::update('update subjectquestionstatus set write = 1 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
@@ -238,6 +234,34 @@ class SubjectQuestionsController extends Controller
                 return redirect()->back();
             }else {
                 flash('Error making Exams ready to be Written Please contact the IT department');
+                return redirect()->back();
+            }
+        }else {
+            flash('Exam status was not changed please try again later');
+            return redirect()->back();
+        }
+    }
+
+    public function deleteWrite($classId, $subjectId)
+    {
+               
+        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classId)
+                                ->where('subject_id', $subjectId)->first();
+
+      
+        if ($subjectquestionstatus) {
+        //$affacted = DB::update('update subjectquestionstatus set write = 1 where classe_id = ? and subject_id = ?', [$classId, $subjectId]);
+
+        $affacted = Subjectquestionstatus::where([
+            'classe_id' => $classId,
+            'subject_id' => $subjectId
+        ])->update(['write' => 0]);
+
+            if ($affacted) {
+                flash('Exam Deleted');
+                return redirect()->back();
+            }else {
+                flash('Error Deleting Exams Please contact the IT department');
                 return redirect()->back();
             }
         }else {

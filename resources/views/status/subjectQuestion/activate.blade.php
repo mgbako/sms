@@ -39,10 +39,13 @@
                     <td>{{ Scholr\Classe::where('id', $subjectquestionstatu->classe_id)->first()->name}}</td>
                     <td>{{ $subjectquestionstatu->time }} minutes</td>
                     <td>
-                      <a href="/writeexam/class/{{ $subjectquestionstatu->classe_id }}/subject/{{ $subjectquestionstatu->subject_id }}" class="btn btn-success">Write</a>
+                    @if($subjectquestionstatu->write == 0)
+                      <a href="{{ route('exam.write', [$subjectquestionstatu->classe_id, $subjectquestionstatu->subject_id])}}" class="btn btn-success">Write</a>
+                    @else
+                      <a href="{{ route('exam.delete', [$subjectquestionstatu->classe_id, $subjectquestionstatu->subject_id])}}" class="btn btn-danger">Delete</a>
+                    @endif
                     </td>
                   </tr>
-
                 @endforeach
               </tbody>
               <tfoot>

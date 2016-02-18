@@ -40,27 +40,25 @@
 					<div class="col-md-12">
 						@include('errors.formError')
 					</div>
-					<div class="col-md-12">
+					<div class="col-md-12" style="opacity: .9; pointer-events: none;">
 						<div class="form-group">
 							<label><i class="fa fa-list-alt"></i>Question</label>
 							<div class="form-group">
-								{!! Form::textarea('question', null, ['class'=>'form-control', 'placeholder'=>'Enter Question', 'rows'=>6, 'id'=>'question']) !!}
+								{!! Form::textarea('question', null, ['class'=>'form-control', 'disabled', 'placeholder'=>'Enter Question', 'rows'=>6, 'id'=>'question']) !!}
 							</div>
 						</div><!-- /.form-group -->
 					</div><!-- /.col -->
-					<div class="col-md-12">
-						<br>
-					</div>
+					
 					<div class="col-md-12">
 						<dt>Answers</dt>
-					<br>
-					<div class="row">
+						<br>
+					<div class="row" style="opacity: .9; pointer-events: none;">
 						<div class="col-lg-3">
 							<div class="input-group">
 								<span class="input-group-addon">
 									{!! Form::radio('answer', 'option1') !!}
 								</span>
-								{!! Form::text('option1', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 1']) !!}
+								{!! Form::text('option1', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 1', 'disabled']) !!}
 							</div><!-- /input-group -->
 						</div>
 
@@ -69,7 +67,7 @@
 								<span class="input-group-addon">
 									{!! Form::radio('answer', 'option2') !!}
 								</span>
-								{!! Form::text('option2', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 2']) !!}
+								{!! Form::text('option2', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 2', 'disabled']) !!}
 							</div><!-- /input-group -->
 						</div>
 
@@ -78,7 +76,7 @@
 								<span class="input-group-addon">
 									{!! Form::radio('answer', 'option3') !!}
 								</span>
-								{!! Form::text('option3', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 3']) !!}
+								{!! Form::text('option3', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 3', 'disabled']) !!}
 							</div><!-- /input-group -->
 						</div>
 
@@ -87,7 +85,7 @@
 								<span class="input-group-addon">
 									{!! Form::radio('answer', 'option4') !!}
 								</span>
-								{!! Form::text('option4', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 4']) !!}
+								{!! Form::text('option4', null, ['class'=>'form-control', 'placeholder'=>'Enter Option 4', 'disabled']) !!}
 							</div><!-- /input-group -->
 						</div>
 					</div>

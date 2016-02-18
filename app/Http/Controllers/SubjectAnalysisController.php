@@ -17,7 +17,7 @@ class SubjectAnalysisController extends Controller
     public function index()
     {
         $count = 1;
-        $subjectAnalysis = SubjectQuestionstatus::whereProgress(1)->get();
+        $subjectAnalysis = SubjectQuestionstatus::all();
 
          //$subjectAssigned = SubjectAssigned::where('classe_id', $request->classe_id)->where('subject_id', $request->subject_id)->first('teacher_id');
 

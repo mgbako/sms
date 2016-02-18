@@ -70,7 +70,7 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
-                  <table width="92%" class="table table-hover">
+                  <table width="92%" class="table table-hover text-center">
                     <tr>
                       <th width="4%">S/N</th>
                       <th width="23%">Class</th>
@@ -85,9 +85,13 @@
                         <td>{{ Scholr\Classe::where('id', $subjectquestionstatus->classe_id)->first()->name}}</td>
                         <td>{{ Scholr\Subject::where('id', $subjectquestionstatus->subject_id)->first()->name}}</td>
                         <td>
-                          <a href="{{ route('subjectQuestions.delete', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a>
+                          @if(!Scholr\SubjectQuestionstatus::where('classe_id', $subjectquestionstatus->classe_id)->where('subject_id', $subjectquestionstatus->subject_id)->where('progress', 0)->first())
+                            <a href="{{ route('subjectQuestions.delete', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a>
+                          @endif
                           @if( ( (Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) * 100) / $totalquestion ) == 100)
-                          | <a href="{{ route('subjectQuestions.submit', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}" class="btn"><i class="fa fa-database"></i> Submit</a>
+                            @if(Scholr\SubjectQuestionstatus::where('classe_id', $subjectquestionstatus->classe_id)->where('subject_id', $subjectquestionstatus->subject_id)->where('progress', 0)->first())
+                              <a href="{{ route('subjectQuestions.submit', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}" class="btn"><i class="fa fa-database"></i> Submit</a>
+                            @endif
                           @endif
                         </td>
                           
@@ -103,6 +107,8 @@
                             <span class="label label-primary">Question Submitted</span>
                           @elseif($subjectquestionstatus->progress == 2)
                             <span class="label label-success">Question Approved</span>
+                          @elseif($subjectquestionstatus->progress == 2 && $subjectquestionstatus->write == 1)
+                            <span class="label label-success">Question Ready for Exam</span>
                           @else
                             <span class="label label-warning">Question Not Submitted</span>
                           @endif

@@ -23,12 +23,14 @@ class ExamsController extends Controller
 {
     public $class;
     public $subject;
+    public $school;
 
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
+
     public function index($classe_id)
     {   
         $user = Auth::user();
@@ -39,7 +41,7 @@ class ExamsController extends Controller
             $subjects = Classe::find($classe_id)->subjects()->get();
             $records = DB::table('students')->where('id', $user->student_id)->first();
             $count = 1;
-            return view('exams.index', compact('user', 'classe_id', 'subjects', 'subjectAssigneds', 'records'));
+            return view('exams.index', compact('user', 'classe_id', 'subjects', 'subjectAssigneds', 'records', 'term'));
         }  
         flash('you are not allowed access to this area');
         return redirect()->back();
@@ -59,6 +61,7 @@ class ExamsController extends Controller
             $count = 1;
             $questions = Question::where('classe_id', $classe_id)
                                    ->where('subject_id', $subject_id)
+                                   ->where('term', $term)
                                    ->orderBy(\DB::raw('RAND()'))
                                    ->get();
 

@@ -1,6 +1,7 @@
 <?php namespace Scholr;
 
 use Illuminate\Database\Eloquent\Model;
+use Scholr\SubjectAssigned;
 
 class Subject extends Model {
 
@@ -31,5 +32,6 @@ class Subject extends Model {
 
 	  return $this->morphMany('Scholr\Photo', 'imageable');
 	}
+
 
 }
