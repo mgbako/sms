@@ -85,12 +85,11 @@
                         <td>{{ Scholr\Classe::where('id', $subjectquestionstatus->classe_id)->first()->name}}</td>
                         <td>{{ Scholr\Subject::where('id', $subjectquestionstatus->subject_id)->first()->name}}</td>
                         <td>
-                          @if(!Scholr\SubjectQuestionstatus::where('classe_id', $subjectquestionstatus->classe_id)->where('subject_id', $subjectquestionstatus->subject_id)->where('progress', 0)->first())
+                          
                             <a href="{{ route('subjectQuestions.delete', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a>
-                          @endif
                           @if( ( (Scholr\Teacher::totalAdded($teacher->id, $subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id) * 100) / $totalquestion ) == 100)
                             @if(Scholr\SubjectQuestionstatus::where('classe_id', $subjectquestionstatus->classe_id)->where('subject_id', $subjectquestionstatus->subject_id)->where('progress', 0)->first())
-                              <a href="{{ route('subjectQuestions.submit', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}" class="btn"><i class="fa fa-database"></i> Submit</a>
+                          |<a href="{{ route('subjectQuestions.submit', [$subjectquestionstatus->classe_id, $subjectquestionstatus->subject_id]) }}" class="btn"><i class="fa fa-database"></i> Submit</a>
                             @endif
                           @endif
                         </td>
