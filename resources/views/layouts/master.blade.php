@@ -140,6 +140,7 @@
     <script src="{{ asset('js/scores.js')}}"></script>
   
     <script src="{{ asset('/js/page.js')}}"></script>
+    <script src="{{ asset('/js/select2.min.js') }}"></script>
     <script src="{{ asset('js/paginate2.js')}}"></script>
   
     <script src="{{ asset('/js/progressBar.js')}}"></script>

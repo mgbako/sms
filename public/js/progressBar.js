@@ -26,13 +26,14 @@
 	}
 
 	function countChecked(){
-		checked = $('input:checked').length;
+		var checked = $('input:checked').length;
+		var totalQ = $('#totalQ');
 		var percentage = parseInt( ( (checked / count) * 100), 10);
 
-		if(percentage <= 40 ){
+		if(percentage <= 25){
 			$('.progress-bar').addClass('progress-bar-danger');
 		}
-		else if(percentage <= 80){
+		else if(percentage <= 50){
 			$('.progress-bar').removeClass('progress-bar-danger');
 			$('.progress-bar').addClass('progress-bar-warning');
 		}

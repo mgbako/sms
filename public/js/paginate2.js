@@ -10,6 +10,7 @@
 	*/
 	var number_of_items = $('.post').size();
 
+
 	/**
 	 * Calculate the number of pages we are going to have
 	 */
@@ -20,7 +21,7 @@
 	 * Set the value of our hidden input fields
 	 */
 	$("#numbers").val(1);
-	$('#current_page').val(1);
+	$('#current_page').val(0);
 	$('#show_per_page').val(show_per_page);
 
 	/**
@@ -34,7 +35,7 @@
 	 * -link to next page
 	 */
 	var navigation_html = '<button type="button" class=" btn btn-primary pull-left previous_link"><a class="link" href="javascript:previous();">Prev</a></button>';
-	var current_link = 1;
+	var current_link = 0;
 
 	while(number_of_pages > current_link){
 		navigation_html += '<a class="page_link" href="javascript:go_to_page('+ current_link +')" longdesc="' + current_link +'">'+ (current_link + 1) + '</a>';
@@ -62,9 +63,6 @@
 	 */
 	$('.post').slice(0, show_per_page).css('display', 'block');
 	
-
-	
-
 }());
 
 

@@ -15,7 +15,7 @@ class Subjectquestionstatus extends Model
     {
     	$subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classId)
                                 ->where('subject_id', $subjectId)
-                                ->where('write', $write)->first();
+                                ->where('write', $write)->get();
 
         return $subjectquestionstatus;
     }
