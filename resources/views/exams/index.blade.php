@@ -31,7 +31,7 @@
                        </div>
                          
                         @foreach($subjects as $subject)
-                        @if(Scholr\Subjectquestionstatus::canwrite($classe_id, $subject->id, 1))
+                        @if(Scholr\SubjectQuestionstatus::canwrite($classe_id, $subject->id, 1))
 
                           @if( Scholr\Grade::where(['student_id'=> $records->id, 'classe_id'=> $classe_id, 'subject_id'=> $subject->id])->first() )  
                             <div class="box box-warning box-solid" style="opacity: .5;">
