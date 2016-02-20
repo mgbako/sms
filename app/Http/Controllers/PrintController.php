@@ -55,6 +55,7 @@ class PrintController extends Controller
     {   
         if ($this->user->type == 'admin') {
             $grades = Grade::all();
+
             $pdf = PDF::loadView('pdf.allresults', compact('grades'));
             return $pdf->stream('Allresult.pdf');
         }else {
@@ -70,8 +71,9 @@ class PrintController extends Controller
                 $student = DB::table('users')->where('slug', $slug)->first();
                 $records = DB::table('students')->where('id', $student->student_id)->first();
 
-                $pdf = PDF::loadView('pdf.studentdetails', compact('student', 'records'));  
-                return $pdf->stream('mydetails.pdf');
+            $pdf = PDF::loadView('pdf.studentdetails', compact('student', 'records')); 
+            //dd($pdf->stream('mydetails.pdf')); 
+            return $pdf->stream('mydetails.pdf');
             }else {
                 flash('Ops you do not have access to that area!');
                 return redirect()->back();

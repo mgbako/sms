@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'mail'),
+    'driver' => env('MAIL_DRIVER', 'SMTP'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'codebugsolved@gmail.com', 'name' => 'AddTen'],
+    'from' => ['address' => 'nonreply@addtenten.com', 'name' => 'AddTen'],
 
     /*
     |--------------------------------------------------------------------------

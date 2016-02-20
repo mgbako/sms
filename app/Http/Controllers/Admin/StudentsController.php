@@ -191,7 +191,7 @@ class StudentsController extends Controller {
 							'address' => $row[7],
 							'state' => $row[8],
 							'nationality' =>$row[9],
-							'class' =>$row[10],
+							'class_id' =>$row[10],
 							'slug' => $row[11]
 						)
 					);
