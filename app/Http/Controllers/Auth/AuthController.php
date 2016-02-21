@@ -141,9 +141,7 @@ class AuthController extends Controller
                 $submitCount = [];
                 $inCount = 0;
 
-                // foreach ($assigned as $myclass) {
-                //     dd(SubjectAssigned::get_subjects($myclass->classe_id, $teacher->id));
-                // }
+               
                 $school = DB::table('schools')->first();
 
                 foreach($assigned as $assign)
