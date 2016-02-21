@@ -74,7 +74,7 @@
 		                      	<a href="{{ route('results.classes', [$class->classe_id]) }}">
 		                      		<i class="fa fa-list-alt"></i> {{$mainclass::whereId($class->classe_id)->distinct()->first()->name }}
 		                      	</a>
-		                        
+		                        <i class="fa fa-dashboard"></i>
 		                      </li>
 		                  @endforeach
 		              </ul>
