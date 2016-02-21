@@ -40,6 +40,8 @@ class ExamsController extends Controller
             $term = School::first()->term;
             $subjects = Classe::find($classe_id)->subjects()->get();
             $records = DB::table('students')->where('id', $user->student_id)->first();
+
+            //dd($subjects);
             $count = 1;
             return view('exams.index', compact('user', 'classe_id', 'subjects', 'subjectAssigneds', 'records', 'term'));
         }  
