@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
 		<div class="row">
 			@unless(Auth::guest())
@@ -85,6 +86,10 @@
 		              </a>
 		              <ul class="treeview-menu">
 		                <li><a href="{{ route('schools.index') }}"><i class="fa fa-circle-o"></i> School</a></li>
+		                @if ($admin->type !== "secretary")
+		                	<li><a href="{{ route('admins.index') }}"><i class="fa fa-circle-o"></i> 
+		                	Admins</a></li>
+		                @endif
 		              </ul>
 		            </li>
 		          </ul>

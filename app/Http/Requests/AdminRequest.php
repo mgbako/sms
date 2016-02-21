@@ -26,7 +26,6 @@ class AdminRequest extends Request
         return [
             'firstname' => 'required|min:4|max:25',
             'lastname' => 'required|min:4|max:25',
-            'staffId' => 'required|min:4',
             'nationality' => 'required',
             'gender' => 'required',
             'email' => 'required|email|unique:admins',

@@ -124,9 +124,10 @@ class AuthController extends Controller
          return redirect('/');
     }
 
-    public function getTeacher($slug){
+    public function getTeacher($slug)
+    {
          $questionCount;
-         
+         $subject_assigned = SubjectAssigned::where('teacher_id', \Auth::user()->teacher_id)->get();
         if ($this->auth->check()) {
             $user = $this->auth->user();
             if ($user->type == 'teacher') {
@@ -139,6 +140,9 @@ class AuthController extends Controller
                 $submitCount = [];
                 $inCount = 0;
 
+                // foreach ($assigned as $myclass) {
+                //     dd(SubjectAssigned::get_subjects($myclass->classe_id, $teacher->id));
+                // }
                 $school = DB::table('schools')->first();
 
                 foreach($assigned as $assign)
