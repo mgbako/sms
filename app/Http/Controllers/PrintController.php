@@ -38,6 +38,7 @@ class PrintController extends Controller
                 $data = [];
                 flash('Find out how you have been performing in Exams below');
                 $pdf = PDF::loadView('pdf.result', compact('term', 'student', 'grades', 'count', 'school'));
+                dd($pdf->stream('myresult.pdf'));
                 return $pdf->stream('myresult.pdf');
             }else {
                flash('There is no record for this Student on the Database');
