@@ -25,7 +25,17 @@ class ScoreController extends Controller
     public function store(Request $request)
     {
         $user = \Auth::user();
+
         $student_id = Student::where('studentId', $user->loginId)->first();
+        //dd($student_id);
+
+        if(Grade::where(['student_id'=> $student_id->id, 'classe_id'=> $request->classe_id, 'subject_id'=> $request->subject_id])->first() )
+        {
+           return redirect()
+                ->route("classes.exams.index", [$request->classe_id])
+                ->with('message', '<p class="alert alert-danger">You have Already Taken This Exam</p>');
+        }
+        
 
         $result;
         $selected;
@@ -98,7 +108,7 @@ class ScoreController extends Controller
                     ])->first();
 
         //dd($score);
-        return view('scores.show', compact('user', 'score'));
+        return view('scores.show', compact('user', 'score', 'classe_id'));
     }
 
     /**

@@ -63,9 +63,12 @@ class ResultsController extends Controller
             //dd($student);
             if ($student->slug == $slug) {
                 $grades = Grade::where('student_id', $student->id)->get();
+                $sum = $grades->sum('score');
+                $avg = $grades->avg('score');
+                //dd($sum);
                 $term = $this->term;
                 flash('Find out how you have been performing in Exams below');
-                return view('results.myresult', compact('student', 'grades', 'count', 'term'));
+                return view('results.myresult', compact('student', 'grades', 'count', 'term', 'sum', 'avg'));
             }else {
                flash('There is no record for this Student on the Database');
                 return redirect()->back(); 

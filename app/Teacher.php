@@ -64,4 +64,11 @@ class Teacher extends Model implements SluggableInterface{
 
       return $classes;
     }
+
+    public function assignedClass($teacher_id, $classe_id)
+    {
+      $subjects = SubjectAssigned::where(['teacher_id'=>$teacher_id, 'classe_id'=>$classe_id])->get(['suubject_id']);
+
+      return $subjects;
+    }
 }

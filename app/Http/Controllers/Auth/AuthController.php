@@ -133,6 +133,7 @@ class AuthController extends Controller
             if ($user->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', $user->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+                $assignedSubjects = SubjectAssigned::all();
 
                 $class_number = SubjectAssigned::where('teacher_id', $teacher->id)->count();
 
@@ -178,7 +179,7 @@ class AuthController extends Controller
 
                 //sdd($questionCount);
 
-                return view('account.teacherHome', compact('teacher', 'assigned', 'class_number', 'approvedCount', 'submitCount', 'inCount'));
+                return view('account.teacherHome', compact('teacher', 'assigned', 'class_number', 'approvedCount', 'submitCount', 'inCount', 'assignedSubjects'));
             }else{
                 flash('Ops you do not have access to that area!');
                 return redirect()->back();
