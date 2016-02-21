@@ -202,7 +202,8 @@ return [
         'Image'     => Intervention\Image\Facades\Image::class,
         'Flash'     => Laracasts\Flash\Flash::class,
         'PDF'       => Barryvdh\Snappy\Facades\SnappyPdf::class,
-        'Images'     => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'Images'    => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'School'    => Scholr\School::class,
 
     ],
 
