@@ -1,7 +1,12 @@
 /resources/assets
 /vendor
 /node_modules
+/public/csvfiles*
+/public/img*
+/public/mailoutput*
 composer.lock
 composer.json
 .env
 .htaccess
+.tags
+.tags_sorted_by_file

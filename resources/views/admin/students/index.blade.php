@@ -1,3 +1,4 @@
+@inject('class', 'Scholr\Classe')
 @extends('layouts.admin')
 @section('content')
 @include('partials.adminDashboard')
@@ -54,7 +55,7 @@
 							<td>
                 {!! link_to_route('students.show', $student->studentId, $student->id) !!}
               </td>
-							<td>{!! $student->class !!}</td>
+							<td>{!! $class::whereId($student->class_id)->first()->name !!}</td>
 							<td>{!! link_to_route('students.edit', 'Edit', $student->id, ['class'=>'btn btn-info btn-xs']) !!}</td>
 							<td>{!! link_to_route('students.delete', 'Delete', $student->id, ['class'=>'btn btn-danger btn-xs']) !!}</td>
 						</tr>
