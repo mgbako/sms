@@ -51,7 +51,7 @@
                     <div class="col-sm-3 invoice-col">
                       <b>Session:</b> 2015/2016<br>
                       <b>Present Term:</b> 1st Term<br>
-                      <b>Present Class:</b> {{ $class:whereId($student->class_id)->first()->name}}
+                      <b>Present Class:</b> {{ $class::whereId($student->class_id)->first()->name}}
 
                     </div>
                     <div class="col-xs-12 table-responsive">
