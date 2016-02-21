@@ -108,7 +108,7 @@ class ScoreController extends Controller
                     ])->first();
 
         //dd($score);
-        return view('scores.show', compact('user', 'score'));
+        return view('scores.show', compact('user', 'score', 'classe_id'));
     }
 
     /**

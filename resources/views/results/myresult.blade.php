@@ -8,7 +8,7 @@
 		      <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Welcome, <span>Admin</span>
+            Welcome, <span>{{$student->lastname}} {{$student->firstname}}</span>
           </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -92,15 +92,15 @@
                 <table class="table">
                   <tr>
                     <th style="width:50%">Total Grades:</th>
-                    <td</td>
+                    <td>{{$sum}}</td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <th>Total Questions:</th>
-                    <td</td>
-                  </tr>
+                    <td>{{$sum}}</td>
+                  </tr> -->
                   <tr>
                     <th>Average:</th>
-                    <td></td>
+                    <td>{{$avg}}</td>
                   </tr>
                   <tr>
                     <th>Remarks:</th>
