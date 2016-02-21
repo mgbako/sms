@@ -10,4 +10,9 @@ class SubjectAssigned extends Model
     protected $table = 'subjectAssigneds';
 
 
+	public static function get_subjects($class_id, $teacher_id)
+	{
+		return Self::where(['classe_id'=>$class_id, 'teacher_id'=>$teacher_id])->get();
+
+	}
 }

@@ -5,7 +5,7 @@ namespace Scholr\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class RedirectIfNotAStaff {
+class RedirectIfNotAdmin {
 
 	protected $auth;
 
@@ -25,9 +25,11 @@ class RedirectIfNotAStaff {
 		
 		if ($this->auth->guest()) {
 			return redirect()->guest('/');
-		}elseif ($request->user()->type == 'student') {
-			return redirect('account/student/'.$request->user()->slug);
 		}
+		if ($request->user()->type != 'admin') {
+			return redirect()->back();
+		}
+		
 		return $response;
 	}
 

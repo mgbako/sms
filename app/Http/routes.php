@@ -103,6 +103,7 @@ Route::group(['middleware'=> 'auth'], function(){
 		
 	Route::get ('github', 'PdfController@github');
 
+	Route::get('admins/{id}/delete', ['as'=>'admins.delete', 'uses'=>'Admin\AdminController@delete']);
 	Route::resource('admins', 'Admin\AdminController');
 });
 

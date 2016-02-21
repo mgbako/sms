@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ucfirst(School::first()->name)}}</title>
 
-
 	<link href="/css/app.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/AdminLTE.min.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css">

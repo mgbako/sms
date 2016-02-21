@@ -1,5 +1,6 @@
 @inject('subject', 'Scholr\Subject')
 @inject('mainclass', 'Scholr\Classe')
+@inject('subject_assigned', 'Scholr\SubjectAssigned')
 <div class="container-fluid">
 		<div class="row">
 			@if(!Auth::guest())
@@ -39,11 +40,15 @@
 		                      		<i class="fa fa-angle-left pull-right"></i>
 		                      	</a>
 		                        <ul class="treeview-menu">
-		                          <li>
-		                          	<a href="{{ route('classes.subjects.questions.index', [$class->classe_id, $class->subject_id]) }}">
-		                          		<i class="fa fa-list-alt"></i>{{ $subject::whereId($class->subject_id)->first()->name }}
-		                          	</a>
-		                          </li>
+																@foreach ($subject_assigned::get_subjects($class->classe_id, $teacher->id) as $my_subjects)
+																	<li>
+				                          	<a href="{{ route('classes.subjects.questions.index', [$my_subjects->classe_id, $my_subjects->subject_id]) }}">
+				                          			<!--  -->
+				                          		<i class="fa fa-list-alt"></i>{{ $subject::whereId($my_subjects->subject_id)->first()->name }}
+				                          	</a>
+				                          </li>
+																@endforeach
+		                          
 		                        </ul>
 		                      </li>
 		                  @endforeach

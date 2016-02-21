@@ -69,7 +69,7 @@
                           <th>ID No.</th>
                           <th>Role</th>
                           <th>Edit</th>
-						  <th>Delete</th>
+						              <th>Delete</th>
                         </tr>
                       </tfoot>
                     </table>

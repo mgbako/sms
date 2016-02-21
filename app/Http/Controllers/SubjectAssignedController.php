@@ -16,21 +16,34 @@ use Scholr\SubjectAssigned;
 class SubjectAssignedController extends Controller
 {
 
+
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
     public function index()
-    {
+    {   
         $user = Auth::user();
+        if($user->type !== 'admin')
+        {
+            return redirect()->back();
+        }
+        
 
         $staff = Teacher::all();
         $classList = Classe::lists('name', 'id');
         $subjectList = Subject::lists('name', 'id');
 
         $subjectAssigned = SubjectAssigned::all();
+        
 
+
+   
         return view('admin.subjectAssigned.index', compact('subjectList', 'classList', 'staff', 'user', 'assignedClass', 'subjectAssigned'));
     }
 
