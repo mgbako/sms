@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-  @include('partials.adminDashboard'))
+  @include('partials.teachersDashboard'))
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->

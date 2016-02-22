@@ -281,7 +281,9 @@ class SubjectQuestionsController extends Controller
     {
         $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
                                 ->where('subject_id', $subjectId)->first();
-        return view('status.subjectQuestion.delete', compact('subjectquestionstatus', 'classeId', 'subjectId'));
+
+        $assigned = SubjectAssigned::all();
+        return view('status.subjectQuestion.delete', compact('subjectquestionstatus', 'classeId', 'subjectId', 'assigned'));
     }
 
     /**
