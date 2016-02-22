@@ -63,8 +63,10 @@ class ResultsController extends Controller
             //dd($student);
             if ($student->slug == $slug) {
                 $grades = Grade::where('student_id', $student->id)->get();
-                $sum = $grades->sum('score');
-                $avg = $grades->avg('score');
+
+                /*dd($grades);*/
+                $sum = $grades->sum('total');
+                $avg = $grades->avg('total');
                 //dd($sum);
                 $term = $this->term;
                 flash('Find out how you have been performing in Exams below');
