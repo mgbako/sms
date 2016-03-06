@@ -7,7 +7,7 @@
 	<title>{{ucfirst(School::first()->name)}}</title>
 
 	<link href="/css/app.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/css/AdminLTE.min.css">
+	<link rel="stylesheet" href="/css/AdminLTE.min.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/square/blue.css">
 
@@ -32,7 +32,8 @@
 	<script src="{{ asset('/js/jquery.js') }}"></script>
 
 	<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-	  <script src="{{ asset('/js/icheck.min.js') }}"></script>	    <script>
+	  <script src="{{ asset('/js/icheck.min.js') }}"></script>	    
+    <script>
       $(function () {
         $('input').iCheck({
           checkboxClass: 'icheckbox_square-blue',
