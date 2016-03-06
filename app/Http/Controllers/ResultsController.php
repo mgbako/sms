@@ -62,7 +62,8 @@ class ResultsController extends Controller
             $student = Student::where('id', $this->user->student_id)->first();
             //dd($student);
             if ($student->slug == $slug) {
-                $grades = Grade::where('student_id', $student->id)->get();
+                $grades = Grade::where('student_id', $student->id)
+                ->where('approve', 1)->get();
 
                 /*dd($grades);*/
                 $sum = $grades->sum('total');
@@ -130,6 +131,59 @@ class ResultsController extends Controller
             flash('You are not allowed Access to that Area');
             return redirect()->back();
         }
+    }
+
+    /**
+        Approving result
+    */
+    public function approve($classeId, $subjectId, $studentId)
+    {   
+  
+        $grade = Grade::where('classe_id', $classeId)
+                        ->where('subject_id', $subjectId)
+                        ->where('student_id', $studentId)
+                        ->where('approve', 0)->get();
+
+        if ($grade) {
+            $affacted = DB::update('update grades set approve = 1 where classe_id = ? and subject_id = ? and student_id = ?', [$classeId, $subjectId, $studentId]);
+           if($affacted) {
+            flash('Result as been Approved');
+            return redirect('/results/all');
+           }else {
+            flash('Error Approving result please contact the IT department');
+            return redirect('/results/all');
+           }
+        }else {
+            flash('Result was not Approved please try again');
+            return redirect('/results/all');
+        }
+        
+    }
+
+    /**
+        Disapproving result
+    */
+    public function disapprove($classeId, $subjectId, $studentId)
+    {   
+  
+        $grade = Grade::where('classe_id', $classeId)
+                        ->where('subject_id', $subjectId)
+                        ->where('student_id', $studentId)
+                        ->where('approve', 1)->get();
+        if ($grade) {
+            $affacted = DB::update('update grades set approve = 0 where classe_id = ? and subject_id = ? and student_id = ?', [$classeId, $subjectId, $studentId]);
+           if($affacted) {
+            flash('Result as been disapproved');
+            return redirect('/results/all');
+           }else {
+            flash('Error Disapproving result please contact the IT department');
+            return redirect('/results/all');
+           }
+        }else {
+            flash('Result was not disapproved please try again');
+            return redirect('/results/all');
+        }
+        
     }
 
     public function missingMethod($parameters = array())

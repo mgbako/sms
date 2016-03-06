@@ -23,6 +23,7 @@ class CreateGradesTable extends Migration {
 			$table->integer('total');
 			$table->string('remark');
 			$table->string('slug');
+			$table->integer('approve');
 			$table->timestamps();
 
 				$table->foreign('student_id')
