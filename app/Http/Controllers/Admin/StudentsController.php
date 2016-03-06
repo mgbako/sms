@@ -48,7 +48,7 @@ class StudentsController extends Controller {
 	 * @return Response
 	 */
 	public function store(StudentRequest $request)
-	{	
+	{
 		$school = DB::table('schools')->first();
 		if (!$school) {
             flash("You have to setup school before any other thing");
@@ -141,13 +141,13 @@ class StudentsController extends Controller {
 			flash('You are banned from this area');
 			return redirect()->back();
 		}else{
-			$students = Student::where('id', '>', 0)->exclude(['type', 'image', 
+			$students = Student::where('id', '>', 0)->exclude(['type', 'image',
 				'created_at', 'updated_at', 'end_date', 'slug'])->get()->toArray();
 			$csv = Writer::createFromFileObject(new \SplTempFileObject());
 
 			//we insert the CSV header
-			$csv->insertOne(['firstname', 'lastname', 'studentId', 'phone', 
-  				'email', 'dob', 'gender', 'address', 'state','nationality', 
+			$csv->insertOne(['firstname', 'lastname', 'studentId', 'phone',
+  				'email', 'dob', 'gender', 'address', 'state','nationality',
   				'class']);
 
 			$csv->insertAll($students);
@@ -167,18 +167,22 @@ class StudentsController extends Controller {
 	}
 
 	public function csvupload(Request $request)
-	{	
+	{
 		if($request->hasFile('file'))
-		{	
+		{
 			$file = $request->file('file');
 			$filename = $file->getClientOriginalName();
 			$path = public_path('csvfiles/students/'.$filename);
 			if(!file_exists($path))
-			{	
+			{
 
 				$file->move(public_path('csvfiles/students'), $filename);
 				$csv = Reader::createFromPath($path);
 				foreach ($csv->setOffset(1)->fetchAll() as $key => $row) {
+					if (Student::checkifempty($row)) {
+						flash('Records added successfully');
+						return redirect('students');
+					}
 					DB::table('students')->insert(
 						array(
 							'firstname' => $row[0],
@@ -186,7 +190,7 @@ class StudentsController extends Controller {
 							'studentId' => $row[2],
 							'phone' => $row[3],
 							'email' => $row[4],
-							'dob' => $row[5],
+							'dob' => date("Y-m-d",strtotime($row[5])),
 							'gender' => $row[6],
 							'address' => $row[7],
 							'state' => $row[8],
@@ -226,6 +230,7 @@ class StudentsController extends Controller {
 
 		return redirect('students');
 	}
+
 
 	 public function missingMethod($parameters = array())
     {
