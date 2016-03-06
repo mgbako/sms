@@ -100,6 +100,13 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::post('/classes/{id}/subjects/{subjectId}/result',  ['as'=>'results.store', 'uses'=>'ResultsController@store']);
 	Route::resource('/results', 'ResultsController');
 
+	/*---------------------------------------------------------------------------------------------------
+	|							Approve and Disapprove Result
+	-----------------------------------------------------------------------------------------------------*/
+
+	Route::get('/result/class/{classeId}/subject/{subjectId}/student/{studentId}/approve', ['as'=>'result.approve', 'uses'=> 'ResultsController@approve']);
+	Route::get('/result/class/{classeId}/subject/{subjectId}/student/{studentId}/disapprove', ['as'=>'result.disapprove', 'uses'=> 'ResultsController@disapprove']);
+
 
 	Route::post('/scores',  ['as'=>'score.store', 'uses'=>'ScoreController@store']);
 	Route::get('/student/{id}/classe/{classeId}/subject/{subjectId}/score', ['as'=>'scores.show', 'uses'=>'ScoreController@show']);

@@ -12,7 +12,7 @@
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="/students">Students</a></li>
-        <li class="active">{{ ucwords($profile->firstname) }} Biodata</li>
+        <li class="active">{{ ucwords($profile->firstname) }}'s Biodata</li>
       </ol>        
     </section>
 

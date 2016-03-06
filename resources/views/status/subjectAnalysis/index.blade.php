@@ -47,6 +47,7 @@
                     <td>{{ Scholr\Subject::where('id', $subjectAnalysis->subject_id)->first()->name}}</td>
                     <td>{{ Scholr\Classe::where('id', $subjectAnalysis->classe_id)->first()->name}}</td>
                     <td>
+
                           <a href="{{ route('questions.edits', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id, Scholr\SubjectAssigned::where('subject_id', $subjectAnalysis->subject_id)->first()->teacher_id]) }}">
 
                             <i class="fa fa-eye"></i> View

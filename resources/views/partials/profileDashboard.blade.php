@@ -200,7 +200,7 @@
 	            </li>
 	           
 	            <li class="treeview">
-                <a href="{{ route('classes.exams.index', [$class::whereId($student->class_id)->first()->id]) }}">
+                <a href="{{ route('classes.exams.index', [$mainclass::whereId($student->class_id)->first()->id]) }}">
                   <i class="fa fa-file-text-o"></i>
                     <span>
                        Exam Hall 

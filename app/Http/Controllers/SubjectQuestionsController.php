@@ -36,6 +36,7 @@ class SubjectQuestionsController extends Controller
          if (Auth::user()->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', Auth::user()->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
+                $assignedSubject = SubjectAssigned::where('teacher_id', $teacher->id)->get();
         }
 
 
@@ -52,14 +53,16 @@ class SubjectQuestionsController extends Controller
         {
             //dd($value);
             $classIds[] = $value->classe_id;
-            $subjectIds[] = $value->subject_id;
-
         }
 
+        foreach ($assignedSubject as $key => $value) 
+        {
+            $subjectIds[] = $value->subject_id;
+        }
         
         $classList = Classe::whereIn('id', $classIds)->orderBy('name', 'asc')->lists('name', 'id');
         $subjectList = Subject::whereIn('id', $subjectIds)->orderBy('name', 'asc')->lists('name', 'id');
-        
+
         
         $time = [""=>"Choose", 15=>15, 30=>30, 45=>45, 60=>60, 75=>75, 90=>90, 105=>105, 120=>120];
 
@@ -281,7 +284,9 @@ class SubjectQuestionsController extends Controller
     {
         $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
                                 ->where('subject_id', $subjectId)->first();
-        return view('status.subjectQuestion.delete', compact('subjectquestionstatus', 'classeId', 'subjectId'));
+
+        $assigned = SubjectAssigned::all();
+        return view('status.subjectQuestion.delete', compact('subjectquestionstatus', 'classeId', 'subjectId', 'assigned'));
     }
 
     /**

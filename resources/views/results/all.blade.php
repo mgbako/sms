@@ -33,16 +33,21 @@
                     <table align="center" class="table table-bordered table-striped" id="example1">
                       <thead>
                         <tr>
+                          <th>{!! Form::checkbox('all', 'all', null, []) !!} </th>
                           <th>Student Name</th>
                           <th>ID No.</th>
                           <th>Class</th>
                           <th>Subject</th>
                           <th>Score (%)</th>
+                          <th>Approve/Disapprove</th>
                         </tr>
                       </thead>
-                     @foreach ($grades as $grade)
-                        <tbody>
+                      <tbody>
+                         @foreach ($grades as $grade)
                         <tr>
+                          <td>
+                              {!! Form::checkbox('all', $grade->id, null, []) !!}
+                          </td>
                           <td>
                               {{ $student::whereId($grade->student_id)->first()->firstname.' '.$student::whereId($grade->student_id)->first()->lastname}}
                           </td>
@@ -67,16 +72,25 @@
                           <td>
                             {{ $grade->total }}
                           </td>
+                          <td>
+                            @if($grade->approve < 1)
+                              <a href="{{ route('result.approve', [$grade->classe_id, $grade->subject_id, $grade->student_id])}}" class="btn btn-success btn-xs"><i class="fa fa-check-square-o"></i></a>
+                            @else
+                              <a href="{{ route('result.disapprove', [$grade->classe_id, $grade->subject_id, $grade->student_id])}}" class="btn btn-danger btn-xs" onclick="confirm('Are sure you want to do disapprove this result', 'djdj')"><i class="fa fa-trash"></i></a>
+                            @endif
+                          </td>
                         </tr>
+                        @endforeach
                       </tbody>
-                     @endforeach
                       <tfoot>
                         <tr>
-                           <th>Student Name</th>
+                          <th>{!! Form::checkbox('all', 'all', null, []) !!} </th>
+                          <th>Student Name</th>
                           <th>ID No.</th>
                           <th>Class</th>
                           <th>Subject</th>
                           <th>Score (%)</th>
+                          <th>Approve/Disapprove</th>
                         </tr>
                       </tfoot>
                     </table>
