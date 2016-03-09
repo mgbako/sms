@@ -203,7 +203,7 @@ class StudentsController extends Controller {
 				flash('Records added successfully');
 				return redirect('students');
 			}else{
-				flash('file already exits');
+				flash('file already exist');
 				return redirect()->back();
 			}
 		}
