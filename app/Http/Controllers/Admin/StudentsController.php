@@ -127,6 +127,7 @@ class StudentsController extends Controller {
 			$student->state = $request['state'];
 			$student->nationality = $request['nationality'];
 			$student->class_id = $request['class_id'];
+			$student->subjects()->attach($request->input('subject_list'));
 			$student->update();
 			flash($student->firstname.' '.$student->lastname.' was updated successfully!');
 			return redirect('students');
