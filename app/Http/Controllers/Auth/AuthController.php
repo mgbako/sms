@@ -14,6 +14,7 @@ use Scholr\SubjectAssigned;
 use Scholr\Grade;
 use Scholr\SubjectQuestionstatus;
 use Scholr\Question;
+use Scholr\School;
 use DB;
 use Auth;
 
@@ -29,7 +30,7 @@ class AuthController extends Controller
     | a simple trait to add these behaviors. Why don't you explore it?
     |
     */
-    
+
 
     use AuthenticatesAndRegistersUsers;
 
@@ -56,7 +57,7 @@ class AuthController extends Controller
 
     /**
      * shows student login form
-     * 
+     *
      */
     public function getStudentlogin() {
         return view('account.studentLogin');
@@ -64,7 +65,7 @@ class AuthController extends Controller
 
     /**
      * show form for teacher login
-     * 
+     *
      */
     public function getTeacherlogin() {
         return view('account.teacherLogin');
@@ -83,7 +84,7 @@ class AuthController extends Controller
 
         /**
      * show teacher regisyration form
-     * @return string 
+     * @return string
      */
     public function getNewteacher() {
         return view('account.newTeacher');
@@ -95,18 +96,16 @@ class AuthController extends Controller
             if($this->auth->user()->type == 'admin')
             {
                 $admin = DB::table('users')->where('slug', $slug)->first();
-
+                $term = School::first()->term;
                 $total_student = DB::select('SELECT COUNT(*) AS all_student FROM students');
                 $total_student = (int) $total_student[0]->all_student;
-
-                $grade_sum = DB::select("SELECT SUM(total) As sum FROM grades WHERE term = '1st Term'");
+                $grade_sum = DB::select("SELECT SUM(total) As sum FROM grades WHERE term ='$term' group by id");
                 $grade_sum = (int) $grade_sum[0]->sum;
-
                 $term_average_score = @($grade_sum / $total_student);
 
                 return view('account.staffHome', compact('admin', 'term_average_score'));
             }
-            
+
         }
     }
 
@@ -115,7 +114,9 @@ class AuthController extends Controller
             if ($this->auth->user()->type == 'student') {
                 $student = DB::table('users')->where('slug', $slug)->first();
                 $records = DB::table('students')->where('id', $student->student_id)->first();
-                return view('account.studentHome', compact('student', 'records'));  
+                $student_subjects = DB::table('student_subject')->where('student_id', $student->student_id)->get();
+
+                return view('account.studentHome', compact('student', 'records', 'student_subject'));
             }else {
                 flash('Ops you do not have access to that area!');
                 return redirect()->back();
@@ -141,7 +142,7 @@ class AuthController extends Controller
                 $submitCount = [];
                 $inCount = 0;
 
-               
+
                 $school = DB::table('schools')->first();
 
                 foreach($assigned as $assign)
@@ -188,13 +189,13 @@ class AuthController extends Controller
 
     /**
      * handle creating admin user account
-     * @param  \Illuminate\Http\Request $request 
-     * @return \Illuminnate\Http\Response  
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminnate\Http\Response
      */
     public function postNewadmin(NewAccountRequest $request) {
 
         $requests = $request->all();
-        
+
         $requests['password'] = bcrypt($requests['password']);
         $requests['type'] = 'admin';
         $admin = Admin::whereStaffid($requests['loginId'])->firstOrFail();
@@ -204,15 +205,15 @@ class AuthController extends Controller
         $slug = $this->auth->user()->slug;
         $this->redirectTo = 'account/admin/'.$slug;
         $user = $this->auth->user();
-        flash('Welcome '.$user->username  
+        flash('Welcome '.$user->username
                         .' Your account was created succeessfully, Setup Your school if not setup yet');
         return redirect($this->redirectPath());
-    
+
     }
 
     /**
      * handels a registration request for student account
-     * @param  \Illuminate\Http\Request  $request 
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http'Response
      */
     public function postNewstudent(NewAccountRequest $request) {
@@ -228,19 +229,19 @@ class AuthController extends Controller
         $this->redirectTo = 'account/student/'.$slug;
 
         $user = $this->auth->user();
-        flash('Welcome '.$user->firstname .' '.$user->lastname 
+        flash('Welcome '.$user->firstname .' '.$user->lastname
                         .' Your account was created succeessfully');
         return redirect($this->redirectPath());
     }
     /**
      * handle creating teacher account
-     * @param  \Illuminate\Http\Request $request 
-     * @return \Illuminnate\Http\Response  
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminnate\Http\Response
      */
     public function postNewteacher(NewAccountRequest $request) {
 
         $requests = $request->all();
-        
+
         $requests['password'] = bcrypt($requests['password']);
         $requests['type'] = 'teacher';
         $teacher = Teacher::whereStaffid($requests['loginId'])->firstOrFail();
@@ -250,23 +251,23 @@ class AuthController extends Controller
         $slug = $this->auth->user()->slug;
         $this->redirectTo = 'account/teacher/'.$slug;
         $user = $this->auth->user();
-        flash('Welcome '.$user->firstname.' '.$user->lastname 
+        flash('Welcome '.$user->firstname.' '.$user->lastname
                         .' Your account was created succeessfully');
         return redirect($this->redirectPath());
-    
+
     }
 
 
     /**
      * handle admin login
-     * @param  \Illuminate\Http\Request $request 
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postAdminlogin(Request $request){
 
         $credentials = $request->only('email', 'password');
 
-        
+
 
         if ($this->auth->attempt($credentials, $request->has('remember'))){
             $slug = $this->auth->user()->slug;
@@ -289,21 +290,21 @@ class AuthController extends Controller
 
     /**
      * handle student login
-     * @param  \Illuminate\Http\Request $request 
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postStudentlogin(Request $request){
 
         $credentials = $request->only('email', 'password');
 
-        
+
 
         if ($this->auth->attempt($credentials, $request->has('remember'))){
             $slug = $this->auth->user()->slug;
             $this->redirectTo = 'account/student/'.$slug;
 
                 $user = $this->auth->user();
-        flash('Welcome Back '.$user->firstname. ' '.$user->lastname 
+        flash('Welcome Back '.$user->firstname. ' '.$user->lastname
                         .' You have logged in succeessfully');
 
             return redirect()->intended($this->redirectPath());
@@ -318,7 +319,7 @@ class AuthController extends Controller
 
     /**
      * Handle teacher logining teachers
-     * @param  \Illuminate\Http\Request $request 
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postTeacherlogin(Request $request){
@@ -341,7 +342,7 @@ class AuthController extends Controller
                     ->withErrors([
                         'email' => $this->getFailedLoginMessage(),
         ]);
-        
+
     }
 
     public function getMissingmethod($parameters = array())

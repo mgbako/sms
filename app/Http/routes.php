@@ -1,6 +1,10 @@
 <?php
 
 Route::get('/', 'WelcomeController@index');
+Route::get('/me', function ()
+{
+	return view('me');
+});
 Route::get('home', 'WelcomeController@index');
 
 Route::group(['middleware'=> 'auth'], function(){

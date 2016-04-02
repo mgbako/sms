@@ -14,12 +14,12 @@ class Student extends Model implements SluggableInterface
         'save_to'    => 'slug',
     );
 
-	protected $fillable = ['firstname', 'lastname', 'studentId', 'phone', 
-  'email', 'dob', 'gender', 'address', 'state','nationality', 'class_id', 
+	protected $fillable = ['firstname', 'lastname', 'studentId', 'phone',
+  'email', 'dob', 'gender', 'address', 'state','nationality', 'class_id',
   'end_date', 'image', 'slug'];
 
-  protected $columns = ['firstname', 'lastname', 'studentId', 'phone', 
-  'email', 'dob', 'gender', 'address', 'state','nationality', 'class_id', 
+  protected $columns = ['firstname', 'lastname', 'studentId', 'phone',
+  'email', 'dob', 'gender', 'address', 'state','nationality', 'class_id',
     'image', 'created_at', 'updated_at', 'end_date', 'slug'];
 
   public function scopeExclude($query, $value = [])
@@ -49,11 +49,22 @@ class Student extends Model implements SluggableInterface
     public function getSubjectListAttribute()
     {
       return $this->subjects->lists('id');
-    } 
+    }
 
     public function grades()
     {
       return $this->hasMany('Scholr\Grade');
+    }
+
+    public static function checkifempty($data)
+    {
+      $count = 0;
+      for ($i=0; $i < count($data); $i++) {
+        if (empty($data[$i])) {
+          $count++;
+        }
+      }
+      return $count;
     }
 
 }

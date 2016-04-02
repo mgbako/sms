@@ -12,7 +12,7 @@
           </h1>
           <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Staffs</li>
+            <li class="active">Schoo Settings</li>
           </ol>
         </section>
 
@@ -27,7 +27,7 @@
 
               <div class="box">
                 <div class="box-header">
-              
+
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div align="center">
