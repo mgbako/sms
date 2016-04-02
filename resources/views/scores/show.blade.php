@@ -42,18 +42,18 @@
 
                 
                 <div class="box-body">
-                  <dl>
+                  <!-- <dl>
                     
                     <div class="col-md-3 col-sm-6 col-xs-6 text-center">
                       <input type="text" class="knob" value="{{ $score->total}}" data-skin="tron" data-thickness="0.2" data-angleArc="250" data-angleOffset="-125" data-width="120" data-height="120" data-fgColor="#00c0ef" data-readonly="true">
                       <div class="knob-label">
                     <h3>Your Score</h3>
                       </div>
-                    </div><!-- ./col -->
+                    </div>./col
                     
                     <dt>
                     </dt>
-                  </dl>
+                  </dl> -->
                   <div class="form-group pull-left">
                     <div class="item col-lg-12">
                       <p class="message" id="compose-textarea" style="height: 120px">

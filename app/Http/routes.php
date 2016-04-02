@@ -14,10 +14,12 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::resource('subjects', 'Admin\SubjectsController');
 
 	Route::get('students/{id}/delete', ['as'=>'students.delete', 'uses'=>'Admin\StudentsController@delete']);
+	
+	
+	Route::resource('students', 'Admin\StudentsController');
 	Route::get('students/download', ['as'=>'students.download', 'uses'=>'Admin\StudentsController@download']);
 	Route::get('students/uploadfile', ['as'=>'students.upload', 'uses'=>'Admin\StudentsController@upload']);
 	Route::post('students/csvupload', ['as'=>'students.csvupload', 'uses'=>'Admin\StudentsController@csvupload']);
-	Route::resource('students', 'Admin\StudentsController');
 
 	Route::get('teachers/{id}/delete', ['as'=>'teachers.delete', 'uses'=>'Admin\TeachersController@delete']);
 	Route::get('teachers/download', ['as'=>'teachers.download', 'uses'=>'Admin\TeachersController@download']);

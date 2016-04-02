@@ -33,7 +33,6 @@
                     <table align="center" class="table table-bordered table-striped" id="example1">
                       <thead>
                         <tr>
-                          <th>{!! Form::checkbox('all', 'all', null, []) !!} </th>
                           <th>Student Name</th>
                           <th>ID No.</th>
                           <th>Class</th>
@@ -45,9 +44,6 @@
                       <tbody>
                          @foreach ($grades as $grade)
                         <tr>
-                          <td>
-                              {!! Form::checkbox('all', $grade->id, null, []) !!}
-                          </td>
                           <td>
                               {{ $student::whereId($grade->student_id)->first()->firstname.' '.$student::whereId($grade->student_id)->first()->lastname}}
                           </td>
@@ -84,7 +80,6 @@
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>{!! Form::checkbox('all', 'all', null, []) !!} </th>
                           <th>Student Name</th>
                           <th>ID No.</th>
                           <th>Class</th>

@@ -32,6 +32,8 @@ class SubjectQuestionsController extends Controller
         $count = 1;
         $assigned = '';
         $teacher;
+        $classIds = [];
+         $subjectIds = [];
 
          if (Auth::user()->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', Auth::user()->loginId)->first();
@@ -55,9 +57,19 @@ class SubjectQuestionsController extends Controller
             $classIds[] = $value->classe_id;
         }
 
+        if(!$classIds){
+            flash('Not Assigned to any class. Please contact the admin');
+            return redirect()->back();
+        }
+
         foreach ($assignedSubject as $key => $value) 
         {
+            flash('Not Assigned to any Subject Please contact the admin');
             $subjectIds[] = $value->subject_id;
+        }
+
+        if(!$subjectIds){
+            return redirect()->back();
         }
         
         $classList = Classe::whereIn('id', $classIds)->orderBy('name', 'asc')->lists('name', 'id');
@@ -70,7 +82,7 @@ class SubjectQuestionsController extends Controller
         $totalquestion = (int)$school->number;
 
               
-        $subjectquestionstatus = SubjectQuestionstatus::all();
+        $subjectquestionstatus = SubjectQuestionstatus::where('teacher_id', $teacher->id)->get();
 
        
         $questionCount = (int)Question::where('classe_id', $assigned[0]->classe_id)

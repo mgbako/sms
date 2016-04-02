@@ -1,15 +1,23 @@
 @extends('layouts.login')
 @section('content')
-      <p class="login-box-msg">
-        Admin Users Login Area, Sign in to start your session
-      </p>
-      @include('errors.formError')
+     <div class="row">
+      <div class="col-lg-12">
+        <p class="login-box-msg">Sign in to start your session</p>
+        @include('errors.formError')
+        </div>
+      </div>
       {!! Form::open(['class'=>'form-horizontal', 'role'=>'form']) !!}
         @include('partials.loginForm')
 
       {!! Form::close() !!}
-      <a href="/account/newadmin" class="text-center">
-     Register a as new member
-   </a><br>
-    <a href="/">This is not your login page? Go Back</a>
+    <div class="row">
+      <div class="col-lg-12">
+        <a href="/account/newadmin" class="text-center">
+          Register a as new member
+        </a>
+        </div>
+        <div class="col-lg-12">
+          <a href="/">This is not your login page? Go Back</a>
+        </div>
+    </div>
 @stop
