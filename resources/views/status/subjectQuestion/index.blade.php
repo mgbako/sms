@@ -28,6 +28,7 @@
             <div class="box-body">
               {!! Form::open(['route'=>'subjectQuestions.store'])!!}
               <div class="row">
+                {!! Form::hidden('teacher_id', $teacher->id) !!}
                   <div class="col-md-4">
                     <div class="form-group">
                       <label><i class="fa fa-list-alt"></i> Class List</label>
