@@ -33,14 +33,14 @@ class SubjectQuestionsController extends Controller
         $assigned = '';
         $teacher;
         $classIds = [];
-         $subjectIds = [];
+        $subjectIds = [];
+        $assignedSubject;
 
-         if (Auth::user()->type == 'teacher') {
+        if (Auth::user()->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', Auth::user()->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
                 $assignedSubject = SubjectAssigned::where('teacher_id', $teacher->id)->get();
         }
-
 
         $classList = [];
         $subjectList = [];
@@ -53,7 +53,6 @@ class SubjectQuestionsController extends Controller
 
         foreach ($assigned as $key => $value) 
         {
-            //dd($value);
             $classIds[] = $value->classe_id;
         }
 
@@ -64,11 +63,11 @@ class SubjectQuestionsController extends Controller
 
         foreach ($assignedSubject as $key => $value) 
         {
-            flash('Not Assigned to any Subject Please contact the admin');
             $subjectIds[] = $value->subject_id;
         }
 
         if(!$subjectIds){
+            flash('Not Assigned to any Subject Please contact the admin');
             return redirect()->back();
         }
         
@@ -104,11 +103,14 @@ class SubjectQuestionsController extends Controller
 
     public function submit($classeId, $subjectId)
     {   
-  
-        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
+
+        $teacher = DB::table('teachers')->where('staffId', Auth::user()->loginId)->first();
+    
+        $subjectquestionstatus = SubjectQuestionstatus::where('teacher_id', $teacher->id)
+                                ->where('classe_id', $classeId)
                                 ->where('subject_id', $subjectId)->first();
         if ($subjectquestionstatus) {
-            $affacted = DB::update('update subjectquestionstatus set progress = 1 where classe_id = ? and subject_id = ?', [$classeId, $subjectId]);
+            $affacted = DB::update('update subjectquestionstatus set progress = 1 where teacher_id = ? and classe_id = ? and subject_id = ?', [$teacher->id, $classeId, $subjectId]);
             if ($affacted) {
                 flash('Time for Exam Submited for Approval');
                 return redirect('subjectQuestions');
@@ -175,6 +177,7 @@ class SubjectQuestionsController extends Controller
     {   
         $teacher;
 
+
         if (Auth::user()->type == 'teacher') {
             $teacher = DB::table('teachers')->where('staffId', Auth::user()->loginId)->first();
             $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
@@ -183,7 +186,11 @@ class SubjectQuestionsController extends Controller
        
 
         $Subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $request['classe_id'])
+        ->where('teacher_id', $request['teacher_id'])
         ->where('subject_id', $request['subject_id'])->get()->count();
+
+
+
         if($Subjectquestionstatus == 1)
         {   flash('Time Already Assigned to Subject');
             return redirect('subjectQuestions');
@@ -192,20 +199,12 @@ class SubjectQuestionsController extends Controller
         $subjectAssigned = SubjectAssigned::where('teacher_id', $teacher->id)
                                             ->where('classe_id', $request->classe_id)
                                             ->where('subject_id', $request->subject_id)->get()->count();
-                                             //dd($subjectAssigned);
-        
-        /*if($subjectAssigned->classe_id != $request->classe_id && $subjectAssigned->subject_id != $request->subject_id)
-        {
-            flash('You are not Assigned this Class or Subject');
-            return redirect('subjectQuestions');
-        }*/
-
+       
         if($subjectAssigned == 0)
         {
             flash('You are not Assigned this Class or Subject');
             return redirect('subjectQuestions');
         }
-
 
         Subjectquestionstatus::create($request->all() );
         flash('Time Assigned to Subject');
@@ -219,7 +218,7 @@ class SubjectQuestionsController extends Controller
      */
     public function activate()
     {
-        $subjectquestionstatus = SubjectQuestionstatus::whereIn('progress', [1,2])->get();
+        $subjectquestionstatus = SubjectQuestionstatus::where('progress', 2)->get();
         $count = 1;
         return view('status.subjectQuestion.activate', compact('subjectquestionstatus', 'count'));
     }
