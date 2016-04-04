@@ -8,13 +8,13 @@
 		      <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Welcome, <span>Admin</span>
+            {{$student->lastname}} {{$student->firstname}}<span>'s Result</span>
           </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="results1.html">Results</a></li>
-                <li class="active">Student Results</li>
+                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="/results">Results</a></li>
+                <li><a href="/results/all">Student Results</a></li>
+                <li class="active"> {{$student->lastname}}</li>
             </ol>        
         </section>
         <!-- Main content -->

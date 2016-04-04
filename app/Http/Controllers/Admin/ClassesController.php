@@ -127,6 +127,29 @@ class ClassesController extends Controller {
 		return redirect('classes');
 	}
 
+	/**
+	 * deleting all classes.
+	 *
+	 * @param  array  $id
+	 * @return Response
+	 */
+	public function deleteAll( Request $request)
+	{
+		dd($request);
+
+		$class = Classe::find($id);
+
+		if($request->get('agree')==1)
+		{
+			$class->delete();
+
+			flash($class->name.' was deleted successfully!');
+			return redirect('classes');
+		}
+
+		return redirect('classes');
+	}
+
 	 public function missingMethod($parameters = array())
     {
         return redirect('/');

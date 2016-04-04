@@ -24,6 +24,7 @@
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 							Add Class
 						</button>
+
 						 <p>&nbsp;</p>
 						<table align="center" class="table table-bordered table-responsive" id="classes">
 							<thead>

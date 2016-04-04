@@ -11,8 +11,12 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::get('/subjectReceptions', ['as'=>'subjectReceptions.subjectReception', 'uses'=>'SubjectQuestionsController@subjectReception']);
 
 
+	/*---------------------------------------------------------------------------------------------------
+	|							Classes
+	-----------------------------------------------------------------------------------------------------*/
 	Route::get('classes/{id}/delete', ['as'=>'classes.delete', 'uses'=>'Admin\ClassesController@delete']);
 	Route::resource('classes', 'Admin\ClassesController');
+	Route::delete('classes', ['as'=>'classes.deleteAll', 'Admin\ClassesController@deleteAll']);
 
 	Route::get('subjects/{id}/delete', ['as'=>'subjects.delete', 'uses'=>'Admin\SubjectsController@delete']);
 	Route::resource('subjects', 'Admin\SubjectsController');
@@ -63,7 +67,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	/*---------------------------------------------------------------------------------------------------
 	|							ACTIVATE EXAMS
 	-----------------------------------------------------------------------------------------------------*/
-	//Route::patch('activateexams/classes/{classeId}/subjects/{subjectId}/write', ['as'=>'exams.write', 'uses'=>'SubjectQuestionsController@write']);
+	
 	Route::get('activateexams', ['as'=>'exams.activate', 'uses'=>'SubjectQuestionsController@activate']);
 	
 

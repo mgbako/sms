@@ -175,6 +175,11 @@ class AuthController extends Controller
                             $inCount -= 1;
                         }
 
+                        if($inCount < 0)
+                        {
+                            $inCount = 0;
+                        }
+
                     }
                 }
 
