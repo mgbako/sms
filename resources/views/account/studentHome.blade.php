@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
       <section class="content-header">
       <h1>
-        Welcome, <span>Admin</span>
+        Welcome, <span>{{ $records->firstname }}</span>
       </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -39,44 +39,51 @@
                     </h1>
                     <hr>   
                   </div> 
-                  <div class="col-md-1">
+                  <div class="col-md-12">
                     <div class="col-sm-2 invoice-col">
                       <div class="pull-left image">
                         <img src="/{{ $records->image }}" alt="User Image" width="82" height="82" class="img-circle">
                       </div>
-                      </div> 
-                    </div>            
-                  <div class="col-md-11">
-                    <dl class="dl-horizontal">
-                   
-                      <dt>Surname</dt>
-                                <dd>{{ $records->lastname }}</dd>
-                                <dt>First Name</dt>
-                                <dd>{{ $records->firstname }}</dd>
-                                <br><br>
-                      <dt>Student Id</dt>
-                          <dd>{{ $records->studentId }}</dd>
-                          <dt>Gender</dt>
-                          <dd>{{ $records->gender }}</dd>
-                          <dt>Date of Birth</dt>
-                          <dd>{{ $records->dob }}</dd>
-                          <dt>Country</dt>
-                          <dd>{{ $records->nationality }}</dd>
-                          <br><br>
-                          <dt>Telephone</dt>
-                          <dd>{{ $records->phone }}</dd>
-                          <dt>Adress</dt>
-                          <dd>{{ $records->address }}</dd>
-                          <dt>Email Address</dt>
-                          <dd>{{ $records->email }}</dd>
-                    </dl>
-                  <!-- this row will not appear when printing -->
-                    <div class="row no-print">
-                      <div class="col-xs-12">
-
-                        <a href="/print/mydetails/{{ $student->slug }}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                    </div> 
+                    <div class="col-md-6">
+                      <dl class="dl-horizontal">
+                        <dt>Surname</dt>
+                                  <dd>{{ $records->lastname }}</dd>
+                                  <dt>First Name</dt>
+                                  <dd>{{ $records->firstname }}</dd>
+                                  <br><br>
+                        <dt>Student Id</dt>
+                            <dd>{{ $records->studentId }}</dd>
+                            <dt>Gender</dt>
+                            <dd>{{ $records->gender }}</dd>
+                            <dt>Date of Birth</dt>
+                            <dd>{{ $records->dob }}</dd>
+                            <dt>Country</dt>
+                            <dd>{{ $records->nationality }}</dd>
+                            <br><br>
+                            <dt>Telephone</dt>
+                            <dd>{{ $records->phone }}</dd>
+                            <dt>Adress</dt>
+                            <dd>{{ $records->address }}</dd>
+                            <dt>Email Address</dt>
+                            <dd>{{ $records->email }}</dd>
+                      </dl>
                     </div>
-                  </div>
+                    <div class="col-md-4">
+                    <h3>Offered Subjects</h3>
+                      <ul>
+                        @foreach($student_subjects as $subjects)
+                          <li>{{ Scholr\Subject::where('id', $subjects->subject_id)->first()->name}}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                    <!-- this row will not appear when printing -->
+                      <div class="row no-print">
+                        <div class="col-xs-12">
+
+                          <a href="/print/mydetails/{{ $student->slug }}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                      </div>
+                    </div>
                   <br><br>               
                 </div>
                   <div class="table-responsive mailbox-messages"><!-- /.table -->

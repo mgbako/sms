@@ -7,17 +7,23 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::get('/subjectReceptions', ['as'=>'subjectReceptions.subjectReception', 'uses'=>'SubjectQuestionsController@subjectReception']);
 
 
+	/*---------------------------------------------------------------------------------------------------
+	|							Classes
+	-----------------------------------------------------------------------------------------------------*/
 	Route::get('classes/{id}/delete', ['as'=>'classes.delete', 'uses'=>'Admin\ClassesController@delete']);
 	Route::resource('classes', 'Admin\ClassesController');
+	Route::delete('classes', ['as'=>'classes.deleteAll', 'Admin\ClassesController@deleteAll']);
 
 	Route::get('subjects/{id}/delete', ['as'=>'subjects.delete', 'uses'=>'Admin\SubjectsController@delete']);
 	Route::resource('subjects', 'Admin\SubjectsController');
 
 	Route::get('students/{id}/delete', ['as'=>'students.delete', 'uses'=>'Admin\StudentsController@delete']);
+	
+	
+	Route::resource('students', 'Admin\StudentsController');
 	Route::get('students/download', ['as'=>'students.download', 'uses'=>'Admin\StudentsController@download']);
 	Route::get('students/uploadfile', ['as'=>'students.upload', 'uses'=>'Admin\StudentsController@upload']);
 	Route::post('students/csvupload', ['as'=>'students.csvupload', 'uses'=>'Admin\StudentsController@csvupload']);
-	Route::resource('students', 'Admin\StudentsController');
 
 	Route::get('teachers/{id}/delete', ['as'=>'teachers.delete', 'uses'=>'Admin\TeachersController@delete']);
 	Route::get('teachers/download', ['as'=>'teachers.download', 'uses'=>'Admin\TeachersController@download']);
@@ -57,7 +63,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	/*---------------------------------------------------------------------------------------------------
 	|							ACTIVATE EXAMS
 	-----------------------------------------------------------------------------------------------------*/
-	//Route::patch('activateexams/classes/{classeId}/subjects/{subjectId}/write', ['as'=>'exams.write', 'uses'=>'SubjectQuestionsController@write']);
+	
 	Route::get('activateexams', ['as'=>'exams.activate', 'uses'=>'SubjectQuestionsController@activate']);
 	
 

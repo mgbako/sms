@@ -114,9 +114,11 @@ class AuthController extends Controller
             if ($this->auth->user()->type == 'student') {
                 $student = DB::table('users')->where('slug', $slug)->first();
                 $records = DB::table('students')->where('id', $student->student_id)->first();
-                $student_subjects = DB::table('student_subject')->where('student_id', $student->student_id)->get();
+                $student_subjects = DB::table('classe_subject')->where('classe_id', $records->class_id)->get(['subject_id']);
 
-                return view('account.studentHome', compact('student', 'records', 'student_subject'));
+               // dd($student_subjects);
+
+                return view('account.studentHome', compact('student', 'records', 'student_subjects'));
             }else {
                 flash('Ops you do not have access to that area!');
                 return redirect()->back();
@@ -171,6 +173,11 @@ class AuthController extends Controller
                         }
                         else{
                             $inCount -= 1;
+                        }
+
+                        if($inCount < 0)
+                        {
+                            $inCount = 0;
                         }
 
                     }

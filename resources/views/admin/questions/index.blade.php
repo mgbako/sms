@@ -20,7 +20,7 @@
 	<section class="content-header">
 		<h1>
 			Subject Question
-			<small>Staff against Subject Question of a particular Cass</small>
+			<small>Staff against Subject Question of a particular Class</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>

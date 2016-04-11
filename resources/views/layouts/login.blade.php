@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="/css/AdminLTE.min.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/square/blue.css">
+  <link rel="stylesheet" href="/css/custom.css">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>

@@ -60,7 +60,7 @@
 		                <i class="fa fa-angle-left pull-right"></i>
 		              </a>
 		              <ul class="treeview-menu">
-		                <li><a href="{{ route('subjectQuestions.index' ) }}"><i class="fa fa-circle-o"></i> Assigne Time</a></li>
+		                <li><a href="{{ route('subjectQuestions.index' ) }}"><i class="fa fa-circle-o"></i> Assigned Time</a></li>
 		              </ul>
 		            </li>
 		             <li class="treeview">
@@ -74,7 +74,6 @@
 		                      	<a href="{{ route('results.classes', [$class->classe_id]) }}">
 		                      		<i class="fa fa-list-alt"></i> {{$mainclass::whereId($class->classe_id)->distinct()->first()->name }}
 		                      	</a>
-		                        <i class="fa fa-dashboard"></i>
 		                      </li>
 		                  @endforeach
 		              </ul>

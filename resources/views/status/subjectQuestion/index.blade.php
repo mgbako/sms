@@ -28,6 +28,7 @@
             <div class="box-body">
               {!! Form::open(['route'=>'subjectQuestions.store'])!!}
               <div class="row">
+                {!! Form::hidden('teacher_id', $teacher->id) !!}
                   <div class="col-md-4">
                     <div class="form-group">
                       <label><i class="fa fa-list-alt"></i> Class List</label>
@@ -70,6 +71,7 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
+                @if($subjectquestionstatus)
                   <table width="92%" class="table table-hover text-center">
                     <tr>
                       <th width="4%">S/N</th>
@@ -80,6 +82,7 @@
                       <th width="17%">Progress</th>
                     </tr>
                     @foreach($subjectquestionstatus as $subjectquestionstatus)
+                    @if(Scholr\SubjectAssigned::where(['teacher_id'=> $teacher->id, 'classe_id'=>$subjectquestionstatus->classe_id, 'subject_id'=> $subjectquestionstatus->subject_id]))
                       <tr>
                         <td>{{$count++}}</td>
                         <td>{{ Scholr\Classe::where('id', $subjectquestionstatus->classe_id)->first()->name}}</td>
@@ -115,8 +118,12 @@
                         {!! Form::hidden('classId', $subjectquestionstatus->classe_id) !!}
                         {!! Form::hidden('subjectId', $subjectquestionstatus->subject_id) !!}
                       </tr>
+                      @endif
                       @endforeach
                   </table>
+                @else
+                  <h1>Not Assigned to any Subject or class</h1>
+                @endif
                 </div><!-- /.box-body -->
 
             </div><!-- /.col (left) -->

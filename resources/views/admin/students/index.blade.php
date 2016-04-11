@@ -49,17 +49,17 @@
                       <tbody>
                       	@foreach($students as $student)
                       	<tr>
-							<td>{!! $count++ !!}</td>
-							<td>{!! $student->firstname !!}</td>
-							<td>{!! $student->lastname !!}</td>
-							<td>
-                {!! link_to_route('students.show', $student->studentId, $student->id) !!}
-              </td>
-							<td>{!! $class::whereId($student->class_id)->first()->name !!}</td>
-							<td>{!! link_to_route('students.edit', 'Edit', $student->id, ['class'=>'btn btn-info btn-xs']) !!}</td>
-							<td>{!! link_to_route('students.delete', 'Delete', $student->id, ['class'=>'btn btn-danger btn-xs']) !!}</td>
-						</tr>
-						@endforeach
+            							<td>{!! $count++ !!}</td>
+            							<td>{!! $student->firstname !!}</td>
+            							<td>{!! $student->lastname !!}</td>
+            							<td>
+                            {!! link_to_route('students.show', $student->studentId, $student->id) !!}
+                          </td>
+            							<td>{!! $class::whereId($student->class_id)->first()->name !!}</td>
+            							<td>{!! link_to_route('students.edit', 'Edit', $student->id, ['class'=>'btn btn-info btn-xs']) !!}</td>
+            							<td>{!! link_to_route('students.delete', 'Delete', $student->id, ['class'=>'btn btn-danger btn-xs']) !!}</td>
+            						</tr>
+            						@endforeach
                       </tbody>
                       <tfoot>
                         <tr>
