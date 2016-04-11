@@ -79,7 +79,8 @@
                                                             <div class="form-group">
                                                                 <dt>Answers</dt>
                                                                 <ol class="radio">
-                                                                    <li>{!! Form::radio($question->id, $question->option1, null, ['class'=>'progress', "id"=>"optionsRadios1"]) !!} {!! $question->option1 !!}</li>
+                                                                    <li>
+                                                                    {!! Form::radio($question->id, $question->option1, null, ['class'=>'progress', "id"=>"optionsRadios1"]) !!} {!! $question->option1 !!}</li>
                                                                     <li>{!! Form::radio($question->id, $question->option2, null, ['class'=>'progress', 'id'=> "optionsRadios2"]) !!} {!! $question->option2 !!}</li>
                                                                     <li>{!! Form::radio($question->id, $question->option3, null, ['class'=>'progress', 'id'=> "optionsRadios3"]) !!} {!! $question->option3 !!}</li>
                                                                     <li>{!! Form::radio($question->id, $question->option4, null, ['class'=>'progress', 'id'=> "optionsRadios4"]) !!} {!! $question->option4 !!}</li>
