@@ -121,12 +121,14 @@ class ResultsController extends Controller
             $count = 1;  
             $student = Student::whereId($slug)->first();
             $grades = Grade::whereStudent_id($student->id)->get();
+            $sum = $grades->sum('total');
+            $avg = $grades->avg('total');
             if ($this->user->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', $this->user->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
-                return view('results.students', compact('assigned', 'grades', 'student', 'count'));
+                return view('results.students', compact('assigned', 'grades', 'student', 'count', 'sum', 'avg'));
             }
-            return view('results.students', compact('grades', 'student', 'count'));
+            return view('results.students', compact('grades', 'student', 'count', 'sum', 'avg'));
         }else {
             flash('You are not allowed Access to that Area');
             return redirect()->back();

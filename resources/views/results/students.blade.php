@@ -1,5 +1,6 @@
 @inject('subject', 'Scholr\Subject')
 @inject('class', 'Scholr\Classe')
+@inject('grade', 'Scholr\Grade')
 @extends('layouts.admin')
 @section('content')
 	@include('partials.profileDashboard')
@@ -92,19 +93,19 @@
                 <table class="table">
                   <tr>
                     <th style="width:50%">Total Grades:</th>
-                    <td></td>
+                    <td>{{$sum}}</td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <th>Total Questions:</th>
                     <td></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                     <th>Average:</th>
-                    <td></td>
+                    <td>{{$avg}}</td>
                   </tr>
                   <tr>
                     <th>Remarks:</th>
-                    <td></td>
+                    <td>{{ $grade::getRemarkBaseOnScore($sum) }}</td>
                   </tr>
                 </table>
               </div>
