@@ -1,5 +1,6 @@
 @inject('subject', 'Scholr\Subject')
 @inject('class', 'Scholr\Classe')
+@inject('grade', 'Scholr\Grade')
 @extends('layouts.admin')
 @section('content')
 	@include('partials.studentDashboard')
@@ -84,7 +85,7 @@
                   </tbody>
                 @endforeach
               </table>
-                    <div class="row">
+            <div class="row">
             <!-- accepted payments column --><!-- /.col -->
             <div class="col-xs-8 pull-right">
               <p class="lead">Summary</p>
@@ -104,7 +105,7 @@
                   </tr>
                   <tr>
                     <th>Remarks:</th>
-                    <td></td>
+                    <td>{{ $grade::getRemarkBaseOnScore($sum) }}</td>
                   </tr>
                 </table>
               </div>
@@ -120,9 +121,9 @@
             </div>
             <br><br>
           </div>
-              
                 </div><!-- /.box-body -->
-                <div class="box-footer no-padding">
+                <div class="box-footer no-paddi
+              ng">
                 </div>
               </div><!-- /. box -->
             </div><!-- /.col -->

@@ -83,7 +83,7 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::resource('/schools', 'SchoolController');
 	Route::resource('/subjectProgess', 'SubjectProgressController');
 
-	
+	Route::resource('/settings', 'SettingsController');
 	
 	Route::resource('/subjectAssigned', 'SubjectAssignedController');
 	Route::delete('/subjectAssigned/{id}/{classeId}/{subjectId}', ['as'=>'subjectAssigneds.destroy', 'uses'=>'SubjectAssignedController@destroy']);

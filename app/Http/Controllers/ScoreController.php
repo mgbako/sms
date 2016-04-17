@@ -14,8 +14,6 @@ use Scholr\Grade;
 
 class ScoreController extends Controller
 {
-    
-
     /**
      * Store a newly created resource in storage.
      *
@@ -72,7 +70,8 @@ class ScoreController extends Controller
                         'classe_id' => $classe_id,
                         'subject_id' => $subject_id,
                         'term' => $term,
-                        'total' => $count
+                        'total' => $count,
+                        'remark' => Grade::getRemarkBaseOnScore($count)
                     ]
             );
         }
