@@ -97,12 +97,10 @@ class AuthController extends Controller
             {
                 $admin = DB::table('users')->where('slug', $slug)->first();
                 $term = School::first()->term;
-                $total_student = DB::select('SELECT COUNT(*) AS all_student FROM students');
-                $total_student = (int) $total_student[0]->all_student;
-                $grade_sum = DB::select("SELECT SUM(total) As sum FROM grades WHERE term ='$term' group by id");
-                $grade_sum = (int) $grade_sum[0]->sum;
-                $term_average_score = @($grade_sum / $total_student);
-
+                $total_student = Student::count(); 
+                $grade_sum  = Grade::where('term', $term)
+                                ->sum('total');
+                 $term_average_score = ($grade_sum / $total_student);
                 return view('account.staffHome', compact('admin', 'term_average_score'));
             }
 
