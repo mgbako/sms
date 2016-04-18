@@ -17,7 +17,7 @@ class CreateProfilesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('firstname');
             $table->string('lastname');
-            $table->integer('phone');
+            $table->string('phone');
             $table->date('dob');
             $table->char('gender');
             $table->string('address');
