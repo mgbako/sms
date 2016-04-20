@@ -12,7 +12,7 @@ class CreateSchoolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Schools', function (Blueprint $table) {
+        Schema::create('schools', function (Blueprint $table) {
             $table->increments('id');
             $table->string('institution');
             $table->string('name');
@@ -32,6 +32,6 @@ class CreateSchoolsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Schools');
+        Schema::drop('schools');
     }
 }
