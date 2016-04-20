@@ -21,7 +21,7 @@ class ResultsController extends Controller
      * holds value of the current logined in user
      */
     private $user;
-
+    private $shool;
     private $term;
 
     public function __construct(Guard $auth)
@@ -32,6 +32,7 @@ class ResultsController extends Controller
         if($school)
         {
             $this->term = $school->term;
+            $this->school = $school;
         }
     }
     /**
@@ -68,10 +69,10 @@ class ResultsController extends Controller
                 /*dd($grades);*/
                 $sum = $grades->sum('total');
                 $avg = $grades->avg('total');
-                //dd($sum);
+                $school = $this->school;
                 $term = $this->term;
                 flash('Find out how you have been performing in Exams below');
-                return view('results.myresult', compact('student', 'grades', 'count', 'term', 'sum', 'avg'));
+                return view('results.myresult', compact('student', 'grades', 'count', 'term', 'sum', 'avg', 'school'));
             }else {
                flash('There is no record for this Student on the Database');
                 return redirect()->back(); 
@@ -123,12 +124,13 @@ class ResultsController extends Controller
             $grades = Grade::whereStudent_id($student->id)->get();
             $sum = $grades->sum('total');
             $avg = $grades->avg('total');
+            $school = $this->school;
             if ($this->user->type == 'teacher') {
                 $teacher = DB::table('teachers')->where('staffId', $this->user->loginId)->first();
                 $assigned = SubjectAssigned::where('teacher_id', $teacher->id)->groupBy('classe_id')->get();
-                return view('results.students', compact('assigned', 'grades', 'student', 'count', 'sum', 'avg'));
+                return view('results.students', compact('assigned', 'grades', 'student', 'count', 'sum', 'avg', 'school'));
             }
-            return view('results.students', compact('grades', 'student', 'count', 'sum', 'avg'));
+            return view('results.students', compact('grades', 'student', 'count', 'sum', 'avg', 'school'));
         }else {
             flash('You are not allowed Access to that Area');
             return redirect()->back();

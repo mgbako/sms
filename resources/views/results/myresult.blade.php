@@ -25,7 +25,7 @@
               <div class="box box-primary">
                 <div class="col-xs-12">
                   <h1 class="page-header">
-                      <img src="/img/photo.jpg" alt="Add Ten" /> 
+                      <img src="/{{ $school->logo }}" alt="Add Ten" /> 
                         Potasfield College  
                     </h1>
                     <div class="col-xs-12 table-responsive">
