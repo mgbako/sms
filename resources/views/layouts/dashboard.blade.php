@@ -4,7 +4,11 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ucfirst(School::first()->name)}}</title>
+  @if (School::first())
+    <title>{{ucfirst(School::first()->name)}}</title>
+  @else
+    <title>AddTen</title>
+  @endif
 
   <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 

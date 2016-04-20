@@ -4,7 +4,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ucfirst(School::first()->name)}}</title>
+@if (School::first())
+    <title>{{ucfirst(School::first()->name)}}</title>
+  @else
+    <title>AddTen</title>
+  @endif
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">

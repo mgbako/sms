@@ -2,7 +2,11 @@
 <html>
   <head>
     <meta charset="UTF-8">
+  @if (School::first())
     <title>{{ucfirst(School::first()->name)}}</title>
+  @else
+    <title>AddTen</title>
+  @endif
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
