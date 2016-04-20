@@ -96,7 +96,11 @@ class AuthController extends Controller
             if($this->auth->user()->type == 'admin')
             {
                 $admin = DB::table('users')->where('slug', $slug)->first();
-                $term = School::first()->term;
+                if(School::first()){
+                    $term = School::first()->term;
+                }else {
+                    $term = 1;
+                }
                 $total_student = Student::count(); 
                 $grade_sum  = Grade::where('term', $term)
                                 ->sum('total');
