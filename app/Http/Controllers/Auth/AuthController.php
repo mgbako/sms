@@ -104,7 +104,11 @@ class AuthController extends Controller
                 $total_student = Student::count(); 
                 $grade_sum  = Grade::where('term', $term)
                                 ->sum('total');
+                if ($total_student == 0) {
+                    $term_average_score = 0;
+                }else{
                  $term_average_score = ($grade_sum / $total_student);
+                }
                 return view('account.staffHome', compact('admin', 'term_average_score'));
             }
 
