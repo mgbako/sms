@@ -20,7 +20,7 @@
                     </a>
                   @endif
             </li>
-            <li class="active treeview">
+            <li class="treeview">
                 <a href="/">
                 <i class="fa fa-user"></i>
                   <span>Bio Data</span> 

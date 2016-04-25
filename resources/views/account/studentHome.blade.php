@@ -21,7 +21,7 @@
               @if($records)
                 <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Biodata</h3>
+                  <h3 class="box-title">Bio Data</h3>
                   <div class="box-tools pull-right"></div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body no-padding">

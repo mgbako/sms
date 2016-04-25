@@ -40,7 +40,7 @@
 	<![endif]-->
 </head>
 @if(!Auth::guest())
-  <body class="skin-blue sidebar-mini">
+  <body class="skin-blue sidebar-mini" data-spy="scroll" data-target=".sidebar-menu">
   <div class="wrapper">
 
       <header class="main-header">

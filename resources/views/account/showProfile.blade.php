@@ -7,12 +7,12 @@
 	    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Welcome, to <span>{{ ucwords($profile->firstname) }}'s Profile</span>
+        Welcome, to <span>My Profile</span>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Profile</li>
-        <li class="active">{{ ucwords($profile->firstname) }}'s Biodata</li>
+        <li class="active">{{ ucwords($profile->firstname) }}'s Bio Data</li>
       </ol>        
     </section>
 
@@ -27,7 +27,7 @@
               
             <div class="alert alert-info alert-dismissable">
                 <h1>
-                    profile's Detail
+                    User's Detail
                   </h1>
             </div>
            

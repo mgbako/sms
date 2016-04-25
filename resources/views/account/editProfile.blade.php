@@ -49,14 +49,14 @@
             <div class="col-md-6"><br>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                {!! Form::select('gender', [''=>'Select Gender', 'Male'=>'Male', 'Female'=>'Female'], '', ['class'=>'form-control'])!!}
+                {!! Form::select('gender', [''=>'Select Gender', 'Male'=>'Male', 'Female'=>'Female'], $profile->gender, ['class'=>'form-control'])!!}
               </div>
             </div>
 
             <div class="col-md-6"><br>
               <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                {!! Form::input('date', 'dob', date('Y-m-d'), ['class'=>'form-control']) !!}
+                <span class="input-group-addon"><i class="fa fa-time"></i></span>
+                {!! Form::input('date', 'dob', $profile->dob, ['class'=>'form-control']) !!}
               </div>
             </div>
 

@@ -138,7 +138,7 @@ class ProfileController extends Controller
             $profile->update();
             flash(' Your profile was updated successfully!');
             if ($user->type == 'student') {
-            return redirect('account/student/'.$user->slug);
+            return redirect('account/profile/'.$user->slug);
             }
             elseif ($user->type == 'profile') {
                 return redirect('account/profile/'.$user->slug);
