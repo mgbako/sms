@@ -33,7 +33,7 @@
                   <div class="form-group">
                     <label>Type of System</label>
 
-                    <select name="institution" class="form-control select2" style="width: 100%;" disabled>
+                    <select name="institution" class="form-control select2" style="width: 100%;">
                       <option selected="selected">{{$school->institution}}</option>
                       <option>Primary Institution</option>
                       <option>Secondary Institution</option>
@@ -44,7 +44,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                       <label>School Name</label>
-                      <input type="text" name="name" class="form-control" placeholder="Enter ..." value="{{$school->name}}" disabled>
+                      <input type="text" name="name" class="form-control" placeholder="Enter ..." value="{{$school->name}}">
                     </div>
                 </div>
               </div><!-- /.row -->

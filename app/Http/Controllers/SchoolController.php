@@ -101,7 +101,7 @@ class SchoolController extends Controller
             $filename = time()."-".$image->getClientOriginalName();
             $path = public_path('img/schools/logos/'.$filename);
             Image::make($image->getRealPath())->resize(150, 100)->save($path);
-            $school->logo = 'img/school/logos/'.$filename;
+            $school->logo = 'img/schools/logos/'.$filename;
         }
         $school->name = $request['name'];
         $school->term = $request['term'];
