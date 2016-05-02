@@ -33,7 +33,7 @@
                     Thank you.
                   </div>
                   
-                  <div class="col-xs-12 table-responsive">
+                  <div class="col-xs-12">
                     <h1>
                       Candidate Details
                     </h1>
@@ -45,7 +45,7 @@
                         <img src="/{{ $records->image }}" alt="User Image" width="82" height="82" class="img-circle">
                       </div>
                     </div> 
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                       <dl class="dl-horizontal">
                         <dt>Surname</dt>
                                   <dd>{{ $records->lastname }}</dd>
@@ -69,13 +69,17 @@
                             <dd>{{ $records->email }}</dd>
                       </dl>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                     <h3>Offered Subjects</h3>
-                      <ul>
-                        @foreach($student_subjects as $subjects)
-                          <li>{{ Scholr\Subject::where('id', $subjects->subject_id)->first()->name}}</li>
+                      <table class="table table-responsive table-striped table-bordered table-condensed">
+                      @foreach(array_chunk($student_subjects, 4) as $subjects)
+                      <tr>
+                        @foreach($subjects as $subject)
+                          <td>{{ Scholr\Subject::where('id', $subject->subject_id)->first()->name}}</td>
                         @endforeach
-                      </ul>
+                      </tr>
+                      @endforeach
+                      </table>
                     </div>
                     <!-- this row will not appear when printing -->
                       <div class="row no-print">

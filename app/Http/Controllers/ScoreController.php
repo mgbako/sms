@@ -58,9 +58,10 @@ class ScoreController extends Controller
         $request->session()->put('subject_id', $subject_id);
 
         $term = School::first()->term;
+        $qnumber = School::first()->number;
 
         $taken = $user->taken($student_id, $classe_id, $subject_id);
-    
+        $grade = ( ($count * 100) / $qnumber );
         
         if($taken == 0)
         {
@@ -71,7 +72,7 @@ class ScoreController extends Controller
                         'subject_id' => $subject_id,
                         'term' => $term,
                         'total' => $count,
-                        'remark' => Grade::getRemarkBaseOnScore($count)
+                        'remark' => Grade::getRemarkBaseOnScore($grade)
                     ]
             );
         }
