@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/css/select2.min.css">
     <link rel="stylesheet" href="/css/_all-skins.min.css">
     <link rel="stylesheet" href="/css/skin-blue.min.css" >
-
+    <link href="/css/custom.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('/img/logoo3.png') }}" type="image/x-icon">
 	<link rel="shortcut icon" href="{{ asset('/img/logoo3.png') }}" type="image/png" />
   @yield('scripts')

@@ -37,8 +37,8 @@
                           <th>First Name</th>
                           <th>Surname</th>
                           <th>ID No.</th>
-                          <th>Edit</th>
-						              <th>Delete</th>
+                          <th width="5%">Edit</th>
+						              <th width="5%">Delete</th>
                         </tr>
                       </thead>
                       <tbody>

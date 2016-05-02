@@ -31,7 +31,7 @@
 								<tr>
 									<th class="text-center">#</th>
 									<th class="text-center">Class</th>
-									<th class="text-center"bgcolor="">Edit</th>
+									<th class="text-center">Edit</th>
 									<th class="text-center">Delete</th>
 								</tr>
 							</thead>
@@ -42,8 +42,8 @@
 									<td>
 										{!! link_to_route('classes.subjects.index', $class->name, [$class->id]) !!}
 									</td>
-									<td>{!! link_to_route('classes.edit', 'Edit', $class->id, ['class'=>'btn btn-info btn-xs']) !!}</td>
-									<td>{!! link_to_route('classes.delete', 'Delete', $class->id, ['class'=>'btn btn-danger btn-xs']) !!}</td>
+									<td>{!! link_to_route('classes.edit', 'Edit', $class->id, ['class'=>'btn btn-info btn-xs btn-block']) !!}</td>
+									<td>{!! link_to_route('classes.delete', 'Delete', $class->id, ['class'=>'btn btn-danger btn-xs btn-block']) !!}</td>
 								</tr>
 								@endforeach
 							</tbody>

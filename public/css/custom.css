@@ -75,9 +75,9 @@ select['multiple']{
     padding: 0;
 }
 
-.modal-footer {
+/* .modal-footer {
     padding: 0px;
-}
+} */
 
 /* #page_navigation a {
     padding: 3px;
@@ -130,4 +130,8 @@ div .dataTables_filter > label{
     line-height: 34px;
     text-align: center;
     pointer-events: none;
+}
+
+.skin-blue .sidebar-menu>li:hover>a, .sidebar-menu>li>a:hover, .skin-blue .sidebar-menu>li.active>a{
+  background-color: rgba(0,0,0,0.2);
 }

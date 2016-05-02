@@ -11,7 +11,7 @@
           </h1>
                 <ol class="breadcrumb">
                   <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-                  <li class="active">Schoo Settings</li>
+                  <li class="active">School Settings</li>
                 </ol>
             </section>
 
@@ -30,11 +30,6 @@
                                 <div class="alert alert-info alert-dismissable">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     <h4><i class="icon fa fa-info"></i> Alert!</h4> Info alert please note that this area is very sensitive apply with caution.
-                                </div>
-
-                                <div class="alert alert-success alert-dismissable">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <h4>  <i class="icon fa fa-check"></i> Alert!</h4> Success alert information updated.
                                 </div>
                                 <div class="col-md-6">
                                     <label>School Logo</label>

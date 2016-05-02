@@ -30,8 +30,8 @@
 								<tr>
 									<th>#</th>
 									<th>Subjects</th>
-									<th>Edit</th>
-									<th>Delete</th>
+									<th width="15%">Edit</th>
+									<th width="15%">Delete</th>
 								</tr>
 							</thead>
 							
@@ -41,10 +41,10 @@
 									<td>{!! $count++ !!}</td>
 									<td>{!! $subject->name !!}</td>
 									<td>
-										{!! link_to_route('subjects.edit', 'Edit', [$subject->id], ['class'=>'btn btn-info btn-xs']) !!}
+										{!! link_to_route('subjects.edit', 'Edit', [$subject->id], ['class'=>'btn btn-info btn-xs btn-block']) !!}
 									</td>
 									<td>
-									{!! link_to_route('subjects.delete', 'Delete', [$subject->id], ['class'=>'btn btn-danger btn-xs']) !!}
+									{!! link_to_route('subjects.delete', 'Delete', [$subject->id], ['class'=>'btn btn-danger btn-xs btn-block']) !!}
 									</td>
 								</tr>
 								@endforeach

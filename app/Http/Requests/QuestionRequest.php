@@ -32,7 +32,7 @@ class QuestionRequest extends Request {
 
 		if(Request::isMethod('post'))
 	        {
-	        	$rules['subject_id'] = 'required|';
+	        	$rules['subject_id'] = 'required';
 	        	$rules['classe_id'] = 'required';
 	            $rules['term'] = 'required';
 	        }

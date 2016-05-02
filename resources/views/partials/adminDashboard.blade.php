@@ -20,7 +20,7 @@
               		<i class="fa fa-user"></i> <span>Create Profile ( {{Auth::user()->type }} )</span>
               </a>
               @else
-              	<a href="{{ route('profile.show', [Auth::user()->profile->slug]) }}">
+              	<a href="{{ route('profile.show', [Auth::user()->profile->slug]) }}" class="active">
               		<i class="fa fa-user"></i> <span>Profile ( {{Auth::user()->type }} )</span>
               	</a>
               @endif

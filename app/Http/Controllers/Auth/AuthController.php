@@ -107,7 +107,7 @@ class AuthController extends Controller
                 if ($total_student == 0) {
                     $term_average_score = 0;
                 }else{
-                 $term_average_score = ($grade_sum / $total_student);
+                 $term_average_score = round( ($grade_sum / $total_student), 2);
                 }
                 return view('account.staffHome', compact('admin', 'term_average_score'));
             }

@@ -19,7 +19,7 @@
 					<tbody>
 						<td>{!! $count++ !!}</td>
 						<td>{!! $subject->name !!}</td>
-						<td>{!! link_to_route('classes.subjects.delete', 'Delete', [$classe_id, $subject->id], ['class'=>'btn btn-danger btn-xs']) !!}</td>
+						<td>{!! link_to_route('classes.subjects.delete', 'Delete', [$classe_id, $subject->id], ['class'=>'btn btn-danger btn-xs btn-block']) !!}</td>
 					</tbody>
 				@endforeach
 			</table>
