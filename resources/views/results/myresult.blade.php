@@ -101,11 +101,11 @@
                   </tr> -->
                   <tr>
                     <th>Average:</th>
-                    <td>{{ round($avg, 2)}}</td>
+                    <td>{{ round($avg, 2) }}</td>
                   </tr>
                   <tr>
                     <th>Remarks:</th>
-                    <td>{{ $grade::getRemarkBaseOnScore($sum) }}</td>
+                    <td>{{ $grade::getRemarkBaseOnScore( round($avg, 2) ) }}</td>
                   </tr>
                 </table>
               </div>
