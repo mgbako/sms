@@ -101,7 +101,7 @@
                   </tr> -->
                   <tr>
                     <th>Average:</th>
-                    <td>{{$avg}}</td>
+                    <td>{{ round($avg, 2)}}</td>
                   </tr>
                   <tr>
                     <th>Remarks:</th>
