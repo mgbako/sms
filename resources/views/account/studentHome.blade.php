@@ -72,7 +72,7 @@
                     <div class="col-md-5">
                     <h3>Offered Subjects</h3>
                       <table class="table table-responsive table-striped table-bordered table-condensed">
-                      @foreach(array_chunk($student_subjects, 4) as $subjects)
+                      @foreach(array_chunk($student_subjects, 3) as $subjects)
                       <tr>
                         @foreach($subjects as $subject)
                           <td>{{ Scholr\Subject::where('id', $subject->subject_id)->first()->name}}</td>

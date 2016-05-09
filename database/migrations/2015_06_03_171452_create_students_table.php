@@ -37,8 +37,6 @@ class CreateStudentsTable extends Migration {
 				->references('id')
 				->on('classes')
 				->onDelete('cascade');
-
-
 		});
 	}
 

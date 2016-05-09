@@ -24,7 +24,7 @@
                 <div class="small-box bg-aqua">
                   <div class="inner">
                     <h3>{{ $class_number }}</h3>
-                    <p>Classes Assigned</p>
+                    <p>Class Assigned</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-document-text"></i>
@@ -37,7 +37,7 @@
                 <div class="small-box bg-green">
                   <div class="inner">
                     <h3>{{ count($approvedCount) }}</h3>
-                    <p>Exams approved</p>
+                    <p>Approved Exams</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -50,7 +50,7 @@
                 <div class="small-box bg-yellow">
                   <div class="inner">
                     <h3>{{ count($submitCount) }}</h3>
-                    <p>Exams successfully created</p>
+                    <p>Completed Exams</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-person"></i>
@@ -63,7 +63,7 @@
                 <div class="small-box bg-red">
                   <div class="inner">
                     <h3>{{ $inCount }}</h3>
-                    <p>Exams not yet completed</p>
+                    <p>Uncompleted Exams</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-person-stalker"></i>
