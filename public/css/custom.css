@@ -135,3 +135,7 @@ div .dataTables_filter > label{
 .skin-blue .sidebar-menu>li:hover>a, .sidebar-menu>li>a:hover, .skin-blue .sidebar-menu>li.active>a{
   background-color: rgba(0,0,0,0.2);
 }
+
+#finish{
+
+}
