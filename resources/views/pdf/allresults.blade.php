@@ -8,13 +8,12 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>All Result</title>
-
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <style>
+     @include('style.pdfstyles')
+    </style>
 	</head>
 	<body>
-		<section class="content">
+		<section class="container">
       <div class="row"><!-- /.col -->
         <div class="col-md-12">
           <div class="box box-primary">
@@ -22,60 +21,69 @@
           <!-- /.box -->
 
             <div class="box-body">
-              <div align="center">
-                <table align="center" class="table table-bordered table-striped" id="example1">
-                  <thead>
-                    <tr>
-                      <th>Student Name</th>
-                      <th>ID No.</th>
-                      <th>Class</th>
-                      <th>Subject</th>
-                      <th>Score (%)</th>
-                    </tr>
-                  </thead>
-                 @foreach ($grades as $grade)
-                    <tbody>
-                    <tr>
-                      <td>
-                          {{ $student::whereId($grade->student_id)->first()->firstname.' '.$student::whereId($grade->student_id)->first()->lastname}}
-                      </td>
-                      <td>
-                        <a 
-                          href="/results/student/{{ $grade->student_id }}">
-                          {{ $student::whereId($grade->student_id)->first()->studentId }}
-                        </a>
-                      </td>
-                      <td>
-                        <a 
-                          href="/results/classes/{{ $grade->classe_id }}">
-                          {{ $class::whereId($grade->classe_id)->first()->name }}
-                        </a>
-                      </td>
-                       <td>
-                        <a 
-                          href="/results/subjects/{{ $grade->subject_id }}">
-                          {{ $subject::whereId($grade->subject_id)->first()->name }}
-                        </a>
-                      </td>
-                      <td>
-                        {{ $grade->total }}
-                      </td>
-                    </tr>
-                  </tbody>
-                 @endforeach
-                  <tfoot>
-                    <tr>
-                       <th>Student Name</th>
-                      <th>ID No.</th>
-                      <th>Class</th>
-                      <th>Subject</th>
-                      <th>Score (%)</th>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-              
-            </div><!-- /.box-body -->
+                  <div align="center">
+                    <table align="center" class="table table-bordered table-striped table-responsive" id="example1">
+                      <thead>
+                        <tr>
+                          <th>Student Name</th>
+                          <th>ID No.</th>
+                          <th>Class</th>
+                          <th>Subject</th>
+                          <th width="10%">Score (%)</th>
+                          <th width="5%">Approve/Disapprove</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                         @foreach ($grades as $grade)
+                        <tr>
+                          <td>
+                              {{ $student::whereId($grade->student_id)->first()->firstname.' '.$student::whereId($grade->student_id)->first()->lastname}}
+                          </td>
+                          <td>
+                            <a 
+                              href="/results/student/{{ $grade->student_id }}">
+                              {{ $student::whereId($grade->student_id)->first()->studentId }}
+                            </a>
+                          </td>
+                          <td>
+                            <a 
+                              href="/results/classes/{{ $grade->classe_id }}">
+                              {{ $class::whereId($grade->classe_id)->first()->name }}
+                            </a>
+                          </td>
+                           <td>
+                            <a 
+                              href="/results/subjects/{{ $grade->subject_id }}">
+                              {{ $subject::whereId($grade->subject_id)->first()->name }}
+                            </a>
+                          </td>
+                          <td>
+                            {{ $grade->total }}
+                          </td>
+                          <td>
+                            @if($grade->approve < 1)
+                              <a href="{{ route('result.approve', [$grade->classe_id, $grade->subject_id, $grade->student_id])}}" class="btn btn-success btn-block"><i class="fa fa-check-square-o"></i></a>
+                            @else
+                              <a href="{{ route('result.disapprove', [$grade->classe_id, $grade->subject_id, $grade->student_id])}}" class="btn btn-danger btn-block" onclick="confirm('Are sure you want to do disapprove this result')"><i class="fa fa-trash"></i></a>
+                            @endif
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>Student Name</th>
+                          <th>ID No.</th>
+                          <th>Class</th>
+                          <th>Subject</th>
+                          <th>Score (%)</th>
+                          <th>Approve/Disapprove</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                 
+                </div><!-- /.box-body -->
         </div>
        
         <div class="box-footer no-padding">

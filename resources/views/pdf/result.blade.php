@@ -7,9 +7,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Student Result</title>
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
+		<style>
+     @include('style.pdfstyles')
+    </style>
+  
 	</head>
 	<body>
 		<section class="content">
