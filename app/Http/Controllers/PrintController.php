@@ -38,7 +38,6 @@ class PrintController extends Controller
                 $data = [];
                 flash('Find out how you have been performing in Exams below');
                 $pdf = PDF::loadView('pdf.result', compact('term', 'student', 'grades', 'count', 'school'));
-                dd($pdf->stream('myresult.pdf'));
                 return $pdf->stream('myresult.pdf');
             }else {
                flash('There is no record for this Student on the Database');
@@ -65,7 +64,12 @@ class PrintController extends Controller
         }
     }
 
-
+    public function getMe()
+    {
+        $grades = Grade::all();
+        return view('pdf.allresults', compact('grades'));
+           
+    }
     public function getMydetails($slug)
     {
         if (Auth::user()->type == 'student') {
@@ -100,17 +104,12 @@ class PrintController extends Controller
             $subject_name = Subject::whereId($subject)->first()->name;
             $grades = Grade::whereSubject_id($subject)->get();
             $pdf = PDF::loadView('pdf.subjectsresults', compact('grades', 'subject_name'));
+
             return $pdf->stream('results-by-subject.pdf');
         }else {
             flash('You are not allowed Access to that Area');
             return redirect()->back();
         }
-    }
-
-
-    public function getGithub (){
-
-     return PDF::loadFile('http://www.github.com')->stream('github.pdf'); 
     }
 
     public function missingMethod($parameters = array())

@@ -142,6 +142,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
         /*
@@ -203,7 +204,7 @@ return [
         'Form'      => Illuminate\Html\FormFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Flash'     => Laracasts\Flash\Flash::class,
-        'PDF'       => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'PDF'        => Barryvdh\DomPDF\Facade::class,
         'Images'    => Barryvdh\Snappy\Facades\SnappyImage::class,
         'School'    => Scholr\School::class,
 
