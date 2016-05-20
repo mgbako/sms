@@ -1,14 +1,20 @@
 @extends('layouts.admin')
-@section('scripts')
+@section('myscript')
   <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
   <script type="text/javascript">
     tinymce.init({
-        selector: "#question",
+        selector: "question",
         plugins: [
             "advlist autolink lists link image charmap print preview anchor",
         ],
         toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
     });
+     //CKEDITOR.replace( 'question' );
+
+     CKEDITOR.replace( 'question', {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files'
+        });
   </script>
 @stop
 @section('content')
@@ -94,7 +100,7 @@
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
+	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

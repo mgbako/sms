@@ -112,7 +112,7 @@
 
    </div><!-- ./wrapper -->
   <!-- Scripts -->
-   @yield('myscript')
+   
   <script src="{{ asset('/js/jquery.js')}}"></script>
   <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('/js/jquery.slimscroll.min.js') }}"></script>
@@ -129,6 +129,8 @@
   <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
   <script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
   <script src="{{ asset('/js/tables.js')}}"></script>
+  <script src="//cdn.ckeditor.com/4.5.9/full/ckeditor.js"></script>
+  @yield('myscript')
   <script src="{{ asset('/js/custom.js')}}"></script>
   <script>
       $(function () {

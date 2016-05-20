@@ -137,6 +137,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
+        Tsawler\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
@@ -149,6 +150,7 @@ return [
         Scholr\Providers\AppServiceProvider::class,
         Scholr\Providers\EventServiceProvider::class,
         Scholr\Providers\RouteServiceProvider::class,
+        
 
     ],
 
