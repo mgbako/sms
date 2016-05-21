@@ -28,15 +28,18 @@ class CreateGradesTable extends Migration {
 
 				$table->foreign('student_id')
 				->references('id')
-				->on('students');
+				->on('students')
+				->onDelete('cascade');
 
 				$table->foreign('subject_id')
 				->references('id')
-				->on('subjects');
+				->on('subjects')
+				->onDelete('cascade');
 
 				$table->foreign('classe_id')
 					->references('id')
-					->on('classes');
+					->on('classes')
+					->onDelete('cascade');
 		});
 	}
 

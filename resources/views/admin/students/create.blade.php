@@ -112,12 +112,6 @@
 								{!! Form::textarea('address', null, ['class'=>'form-control', 'placeholder'=>'Enter Home Address', 'rows'=>3]) !!}
 							</div>
 						</div>
-
-
-						<div class="col-md-6"><br>
-							{!! Form::label('subject_list', 'Select Subjects to be Taken') !!}
-							{!! Form::select('subject_list[]', $subjects, null, ['id'=>'selected', 'class'=>'form-control', 'multiple']) !!}
-						</div>
 						<div class="col-md-6"><br>
 							
 						</div>

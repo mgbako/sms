@@ -24,7 +24,7 @@
 						<div class="panel-heading text-center"><h2>Are You sure You want to Delete the Class:</h2></div>
 						<div class="panel-body">
 							<h3>{{$class->name}}</h3><hr>
-							{!!Form::open(['method'=>'delete', 'route' => ['classes.destroy', $class->id]]) !!}
+							{!! Form::open(['method'=>'delete', 'route' => ['classes.destroy', $class->id]]) !!}
 								<div class="form-group">{!! Form::radio('agree', 0, true)!!} {!!Form::label('agree', 'No') !!}</div>
 								<div class="form-group">{!! Form::radio('agree', 1) !!} {!!Form::label('agree', 'Yes') !!}</div>
 								<div class="form-group">{!! Form::hidden('id', $class->id) !!}</div>

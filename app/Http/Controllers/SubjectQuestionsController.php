@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use Scholr\Http\Requests;
 use Scholr\Http\Requests\SubjectquestionstatusRequest;
 use Scholr\Http\Controllers\Controller;
+use Scholr\School;
 use Scholr\Classe;
 use Scholr\Subject;
 use Scholr\Question;
+use Scholr\Grade;
 use Scholr\SubjectQuestionstatus;
 use Scholr\SubjectAssigned;
 use DB;
@@ -149,11 +151,15 @@ class SubjectQuestionsController extends Controller
 
     public function deleteApprove($classeId, $subjectId)
     {   
-  
-        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)
-                                ->where('subject_id', $subjectId)->get();
+        $school = School::first();
+        $subjectquestionstatus = SubjectQuestionstatus::where('classe_id', $classeId)->where('subject_id', $subjectId)->get();
+        $grades = Grade::where(['term'=>$school->term, 'classe_id'=>$classeId, 'subject_id'=>$subjectId, 'session'=>$school->session]);
+        
         if ($subjectquestionstatus) {
             $affacted = DB::table('subjectquestionstatus')->where(['classe_id'=>$classeId, 'subject_id'=>$subjectId])->delete();
+            if($grades){
+                $grades->delete();
+            }
            if($affacted) {
             flash('Time for Exam Deleted for Review');
             return redirect('subjectAnalysis');

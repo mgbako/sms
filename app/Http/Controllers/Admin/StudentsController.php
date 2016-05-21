@@ -1,5 +1,4 @@
 <?php namespace Scholr\Http\Controllers\Admin;
-
 use Scholr\Http\Requests;
 use Scholr\Http\Requests\StudentRequest;
 use Scholr\Http\Controllers\Controller;
@@ -11,49 +10,45 @@ use Auth;
 use Illuminate\Http\Request;
 use League\Csv\Reader;
 use League\Csv\Writer;
-
 class StudentsController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('staff');
 	}
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+	* Display a listing of the resource.
+	*
+	* @return Response
+	*/
 	public function index()
 	{
 		$count = 1;
 		$students = Student::all();
 		return view('admin.students.index', compact('students', 'count'));
 	}
-
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
+	* Show the form for creating a new resource.
+	*
+	* @return Response
+	*/
 	public function create()
 	{
 		$classList = Classe::lists('name', 'id');
-
 		$subjects = Subject::lists('name', 'id');
 		return view('admin.students.create', compact('classList', 'subjects'));
 	}
-
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
+	* Store a newly created resource in storage.
+	*
+	* @return Response
+	*/
 	public function store(StudentRequest $request)
 	{
 		$school = DB::table('schools')->first();
 		if (!$school) {
-            flash("You have to setup school before any other thing");
-            return redirect('schools');
-    }
+flash("You have to setup school before any other thing");
+return redirect('schools');
+}
 		$requests = $request->all();
 		$image = $request->file('image');
 		$filename = time()."-".$image->getClientOriginalName();
@@ -67,30 +62,27 @@ class StudentsController extends Controller {
 		flash('New Student: '.$student->firstname.' '.$student->lastname.' was created successfully!');
 		return redirect('students');
 	}
-
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	* Display the specified resource.
+	*
+	* @param  int  $id
+	* @return Response
+	*/
 	public function show($id)
 	{
 		$student = Student::find($id);
 		return view('admin.students.show', compact('student'));
 	}
-
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	* Show the form for editing the specified resource.
+	*
+	* @param  int  $id
+	* @return Response
+	*/
 	public function edit($id)
 	{
 		$classList = Classe::lists('name', 'id');
 		$subjects = Subject::lists('name', 'id');
-
 		$student = Student::findOrFail($id);
 		$str = [];
 		foreach($student->subjects as $st){
@@ -98,18 +90,16 @@ class StudentsController extends Controller {
 		}
 		return view('admin.students.edit', compact('student', 'classList', 'subjects',  'str'));
 	}
-
 	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	* Update the specified resource in storage.
+	*
+	* @param  int  $id
+	* @return Response
+	*/
 	public function update($id, Request $request)
 	{
 		// dd($request->all());
 		$student = Student::findOrFail($id);
-
 		if ($student) {
 			if ($request->hasFile('image')) {
 				$image = $request->file('image');
@@ -132,9 +122,7 @@ class StudentsController extends Controller {
 			flash($student->firstname.' '.$student->lastname.' was updated successfully!');
 			return redirect('students');
 		}
-
 	}
-
 	public function download()
 	{
 		if(Auth::user()->type != 'admin')
@@ -145,28 +133,23 @@ class StudentsController extends Controller {
 			$students = Student::where('id', '>', 0)->exclude(['type', 'image',
 				'created_at', 'updated_at', 'end_date', 'slug'])->get()->toArray();
 			$csv = Writer::createFromFileObject(new \SplTempFileObject());
-
 			//we insert the CSV header
 			$csv->insertOne(['firstname', 'lastname', 'studentId', 'phone',
-  				'email', 'dob', 'gender', 'address', 'state','nationality',
-  				'class']);
-
+				'email', 'dob', 'gender', 'address', 'state','nationality',
+				'class']);
 			$csv->insertAll($students);
-		  header('Content-Disposition: attachment');
-		  header("Cache-control: private");
-		  header("Content-type: application/force-download");
-		  header("Content-transfer-encoding: binary\n");
-
-		  $csv->output('students-data.csv');
-		  exit;
+		header('Content-Disposition: attachment');
+		header("Cache-control: private");
+		header("Content-type: application/force-download");
+		header("Content-transfer-encoding: binary\n");
+		$csv->output('students-data.csv');
+		exit;
 		}
 	}
-
 	public function upload()
 	{
 		return view('admin.students.upload');
 	}
-
 	public function csvupload(Request $request)
 	{
 		if($request->hasFile('file'))
@@ -176,7 +159,6 @@ class StudentsController extends Controller {
 			$path = public_path('csvfiles/students/'.$filename);
 			if(!file_exists($path))
 			{
-
 				$file->move(public_path('csvfiles/students'), $filename);
 				$csv = Reader::createFromPath($path);
 				foreach ($csv->setOffset(1)->fetchAll() as $key => $row) {
@@ -209,32 +191,37 @@ class StudentsController extends Controller {
 			}
 		}
 	}
-
 	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	* Remove the specified resource from storage.
+	*
+	* @param  int  $id
+	* @return Response
+	*/
+	public function delete($id)
+	{
+		$student = Student::findOrFail($id);
+		return view('admin.students.delete', compact('student'));
+	}
+	/**
+	* Remove the specified resource from storage.
+	*
+	* @param  int  $id
+	* @return Response
+	*/
 	public function destroy($id, Request $request)
 	{
-		$student = Student::find($id);
-
+		$student = Student::findOrFail($id);
 		if($request->get('agree')==1)
 		{
-			$student->delete();
-
-			return redirect('students');
+			$student->grades()->forceDelete();
+			$student->forceDelete();
 			flash($student->firstname.' '.$student->lastname.' was deleted successfully!');
-
+			return redirect('students');
 		}
-
 		return redirect('students');
 	}
-
-
-	 public function missingMethod($parameters = array())
-    {
-        return redirect('/');
-    }
+	public function missingMethod($parameters = array())
+{
+return redirect('/');
+}
 }

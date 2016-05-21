@@ -58,6 +58,7 @@ class ScoreController extends Controller
         $request->session()->put('subject_id', $subject_id);
 
         $term = School::first()->term;
+        $session = School::first()->session;
         $qnumber = School::first()->number;
 
         $taken = $user->taken($student_id, $classe_id, $subject_id);
@@ -71,6 +72,7 @@ class ScoreController extends Controller
                         'classe_id' => $classe_id,
                         'subject_id' => $subject_id,
                         'term' => $term,
+                        'session'=> $session,
                         'total' => $count,
                         'remark' => Grade::getRemarkBaseOnScore($grade)
                     ]

@@ -13,26 +13,29 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::resource('classes', 'Admin\ClassesController');
 	Route::delete('classes', ['as'=>'classes.deleteAll', 'Admin\ClassesController@deleteAll']);
 
+	/*---------------------------------------------------------------------------------------------------
+	|							Subjects
+	-----------------------------------------------------------------------------------------------------*/
 	Route::get('subjects/{id}/delete', ['as'=>'subjects.delete', 'uses'=>'Admin\SubjectsController@delete']);
 	Route::resource('subjects', 'Admin\SubjectsController');
-
-	Route::get('students/{id}/delete', ['as'=>'students.delete', 'uses'=>'Admin\StudentsController@delete']);
-	
-	
+	/*---------------------------------------------------------------------------------------------------
+	|							Students
+	-----------------------------------------------------------------------------------------------------*/
+	Route::get('students/{id}/delete', ['as'=>'students.delete', 'uses'=>'Admin\StudentsController@delete']);	
 	Route::resource('students', 'Admin\StudentsController');
 	Route::get('students/download', ['as'=>'students.download', 'uses'=>'Admin\StudentsController@download']);
 	Route::get('students/uploadfile', ['as'=>'students.upload', 'uses'=>'Admin\StudentsController@upload']);
 	Route::post('students/csvupload', ['as'=>'students.csvupload', 'uses'=>'Admin\StudentsController@csvupload']);
-
+	/*---------------------------------------------------------------------------------------------------
+	|							Teachers
+	-----------------------------------------------------------------------------------------------------*/
 	Route::get('teachers/{id}/delete', ['as'=>'teachers.delete', 'uses'=>'Admin\TeachersController@delete']);
 	Route::get('teachers/download', ['as'=>'teachers.download', 'uses'=>'Admin\TeachersController@download']);
 	Route::get('teachers/uploadfile', ['as'=>'teachers.upload', 'uses'=>'Admin\TeachersController@upload']);
 	Route::post('teachers/csvupload', ['as'=>'teachers.csvupload', 'uses'=>'Admin\TeachersController@csvupload']);
 	Route::resource('teachers', 'Admin\TeachersController');
 	Route::get('questions/{id}/delete', ['as'=>'questions.delete', 'uses'=>'QuestionsController@delete']);
-	//Route::resource('questions', 'Admin\QuestionsController');
-
-	Route::get('users/{id}/delete', ['as'=>'users.delete', 'uses'=>'UsersController@delete']);
+	
 	Route::get('classes/{id}/subjects', ['as'=>'classes.subjects', 'uses'=>'ClassesSubjectsController@index']);
 
 	Route::get('classes/{id}/subjects/{subjectId}/delete', ['as'=>'classes.subjects.delete', 'uses'=>'ClassesSubjectsController@delete']);
@@ -48,7 +51,9 @@ Route::group(['middleware'=> 'auth'], function(){
 
 	Route::resource('/subjectQuestions', 'SubjectQuestionsController');
 	Route::get('/subjectQuestions/classes/{classeId}/subjects/{subjectId}/delete', ['as'=>'subjectQuestions.delete', 'uses'=>'SubjectQuestionsController@delete']);
-
+	/*---------------------------------------------------------------------------------------------------
+	|							Results
+	-----------------------------------------------------------------------------------------------------*/
 	Route::get('/result/myresult/{slug}', ['as'=>'results.myresult', 'uses'=>'ResultsController@myresult']);
 	Route::get('/results/all', ['as'=>'results.all', 'uses'=>'ResultsController@index']);
 	Route::get('results/subjects/{subjects}', ['as'=>'results.subjects', 'uses'=>'ResultsController@subjects']);
@@ -82,14 +87,14 @@ Route::group(['middleware'=> 'auth'], function(){
 	Route::resource('/schools', 'SchoolController');
 	Route::resource('/subjectProgess', 'SubjectProgressController');
 
-	Route::resource('/settings', 'SettingsController');
+	//Route::resource('/settings', 'SettingsController');
 	
 	Route::resource('/subjectAssigned', 'SubjectAssignedController');
 	Route::delete('/subjectAssigned/{id}/{classeId}/{subjectId}', ['as'=>'subjectAssigneds.destroy', 'uses'=>'SubjectAssignedController@destroy']);
 	
 
 	Route::resource('subjectAnalysis', 'SubjectAnalysisController');
-	Route::resource('users', 'UsersController');
+	//Route::resource('users', 'UsersController');
 
 
 	/*------------------ Exams -----------------*/
