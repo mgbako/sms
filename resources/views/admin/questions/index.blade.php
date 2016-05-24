@@ -2,15 +2,6 @@
 @section('myscript')
   <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
   <script type="text/javascript">
-    tinymce.init({
-        selector: "question",
-        plugins: [
-            "advlist autolink lists link image charmap print preview anchor",
-        ],
-        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-    });
-     //CKEDITOR.replace( 'question' );
-
      CKEDITOR.replace( 'question', {
             filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
             filebrowserBrowseUrl: '/laravel-filemanager?type=Files'

@@ -53,7 +53,7 @@
                             <i class="fa fa-eye"></i> View
                           </a> |
                           @if($subjectAnalysis->progress == 2 )
-                            <a href="{{ route('subjectQuestions.deleteApprove', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-remove"></i> Delete</a>
+                            <span onclick="return confirm('Are You sure You want to Delete?')"><a href="{{ route('subjectQuestions.deleteApprove', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-remove" ></i> Delete</a></span>
                           @endif
                           @if($subjectAnalysis->progress != 2 )
                             <a href="{{ route('subjectQuestions.approve', [$subjectAnalysis->classe_id, $subjectAnalysis->subject_id]) }}"><i class="fa fa-database"></i> Approve</a>
