@@ -31,48 +31,56 @@
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                     <h4><i class="icon fa fa-info"></i> Alert!</h4> Info alert please note that this area is very sensitive apply with caution.
                                 </div>
-                                <div class="col-md-6">
-                                    <label>School Logo</label>
-                                    <br>
-                                    <div class="pull-left image">
-                                        <img src="/{{ $myschool->logo }}" alt="User Image" width="82" height="82" class="img-circle">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>School Name</label>
-                                        <p class="lead">
-                                            {{ $myschool->name }}
-                                        </p>
-                                    </div>
-                                    <!-- /.form-group -->
-                                </div>
-                                <!-- /.col -->
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>School Session</label>
-                                        <p class="lead">
-                                            {{ $myschool->session }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>School Term</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>School Logo</label>
                                         <br>
-                                        <p class="lead">{{ $myschool->term }}</p>
+                                        <div class="pull-left image">
+                                            <img src="/{{ $myschool->logo }}" alt="User Image" width="82" height="82" class="img-circle">
+                                        </div>
                                     </div>
-                                    <!-- /.form-group -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>School ID Format</label>
-                                        <p class="lead">
-                                            {{ $myschool->id_format }}
-                                        </p>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>School Name</label>
+                                            <p class="lead">
+                                                {{ $myschool->name }}
+                                            </p>
+                                        </div>
+                                        <!-- /.form-group -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>School Session</label>
+                                            <p class="lead">
+                                                {{ $myschool->session }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>School Term</label>
+                                            <br>
+                                            <p class="lead">{{ $myschool->term }}</p>
+                                        </div>
+                                        <!-- /.form-group -->
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>School ID Format</label>
+                                            <p class="lead">
+                                                {{ $myschool->id_format }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Number of Questions</label>
+                                            <p class="lead">
+                                                {{ $myschool->number }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
